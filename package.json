@@ -13,10 +13,15 @@
   },
   "dependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.19.1",
     "htmlhint": "^0.9.13",
+    "jasmine": "^3.1.0",
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
-    "opener": "^1.4.3"
+    "opener": "^1.4.3",
+    "serve": "^8.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-jasmine": "^2.10.1"
   }
 }
