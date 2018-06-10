@@ -1,0 +1,38 @@
+body{
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+header{
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+}
+.laboratoria {
+  height: 70px;
+  width: 190px;
+  float: left;
+}
+.initial{
+    color: #fafafa;
+    background-color: #bdbdbd;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    font-size: 1.25rem;
+    font-family: museo-sans, "Helvetica Neue", Arial, sans-serif;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    float: right;
+    margin-top: 8px;
+}
+.loggin{
+    float: right;
+    margin-right: 10px;
+    text-align:right;
+}
+.nameTM {
+    margin-bottom: 0;
+}
+.mailTM {
+    margin-top: 0;
+}

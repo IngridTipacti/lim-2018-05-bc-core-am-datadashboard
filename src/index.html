@@ -1,14 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <html lang="en"></html> 
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Hola soy Anaflavia</h1>
-    <h2>Tengo 20 :D</h2>
-    <script src="main.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <html lang="en">
+  </html>
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- 1er bg parte superior donde irá el logo y el logueo del usuario (Ale) -->
+  <header>
+    <div class="initial">AD</div>
+    <center>
+      <img src="../images/laboratoria.png" alt="Laboratoria código que transforma" class="laboratoria">
+      <!-- <canvas id="myCanvas" width="160" height="100" class="initial"></canvas> -->
+      <div class="loggin">
+        <h3 class="nameTM">ALEJANDRA D</h3>
+        <p class="mailTM">alejandrad@laboratoria.la</p>
+      </div>
+    </center>
+  </header>
+
+  <!-- Select de las sedes de Laboratoria -->
+  <section id="sedes">
+    <h3>Sedes</h3>
+    <select>
+      <option value="">Sedes</option>
+      <option value="lim">Lima</option>
+      <option value="sch">Santiago</option>
+      <option value="cdmx">Ciudad de México</option>
+      <option value="gua">Guadalajara</option>
+      <option value="spa">Sao Paulo</option>
+      <option value="are">Arequipa</option>
+    </select>
+  </section>
+
+  <!-- Promociones por sedes -->
+  <section id="promociones">
+    <h3>Promociones</h3>
+    <select>
+      <option value="">Promociones</option>
+      <option value="ii18">2018-II</option>
+      <option value="i18">2018-I</option>
+      <option value="ii17">2017-II</option>
+      <option value="17">2017-I</option>
+      <option value="i16">2016-II</option>
+      <option value="16">2016-I</option>
+      <option value="i15">2015-II</option>
+      <option value="15">2015-I</option>
+    </select>
+  </section>
+
+  <!-- Turnos AM - PM -->
+  <section>
+    <h3>Turno</h3>
+    <select>
+      <option value="">Turno</option>
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
+  </section>
+
+  <!-- Módulo de Especialización -->
+  <section>
+    <h3>Tracks</h3>
+    <select>
+      <option value="">Tracks</option>
+      <option value="core">Common Core</option>
+      <option value="front">Front-End</option>
+      <option value="ux">UX</option>
+    </select>
+  </section>
+
+  <!-- carga de % de avance por turno al seleccionar la promo-->
+  <section>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  </section>
+
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>
