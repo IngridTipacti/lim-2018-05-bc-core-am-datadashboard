@@ -17,18 +17,17 @@
     <div class="initial">AD</div>
     <center>
       <img src="../images/laboratoria.png" alt="Laboratoria código que transforma" class="laboratoria">
-      <!-- <canvas id="myCanvas" width="160" height="100" class="initial"></canvas> -->
       <div class="loggin">
-        <h3 class="nameTM">ALEJANDRA D</h3>
-        <p class="mailTM">alejandrad@laboratoria.la</p>
+        <h3 class="woMarginBottom letterGray">ALEJANDRA D</h3>
+        <p class="woMarginTop letterGray">alejandrad@laboratoria.la</p>
       </div>
     </center>
   </header>
 
   <!-- Select de las sedes de Laboratoria -->
   <section id="sedes">
-    <h3>Sedes</h3>
-    <select>
+    <h3 class="woMarginBottom">Sedes</h3>
+    <select id="selectSedes">
       <option value="">Sedes</option>
       <option value="lim">Lima</option>
       <option value="sch">Santiago</option>
@@ -40,25 +39,25 @@
   </section>
 
   <!-- Promociones por sedes -->
-  <section id="promociones">
-    <h3>Promociones</h3>
-    <select>
+  <section id="promociones" class="none">
+    <h3 class="woMarginBottom">Promociones</h3>
+    <select id="selectPromos">
       <option value="">Promociones</option>
       <option value="ii18">2018-II</option>
       <option value="i18">2018-I</option>
       <option value="ii17">2017-II</option>
-      <option value="17">2017-I</option>
+      <option value="i17">2017-I</option>
       <option value="i16">2016-II</option>
-      <option value="16">2016-I</option>
+      <option value="i16">2016-I</option>
       <option value="i15">2015-II</option>
-      <option value="15">2015-I</option>
+      <option value="i15">2015-I</option>
     </select>
   </section>
 
   <!-- Turnos AM - PM -->
-  <section>
-    <h3>Turno</h3>
-    <select>
+  <section id="turnos" class="none">
+    <h3 class="woMarginBottom">Turno</h3>
+    <select id="selectTurnos">
       <option value="">Turno</option>
       <option value="am">AM</option>
       <option value="pm">PM</option>
@@ -66,9 +65,9 @@
   </section>
 
   <!-- Módulo de Especialización -->
-  <section>
-    <h3>Tracks</h3>
-    <select>
+  <section id="tracks" class="none">
+    <h3 class="woMarginBottom">Tracks</h3>
+    <select id="selectTracks">
       <option value="">Tracks</option>
       <option value="core">Common Core</option>
       <option value="front">Front-End</option>
@@ -77,7 +76,7 @@
   </section>
 
   <!-- carga de % de avance por turno al seleccionar la promo-->
-  <section>
+  <section id="bargraphTurno" class="none">
     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
   </section>
 

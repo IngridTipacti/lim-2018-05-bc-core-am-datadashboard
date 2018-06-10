@@ -30,9 +30,15 @@ header{
     margin-right: 10px;
     text-align:right;
 }
-.nameTM {
+.woMarginBottom {
     margin-bottom: 0;
 }
-.mailTM {
+.woMarginTop {
     margin-top: 0;
+}
+.letterGray {
+    color: #8d8a8a;
+}
+.none {
+    display: none;
 }
