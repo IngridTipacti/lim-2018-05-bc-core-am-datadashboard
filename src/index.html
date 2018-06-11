@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <html lang="en">
+
   </html>
   <title>Data Dashboard</title>
   <link rel="stylesheet" href="style.css" />
@@ -39,9 +40,9 @@
   </section>
 
   <!-- Promociones por sedes -->
-  <section id="promociones" class="none">
+  <section id="promociones">
     <h3 class="woMarginBottom">Promociones</h3>
-    <select id="selectPromos">
+    <select id="selectPromos" disabled>
       <option value="">Promociones</option>
       <option value="ii18">2018-II</option>
       <option value="i18">2018-I</option>
@@ -54,31 +55,38 @@
     </select>
   </section>
 
-  <!-- Turnos AM - PM -->
-  <section id="turnos" class="none">
-    <h3 class="woMarginBottom">Turno</h3>
-    <select id="selectTurnos">
-      <option value="">Turno</option>
-      <option value="am">AM</option>
-      <option value="pm">PM</option>
-    </select>
-  </section>
-
   <!-- Módulo de Especialización -->
-  <section id="tracks" class="none">
+  <section id="tracks">
     <h3 class="woMarginBottom">Tracks</h3>
-    <select id="selectTracks">
+    <select id="selectTracks" disabled>
       <option value="">Tracks</option>
+      <option value="selec">Selección</option>
       <option value="core">Common Core</option>
       <option value="front">Front-End</option>
       <option value="ux">UX</option>
     </select>
   </section>
 
-  <!-- carga de % de avance por turno al seleccionar la promo-->
-  <section id="bargraphTurno" class="none">
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <!-- Turnos AM - PM -->
+  <section id="turnos">
+    <h3 class="woMarginBottom">Turno</h3>
+    <select id="selectTurnos" disabled>
+      <option value="">Turno</option>
+      <option value="am">AM</option>
+      <option value="pm">PM</option>
+    </select>
   </section>
+
+
+  <!-- carga de % de avance por turno al seleccionar la promo-->
+  <!-- <section id="bargraphTurno">
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  </section> -->
+
+  <p id="demo">Let AJAX change this text.</p>
+
+  <button type="button" id="objectUsers">Change Content</button>
+
 
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="main.js"></script>
