@@ -1,13 +1,21 @@
 let selectSede, selectPromo, selectTrack, selectTurno;
 let functSede, functPromo, functTrack, functTurno;
-let objectUsers, objectProgress;
+let objectUsers, objectProgress, objectCohorts;
+let xhttpUsers = new XMLHttpRequest();
+let xhttpProgress = new XMLHttpRequest();
+let xhttpCohorts = new XMLHttpRequest();
 
-objectUsers = document.getElementById("objectUsers");
-selectSede = document.getElementById("selectSedes");
-selectPromo = document.getElementById("selectPromos");
-selectTrack = document.getElementById("selectTracks");
-selectTurno = document.getElementById("selectTurnos");
-objectProgress = document.getElementById("objectProgress");
+selectSede = document.getElementById('selectSedes');
+selectPromo = document.getElementById('selectPromos');
+selectTrack = document.getElementById('selectTracks');
+selectTurno = document.getElementById('selectTurnos');
+objectUsers = document.getElementById('objectUsers');
+objectProgress = document.getElementById('objectProgress');
+objectCohorts = document.getElementById('objectCohorts');
+
+xhttpProgress.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/progress.json', true);
+xhttpUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
+xhttpCohorts.open('GET','../data/cohorts.json', true);
 
 functSede = () => {
   document.getElementById("selectPromos").disabled = false;
@@ -179,11 +187,6 @@ switchTurnos = (option) => {
 // });
 // chart.render();
 
-let xhttpUsers = new XMLHttpRequest();
-xhttpUsers.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/users.json", true);
-let xhttpProgress = new XMLHttpRequest();
-xhttpProgress.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/progress.json", true);
-
 getProgress = () => {
   xhttpProgress.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -218,6 +221,18 @@ getAlumnas = () => {
   xhttpUsers.send();
 }
 
+getCohorts = () => {
+  xhttpCohorts.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let cohortsjson = JSON.parse(xhttpCohorts.responseText);
+      console.log(cohortsjson);
+      // for (let index = 0; index < cohortsjson.length; index++) {
+        
+      // }
+    }
+  };
+  xhttpCohorts.send();
+}
 
 
 
@@ -227,3 +242,4 @@ selectTrack.addEventListener('change', () => functTrack());
 selectTurno.addEventListener('change', () => functTurno());
 objectUsers.addEventListener('click', () => getAlumnas());
 objectProgress.addEventListener('click', () => getProgress());
+objectCohorts.addEventListener('click', () => getCohorts());
