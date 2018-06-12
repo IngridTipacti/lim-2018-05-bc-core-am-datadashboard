@@ -183,7 +183,11 @@ getAlumnas = () => {
   xhttp.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/users.json", true);
   xhttp.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      let usersjson = JSON.parse(xhttp.responseText);
+      for (let index = 0; index < usersjson.length; index++) {
+        const element = usersjson[index].name;
+        console.log(element);
+      }
       // document.getElementById("demo").innerHTML = this.responseText;
     }
   };
