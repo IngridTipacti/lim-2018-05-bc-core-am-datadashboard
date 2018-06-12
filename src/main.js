@@ -1,12 +1,13 @@
 let selectSede, selectPromo, selectTrack, selectTurno;
 let functSede, functPromo, functTrack, functTurno;
-let objectUsers;
+let objectUsers, objectProgress;
 
 objectUsers = document.getElementById("objectUsers");
 selectSede = document.getElementById("selectSedes");
 selectPromo = document.getElementById("selectPromos");
 selectTrack = document.getElementById("selectTracks");
 selectTurno = document.getElementById("selectTurnos");
+objectProgress = document.getElementById("objectProgress");
 
 functSede = () => {
   document.getElementById("selectPromos").disabled = false;
@@ -178,24 +179,51 @@ switchTurnos = (option) => {
 // });
 // chart.render();
 
-getAlumnas = () => {
-  let xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/users.json", true);
-  xhttp.onload = function () {
+let xhttpUsers = new XMLHttpRequest();
+xhttpUsers.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/users.json", true);
+let xhttpProgress = new XMLHttpRequest();
+xhttpProgress.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/progress.json", true);
+
+getProgress = () => {
+  xhttpProgress.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let usersjson = JSON.parse(xhttp.responseText);
-      for (let index = 0; index < usersjson.length; index++) {
-        const element = usersjson[index].name;
-        console.log(element);
+      let progressjson = JSON.parse(xhttpProgress.responseText);
+      let arrProgress = Object.keys(progressjson);
+      for (let index = 0; index < arrProgress.length; index++) {
+        console.log(progressjson[arrProgress[index]]);
+        // const element = progressjson[index].name;
+        // let createP = document.createElement("p");
+        // data.appendChild(createP);
+        // let myTextNode = document.createTextNode(element + " ");
+        // createP.appendChild(myTextNode);
       }
-      // document.getElementById("demo").innerHTML = this.responseText;
     }
   };
-  xhttp.send();
+  xhttpProgress.send();
 }
+
+getAlumnas = () => {
+  xhttpUsers.onload = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let usersjson = JSON.parse(xhttpUsers.responseText);
+      for (let index = 0; index < usersjson.length; index++) {
+        const element = usersjson[index].name;
+        let createP = document.createElement("p");
+        dataUsers.appendChild(createP);
+        let myTextNode = document.createTextNode(element + " ");
+        createP.appendChild(myTextNode);
+      }
+    }
+  };
+  xhttpUsers.send();
+}
+
+
+
 
 selectSede.addEventListener('change', () => functSede());
 selectPromo.addEventListener('change', () => functPromo());
 selectTrack.addEventListener('change', () => functTrack());
 selectTurno.addEventListener('change', () => functTurno());
 objectUsers.addEventListener('click', () => getAlumnas());
+objectProgress.addEventListener('click', () => getProgress());
