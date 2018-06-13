@@ -17,24 +17,6 @@ xhttpProgress.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/progress.json
 xhttpUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
 xhttpCohorts.open('GET','../data/cohorts.json', true);
 
-functSede = () => {
-  document.getElementById("selectPromos").disabled = false;
-  switchSedes(selectSede.options[selectSede.selectedIndex].value);
-};
-functPromo = () => {
-  document.getElementById("selectTracks").disabled = false;
-  // document.getElementById("bargraphTurno").classList.remove('none');
-  switchPromos(selectPromo.options[selectPromo.selectedIndex].value);
-};
-functTrack = () => {
-  document.getElementById("selectTurnos").disabled = false;
-  switchTracks(selectTrack.options[selectTrack.selectedIndex].value);
-};
-functTurno = () => {
-  document.getElementById("selectTurnos").disabled = false;
-  switchTurnos(selectTurno.options[selectTurno.selectedIndex].value);
-};
-
 switchSedes = (option) => {
   switch (option) {
     case 'lim':
@@ -127,69 +109,27 @@ switchTurnos = (option) => {
   }
 }
 
-// Grafica estatica
-// let chart = new CanvasJS.Chart("chartContainer", {
-//   animationEnabled: true,
-//   theme: "light2",
-//   title: {
-//     text: "Gráfico de avance"
-//   },
-//   axisX: {
-//     interval: 1
-//   },
-//   axisY: {
-//     interval: 10,
-//     suffix: "%"
-//   },
-//   data: [{
-//       type: "bar",
-//       name: "am",
-//       legendText: "Turno AM",
-//       showInLegend: true,
-//       axisYType: "secondary", //Para que todos tengan el mismo color de barra
-//       color: "#FFF70F",
-//       dataPoints: [{
-//           y: 30,
-//           label: "Quizzes"
-//         },
-//         {
-//           y: 100,
-//           label: "Lectura leídas"
-//         },
-//         {
-//           y: 50,
-//           label: "Ejercicios completados"
-//         }
-//       ]
-//     },
-//     {
-//       type: "bar",
-//       name: "pm",
-//       legendText: "Turno PM",
-//       showInLegend: true,
-//       axisYType: "secondary",
-//       color: "#FF0061",
-//       dataPoints: [{
-//           y: 50,
-//           label: "Quizzes"
-//         },
-//         {
-//           y: 80,
-//           label: "Lectura leídas"
-//         },
-//         {
-//           y: 100,
-//           label: "Ejercicios completados"
-//         }
-//       ]
-//     }
-//   ]
-// });
-// chart.render();
+functSede = () => {
+  document.getElementById("selectPromos").disabled = false;
+  switchSedes(selectSede.options[selectSede.selectedIndex].value);
+};
+functPromo = () => {
+  document.getElementById("selectTracks").disabled = false;
+  // document.getElementById("bargraphTurno").classList.remove('none');
+  switchPromos(selectPromo.options[selectPromo.selectedIndex].value);
+};
+functTrack = () => {
+  document.getElementById("selectTurnos").disabled = false;
+  switchTracks(selectTrack.options[selectTrack.selectedIndex].value);
+};
+functTurno = () => {
+  document.getElementById("selectTurnos").disabled = false;
+  switchTurnos(selectTurno.options[selectTurno.selectedIndex].value);
+};
 
 getProgress = () => {
-  xhttpProgress.onload = function () {
-    if (this.readyState == 4 && this.status == 200) {
+  xhttpProgress.onload = () => {
+    if (xhttpProgress.readyState == 4 && xhttpProgress.status == 200) {
       let progressjson = JSON.parse(xhttpProgress.responseText);
       let arrProgress = Object.keys(progressjson);
       for (let index = 0; index < arrProgress.length; index++) {
@@ -206,8 +146,8 @@ getProgress = () => {
 }
 
 getAlumnas = () => {
-  xhttpUsers.onload = function () {
-    if (this.readyState == 4 && this.status == 200) {
+  xhttpUsers.onload = () => {
+    if (xhttpUsers.readyState == 4 && xhttpUsers.status == 200) {
       let usersjson = JSON.parse(xhttpUsers.responseText);
       for (let index = 0; index < usersjson.length; index++) {
         const element = usersjson[index].name;
@@ -222,19 +162,14 @@ getAlumnas = () => {
 }
 
 getCohorts = () => {
-  xhttpCohorts.onload = function () {
-    if (this.readyState == 4 && this.status == 200) {
+  xhttpCohorts.onload = () => {
+    if (xhttpCohorts.readyState == 4 && xhttpCohorts.status == 200) {
       let cohortsjson = JSON.parse(xhttpCohorts.responseText);
       console.log(cohortsjson);
-      // for (let index = 0; index < cohortsjson.length; index++) {
-        
-      // }
     }
   };
   xhttpCohorts.send();
 }
-
-
 
 selectSede.addEventListener('change', () => functSede());
 selectPromo.addEventListener('change', () => functPromo());
