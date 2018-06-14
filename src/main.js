@@ -1,6 +1,7 @@
 let selectSede, selectPromo, selectTrack, selectTurno;
 let functSede, functPromo, functTrack, functTurno;
 let objectUsers, objectProgress, objectCohorts;
+let setTable, tableUsers;
 
 selectSede = document.getElementById('selectSedes');
 selectPromo = document.getElementById('selectPromos');
@@ -9,6 +10,68 @@ selectTurno = document.getElementById('selectTurnos');
 objectUsers = document.getElementById('objectUsers');
 objectProgress = document.getElementById('objectProgress');
 objectCohorts = document.getElementById('objectCohorts');
+setTable = document.getElementById('setTable');
+tableUsers = document.getElementById('tableUsers');
+
+// generando tabla con js
+generateTable = () => {
+  let caracter = '';
+  caracter += '<tr>'
+  caracter += '<th>Alumna</th>';
+  caracter += '<th>Cursos</th>';
+  caracter += '<th>Duracion</th>';
+  caracter += '<th>Total</th>';
+  caracter += '<th>Completado</th>';
+  caracter += '<th>Porcentaje</th>';
+  caracter += '</tr>'
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
+    for (let index = 0; index < usersjson.length; index++) {
+      const userId = usersjson[index].id;
+      const userName = usersjson[index].name;
+      caracter += '<tr>'
+      caracter += '<td>' + userName + '</td>' + '<br>';
+      caracter += '</tr>';
+    }
+    tableUsers.innerHTML = caracter;
+  });
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+    let arrProgress = Object.keys(progressjson);
+    for (let index = 0; index < arrProgress.length; index++) {
+      let element = arrProgress[index];
+      let curseName = progressjson[element];
+      let duration = progressjson[element].intro.totalDuration;
+      console.log(duration);
+      let unidadesTotales = progressjson[element].intro.totalUnits;
+      console.log(unidadesTotales);
+      let unidadesCompletadas = progressjson[element].intro.completedUnits;
+      console.log(unidadesCompletadas);
+      let percent = progressjson[element].intro.percent + "%";
+      console.log(percent);
+      caracter += '<tr>'
+      caracter += '<td>' + "Intro" + '</td>' + '<br>';
+      caracter += '</tr>';
+      caracter += '<tr>'
+      caracter += '<td>' + duration + '</td>' + '<br>';
+      caracter += '</tr>';
+      caracter += '<tr>'
+      caracter += '<td>' + unidadesTotales + '</td>' + '<br>';
+      caracter += '</tr>';
+      caracter += '<tr>'
+      caracter += '<td>' + unidadesCompletadas + '</td>' + '<br>';
+      caracter += '</tr>';
+      caracter += '<tr>'
+      caracter += '<td>' + percent + '</td>' + '<br>';
+      caracter += '</tr>';
+
+      // if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
+      //   console.log(progressjson[element].intro);
+      //   getAlumnaById(element);
+      // }
+    }
+    tableUsers.innerHTML = caracter;
+  });
+}
+
 
 switchSedes = (option) => {
   switch (option) {
@@ -127,9 +190,9 @@ getProgress = () => {
       let element = arrProgress[index];
       if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
         console.log(progressjson[element].intro);
-        document.getElementById('percent').innerHTML = progressjson[element].intro.percent + "%";
-        document.getElementById('total-unid-ejer').innerHTML = progressjson[element].intro.totalUnits;
-        document.getElementById('complet-unid-ejer').innerHTML = progressjson[element].intro.completedUnits;
+        // document.getElementById('percent').innerHTML = progressjson[element].intro.percent + "%";
+        // document.getElementById('total-unid-ejer').innerHTML = progressjson[element].intro.totalUnits;
+        // document.getElementById('complet-unid-ejer').innerHTML = progressjson[element].intro.completedUnits;
         getAlumnaById(element);
       }
     }
@@ -153,7 +216,7 @@ getAlumnaById = (idAlumna) => {
     for (let index = 0; index < usersjson.length; index++) {
       const element = usersjson[index].id;
       if (element === idAlumna) {
-        document.getElementById('name-user').innerHTML = usersjson[index].name;
+        // document.getElementById('name-user').innerHTML = usersjson[index].name;
         console.log(usersjson[index].name);
       }
     }
@@ -185,3 +248,4 @@ selectTurno.addEventListener('change', () => functTurno());
 objectUsers.addEventListener('click', () => getAlumnas());
 objectProgress.addEventListener('click', () => getProgress());
 objectCohorts.addEventListener('click', () => getCohorts());
+setTable.addEventListener('click', () => generateTable());
