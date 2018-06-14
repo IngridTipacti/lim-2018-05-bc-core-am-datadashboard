@@ -15,7 +15,7 @@ objectCohorts = document.getElementById('objectCohorts');
 
 xhttpProgress.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/progress.json', true);
 xhttpUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
-xhttpCohorts.open('GET','../data/cohorts.json', true);
+xhttpCohorts.open('GET', '../data/cohorts.json', true);
 
 switchSedes = (option) => {
   switch (option) {
@@ -133,7 +133,20 @@ getProgress = () => {
       let progressjson = JSON.parse(xhttpProgress.responseText);
       let arrProgress = Object.keys(progressjson);
       for (let index = 0; index < arrProgress.length; index++) {
-        console.log(progressjson[arrProgress[index]]);
+        const element = arrProgress[index];
+        console.log(element);
+        
+        // by Lalo
+        // Object.keys(arrProgress[index]).find(key => 
+        //   key === '00hJv4mzvqM3D9kBy3dfxoJyFV82'
+        // );
+        
+        // by Lulu
+        // var arrProperty = Object.keys(miObject);
+        // for (var i = 0; i < arrProperty.length; i++) {
+        //   console.log(miObject[arrProperty[i]]);
+        // }
+
         // const element = progressjson[index].name;
         // let createP = document.createElement("p");
         // data.appendChild(createP);
