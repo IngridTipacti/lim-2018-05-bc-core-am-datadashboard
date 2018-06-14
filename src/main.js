@@ -4,6 +4,7 @@ let objectUsers, objectProgress, objectCohorts;
 let xhttpUsers = new XMLHttpRequest();
 let xhttpProgress = new XMLHttpRequest();
 let xhttpCohorts = new XMLHttpRequest();
+let xhttpUsersById = new XMLHttpRequest();
 
 selectSede = document.getElementById('selectSedes');
 selectPromo = document.getElementById('selectPromos');
@@ -15,6 +16,7 @@ objectCohorts = document.getElementById('objectCohorts');
 
 xhttpProgress.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/progress.json', true);
 xhttpUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
+xhttpUsersById.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
 xhttpCohorts.open('GET', '../data/cohorts.json', true);
 
 switchSedes = (option) => {
@@ -161,22 +163,18 @@ getAlumnas = () => {
 }
 
 getAlumnaById = (idAlumna) => {
-  xhttpUsers.onload = () => {
-    if (xhttpUsers.readyState == 4 && xhttpUsers.status == 200) {
-      let usersjson = JSON.parse(xhttpUsers.responseText);
+  xhttpUsersById.onload = () => {
+    if (xhttpUsersById.readyState == 4 && xhttpUsersById.status == 200) {
+      let usersjson = JSON.parse(xhttpUsersById.responseText);
       for (let index = 0; index < usersjson.length; index++) {
         const element = usersjson[index].id;
         if(element === idAlumna) {
           console.log(usersjson[index].name);
         }
-        // let createP = document.createElement("p");
-        // dataUsers.appendChild(createP);
-        // let myTextNode = document.createTextNode(element + " ");
-        // createP.appendChild(myTextNode);
       }
     }
   };
-  xhttpUsers.send();
+  xhttpUsersById.send();
 }
 
 getCohorts = () => {

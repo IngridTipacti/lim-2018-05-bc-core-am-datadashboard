@@ -1,10 +1,10 @@
-computeUserStats = (users, progress, courses) => {users, progress, courses}
+window.computeUserStats = (users, progress, courses) => {users, progress, courses}
 
-sortUsers = (users, orderBy, orderDirection) => {users, orderBy, orderDirection}
+window.sortUsers = (users, orderBy, orderDirection) => {users, orderBy, orderDirection}
 
-filterUsers = (users, search) => {users, search}
+window.filterUsers = (users, search) => {users, search}
 
-processCohortData = (options) => {options}
+window.processCohortData = (options) => {options}
 
 
 
