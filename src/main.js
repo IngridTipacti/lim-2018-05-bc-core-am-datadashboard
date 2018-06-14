@@ -138,6 +138,9 @@ getProgress = () => {
         let element = arrProgress[index];
         if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
           console.log(progressjson[element].intro);
+          document.getElementById('percent').innerHTML = progressjson[element].intro.percent + "%";
+          document.getElementById('total-unid-ejer').innerHTML = progressjson[element].intro.totalUnits;
+          document.getElementById('complet-unid-ejer').innerHTML = progressjson[element].intro.completedUnits;
           getAlumnaById(element);
         }
       }
@@ -169,6 +172,7 @@ getAlumnaById = (idAlumna) => {
       for (let index = 0; index < usersjson.length; index++) {
         const element = usersjson[index].id;
         if(element === idAlumna) {
+          document.getElementById('name-user').innerHTML = usersjson[index].name;
           console.log(usersjson[index].name);
         }
       }
