@@ -172,7 +172,7 @@ Mayor organización, orden y utilidad.
 
 #### 2) Sketch de la solución (prototipo de baja fidelidad)
 
-![Prototipo](http://subirimagen.me/uploads/20180612085104.14)
+![Con titulo](http://subirimagen.me/uploads/20180614171643.14 "Prototipo") 
 
 #### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
 
