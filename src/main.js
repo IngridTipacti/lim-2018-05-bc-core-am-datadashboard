@@ -133,25 +133,10 @@ getProgress = () => {
       let progressjson = JSON.parse(xhttpProgress.responseText);
       let arrProgress = Object.keys(progressjson);
       for (let index = 0; index < arrProgress.length; index++) {
-        const element = arrProgress[index];
-        console.log(element);
-        
-        // by Lalo
-        // Object.keys(arrProgress[index]).find(key => 
-        //   key === '00hJv4mzvqM3D9kBy3dfxoJyFV82'
-        // );
-        
-        // by Lulu
-        // var arrProperty = Object.keys(miObject);
-        // for (var i = 0; i < arrProperty.length; i++) {
-        //   console.log(miObject[arrProperty[i]]);
-        // }
-
-        // const element = progressjson[index].name;
-        // let createP = document.createElement("p");
-        // data.appendChild(createP);
-        // let myTextNode = document.createTextNode(element + " ");
-        // createP.appendChild(myTextNode);
+        let element = arrProgress[index];
+        if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
+          console.log(progressjson[element].intro);
+        }
       }
     }
   };
