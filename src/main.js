@@ -136,6 +136,7 @@ getProgress = () => {
         let element = arrProgress[index];
         if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
           console.log(progressjson[element].intro);
+          getAlumnaById(element);
         }
       }
     }
@@ -153,6 +154,25 @@ getAlumnas = () => {
         dataUsers.appendChild(createP);
         let myTextNode = document.createTextNode(element + " ");
         createP.appendChild(myTextNode);
+      }
+    }
+  };
+  xhttpUsers.send();
+}
+
+getAlumnaById = (idAlumna) => {
+  xhttpUsers.onload = () => {
+    if (xhttpUsers.readyState == 4 && xhttpUsers.status == 200) {
+      let usersjson = JSON.parse(xhttpUsers.responseText);
+      for (let index = 0; index < usersjson.length; index++) {
+        const element = usersjson[index].id;
+        if(element === idAlumna) {
+          console.log(usersjson[index].name);
+        }
+        // let createP = document.createElement("p");
+        // dataUsers.appendChild(createP);
+        // let myTextNode = document.createTextNode(element + " ");
+        // createP.appendChild(myTextNode);
       }
     }
   };
