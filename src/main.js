@@ -1,10 +1,6 @@
 let selectSede, selectPromo, selectTrack, selectTurno;
 let functSede, functPromo, functTrack, functTurno;
 let objectUsers, objectProgress, objectCohorts;
-let xhttpUsers = new XMLHttpRequest();
-let xhttpProgress = new XMLHttpRequest();
-let xhttpCohorts = new XMLHttpRequest();
-let xhttpUsersById = new XMLHttpRequest();
 
 selectSede = document.getElementById('selectSedes');
 selectPromo = document.getElementById('selectPromos');
@@ -13,11 +9,6 @@ selectTurno = document.getElementById('selectTurnos');
 objectUsers = document.getElementById('objectUsers');
 objectProgress = document.getElementById('objectProgress');
 objectCohorts = document.getElementById('objectCohorts');
-
-xhttpProgress.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/progress.json', true);
-xhttpUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
-xhttpUsersById.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json', true);
-xhttpCohorts.open('GET', '../data/cohorts.json', true);
 
 switchSedes = (option) => {
   switch (option) {
@@ -130,65 +121,61 @@ functTurno = () => {
 };
 
 getProgress = () => {
-  xhttpProgress.onload = () => {
-    if (xhttpProgress.readyState == 4 && xhttpProgress.status == 200) {
-      let progressjson = JSON.parse(xhttpProgress.responseText);
-      let arrProgress = Object.keys(progressjson);
-      for (let index = 0; index < arrProgress.length; index++) {
-        let element = arrProgress[index];
-        if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
-          console.log(progressjson[element].intro);
-          document.getElementById('percent').innerHTML = progressjson[element].intro.percent + "%";
-          document.getElementById('total-unid-ejer').innerHTML = progressjson[element].intro.totalUnits;
-          document.getElementById('complet-unid-ejer').innerHTML = progressjson[element].intro.completedUnits;
-          getAlumnaById(element);
-        }
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+    let arrProgress = Object.keys(progressjson);
+    for (let index = 0; index < arrProgress.length; index++) {
+      let element = arrProgress[index];
+      if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
+        console.log(progressjson[element].intro);
+        document.getElementById('percent').innerHTML = progressjson[element].intro.percent + "%";
+        document.getElementById('total-unid-ejer').innerHTML = progressjson[element].intro.totalUnits;
+        document.getElementById('complet-unid-ejer').innerHTML = progressjson[element].intro.completedUnits;
+        getAlumnaById(element);
       }
     }
-  };
-  xhttpProgress.send();
+  });
 }
 
 getAlumnas = () => {
-  xhttpUsers.onload = () => {
-    if (xhttpUsers.readyState == 4 && xhttpUsers.status == 200) {
-      let usersjson = JSON.parse(xhttpUsers.responseText);
-      for (let index = 0; index < usersjson.length; index++) {
-        const element = usersjson[index].name;
-        let createP = document.createElement("p");
-        dataUsers.appendChild(createP);
-        let myTextNode = document.createTextNode(element + " ");
-        createP.appendChild(myTextNode);
-      }
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
+    for (let index = 0; index < usersjson.length; index++) {
+      const element = usersjson[index].name;
+      let createP = document.createElement("p");
+      dataUsers.appendChild(createP);
+      let myTextNode = document.createTextNode(element + " ");
+      createP.appendChild(myTextNode);
     }
-  };
-  xhttpUsers.send();
+  });
 }
 
 getAlumnaById = (idAlumna) => {
-  xhttpUsersById.onload = () => {
-    if (xhttpUsersById.readyState == 4 && xhttpUsersById.status == 200) {
-      let usersjson = JSON.parse(xhttpUsersById.responseText);
-      for (let index = 0; index < usersjson.length; index++) {
-        const element = usersjson[index].id;
-        if(element === idAlumna) {
-          document.getElementById('name-user').innerHTML = usersjson[index].name;
-          console.log(usersjson[index].name);
-        }
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
+    for (let index = 0; index < usersjson.length; index++) {
+      const element = usersjson[index].id;
+      if (element === idAlumna) {
+        document.getElementById('name-user').innerHTML = usersjson[index].name;
+        console.log(usersjson[index].name);
       }
     }
-  };
-  xhttpUsersById.send();
+  });
 }
 
 getCohorts = () => {
-  xhttpCohorts.onload = () => {
-    if (xhttpCohorts.readyState == 4 && xhttpCohorts.status == 200) {
-      let cohortsjson = JSON.parse(xhttpCohorts.responseText);
-      console.log(cohortsjson);
+  getData('../data/cohorts.json', (err, xhrjson) => {
+    console.log(xhrjson);
+  });
+}
+
+const getData = (url, callback) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let xhrjson = JSON.parse(xhr.responseText);
+      callback(null, xhrjson);
     }
   };
-  xhttpCohorts.send();
+  xhr.send();
 }
 
 selectSede.addEventListener('change', () => functSede());
