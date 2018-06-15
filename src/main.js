@@ -26,48 +26,56 @@ generateTable = () => {
   caracter += '</tr>'
   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
     for (let index = 0; index < usersjson.length; index++) {
-      const userId = usersjson[index].id;
+      var userId = usersjson[index].id;
       const userName = usersjson[index].name;
-      caracter += '<tr>'
+      caracter += '<tr id=\'user-tabla-' + userId + '\'>'
       caracter += '<td>' + userName + '</td>' + '<br>';
-      caracter += '</tr>';
+      // caracter += '</tr>';
     }
-    tableUsers.innerHTML = caracter;
+    // tableUsers.innerHTML = caracter;
   });
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     let arrProgress = Object.keys(progressjson);
     for (let index = 0; index < arrProgress.length; index++) {
       let element = arrProgress[index];
-      let curseName = progressjson[element];
-      let duration = progressjson[element].intro.totalDuration;
-      console.log(duration);
-      let unidadesTotales = progressjson[element].intro.totalUnits;
-      console.log(unidadesTotales);
-      let unidadesCompletadas = progressjson[element].intro.completedUnits;
-      console.log(unidadesCompletadas);
-      let percent = progressjson[element].intro.percent + "%";
-      console.log(percent);
-      caracter += '<tr>'
-      caracter += '<td>' + "Intro" + '</td>' + '<br>';
-      caracter += '</tr>';
-      caracter += '<tr>'
-      caracter += '<td>' + duration + '</td>' + '<br>';
-      caracter += '</tr>';
-      caracter += '<tr>'
-      caracter += '<td>' + unidadesTotales + '</td>' + '<br>';
-      caracter += '</tr>';
-      caracter += '<tr>'
-      caracter += '<td>' + unidadesCompletadas + '</td>' + '<br>';
-      caracter += '</tr>';
-      caracter += '<tr>'
-      caracter += '<td>' + percent + '</td>' + '<br>';
-      caracter += '</tr>';
+      let curseName = (Object.keys(progressjson[element])[0]);
+      if (curseName === 'intro') {
+        let duration = progressjson[element].intro.totalDuration;
+        // console.log(duration);
+        let unidadesTotales = progressjson[element].intro.totalUnits;
+        // console.log(unidadesTotales);
+        let unidadesCompletadas = progressjson[element].intro.completedUnits;
+        // console.log(unidadesCompletadas);
+        let percent = progressjson[element].intro.percent + "%";
+        // console.log(percent);
+        // caracter += '<tr>'
+        caracter += '<td>' + curseName + '</td>' + '<br>';
+        // caracter += '</tr>';
+        // caracter += '<tr>'
+        caracter += '<td>' + duration + '</td>' + '<br>';
+        // caracter += '</tr>';
+        // caracter += '<tr>'
+        caracter += '<td>' + unidadesTotales + '</td>' + '<br>';
+        // caracter += '</tr>';
+        // caracter += '<tr>'
+        caracter += '<td>' + unidadesCompletadas + '</td>' + '<br>';
+        // caracter += '</tr>';
+        // caracter += '<tr>'
+        caracter += '<td>' + percent + '</td>' + '<br>';
+        caracter += '</tr>';
+      }
+      else {
+        // caracter += '<tr>'
+        caracter += '<td>' + 'Curso' + '</td>' + '<br>';
+        caracter += '</tr>';
+      }
 
       // if (element === '00hJv4mzvqM3D9kBy3dfxoJyFV82') {
       //   console.log(progressjson[element].intro);
       //   getAlumnaById(element);
       // }
     }
+    console.log(caracter);
     tableUsers.innerHTML = caracter;
   });
 }
