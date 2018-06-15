@@ -24,6 +24,19 @@ generateTable = () => {
   caracter += '<th>Completado</th>';
   caracter += '<th>Porcentaje</th>';
   caracter += '</tr>'
+
+  // trabajar esto para mostrar data de tabla ordenada
+  // getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
+  //   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+  //     for (let index = 0; index < usersjson.length; index++) {
+  //       console.log(usersjson[index].name);
+  //       let arrProgress = Object.keys(progressjson);
+  //       for (let index = 0; index < arrProgress.length; index++) {}
+  //     }
+  //   });
+  // });
+
+  // Este codigo esta funcionando pero no mostrando la data en el lugar que le corresponde con el nombre
   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, usersjson) => {
     for (let index = 0; index < usersjson.length; index++) {
       var userId = usersjson[index].id;
@@ -63,8 +76,7 @@ generateTable = () => {
         // caracter += '<tr>'
         caracter += '<td>' + percent + '</td>' + '<br>';
         caracter += '</tr>';
-      }
-      else {
+      } else {
         // caracter += '<tr>'
         caracter += '<td>' + 'Curso' + '</td>' + '<br>';
         caracter += '</tr>';
