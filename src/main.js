@@ -46,17 +46,21 @@ switchSedes = (option) => {
 // Filtraciones de Cohorts por los 3primeros caracteres para ubicar a que sedes pertenece
 const filterProm = (promo) => {
   selectPromos.innerHTML = "";
-  getData('../data/cohorts.json', (err, xhrjson) => {
-    xhrjson.map((promotion) => {
+  getData('../data/cohorts.json', (err, cohortjson) => {
+    cohortjson.map((promotion) => {
       let idPromo = promotion.id;
       if (promo === idPromo.substring(0, 3)) {
         selectPromos.innerHTML += "<option value='" + idPromo + "'>" + idPromo + "</option>";
       }
     });
+    filterUsers(cohortjson);
   });
 }
 
-
+const filterUsers = (cohortjson) => {
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
+  });
+}
 
 
 
