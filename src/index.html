@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <html lang="en">
+
+  </html>
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Este es la cabecera de la página -->
+  <header>
+    <div id="logo">
+      <img src="http://subirimagen.me/uploads/20180614104515.png" alt="Logo">
+    </div>
+    <div id="Login">
+      <p>Bienvenida Alejandra
+        <br>alejandra@laboratoria.la </p>
+    </div>
+    <div id="photo">
+      <img src="http://subirimagen.me/uploads/20180614105011.jpg">
+    </div>
+  </header>
+
+  <div id="main">
+    <aside id=barra>
+      <h2>Selects</h2>
+      <!-- verde -->
+      <!-- Select de las sedes de Laboratoria -->
+      <section id="sedes">
+        <h3 class="woMarginBottom">Sedes</h3>
+        <select id="selectSedes">
+          <option value="">Sedes</option>
+          <option value="lim">Lima</option>
+          <option value="sch">Santiago</option>
+          <option value="cdmx">Ciudad de México</option>
+          <option value="gua">Guadalajara</option>
+          <option value="spa">Sao Paulo</option>
+          <option value="are">Arequipa</option>
+        </select>
+      </section>
+
+      <!-- Promociones por sedes -->
+      <section id="promociones">
+        <h3 class="woMarginBottom">Promociones</h3>
+        <select id="selectPromos" disabled>
+          <option value="">Promociones</option>
+          <option value="ii18">2018-II</option>
+          <option value="i18">2018-I</option>
+          <option value="ii17">2017-II</option>
+          <option value="i17">2017-I</option>
+          <option value="i16">2016-II</option>
+          <option value="i16">2016-I</option>
+          <option value="i15">2015-II</option>
+          <option value="i15">2015-I</option>
+        </select>
+      </section>
+
+      <!-- Módulo de Especialización -->
+      <section id="tracks">
+        <h3 class="woMarginBottom">Tracks</h3>
+        <select id="selectTracks" disabled>
+          <option value="">Tracks</option>
+          <option value="selec">Selección</option>
+          <option value="core">Common Core</option>
+          <option value="front">Front-End</option>
+          <option value="ux">UX</option>
+        </select>
+      </section>
+
+      <!-- Turnos AM - PM -->
+      <section id="turnos">
+        <h3 class="woMarginBottom">Turno</h3>
+        <select id="selectTurnos" disabled>
+          <option value="">Turno</option>
+          <option value="am">AM</option>
+          <option value="pm">PM</option>
+        </select>
+      </section>
+    </aside>
+
+    <section id="contenido">
+      <!-- tabla generada por js -->
+      <h2>Gráficos</h2>
+      <table id="tableUsers"></table>
+      <!-- Botones para probar data de users, progress y cohorts -->
+      <section id="dataProgress">
+        <button type="button" id="objectProgress">PROGRESS</button>
+      </section>
+
+      <section id="dataCohorts">
+        <button type="button" id="objectCohorts">COHORTS</button>
+      </section>
+
+      <section id="dataUsers">
+        <button type="button" id="objectUsers">USERS</button>
+      </section>
+
+      <section>
+        <button type="button" id="setTable">Generar tabla de users y progress</button>
+      </section>
+    </section>
+    <!-- <span class="span">PROMOCIÓN</span>
+        </ul> -->
+
+  </div>
+  <!-- Este es el pie de página -->
+  <footer>
+    <h2>Ingrid y AnaFlavia </h2>
+  </footer>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
