@@ -26,7 +26,7 @@ switchSedes = (option) => {
       filterProm('aqp');
       break;
     default:
-      // selectPromos.innerHTML = "";
+      selectPromos.innerHTML = "";
       selectPromos.disabled = true;
       break;
   }
