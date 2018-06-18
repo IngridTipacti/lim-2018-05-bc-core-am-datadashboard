@@ -7,37 +7,33 @@ switchSedes = (option) => {
   switch (option) {
     case 'lim':
       selectPromos.disabled = false;
-      filterProm('lim');
+      getProm('lim');
       break;
     case 'scl':
       selectPromos.disabled = false;
-      filterProm('scl');
+      getProm('scl');
       break;
     case 'cdm':
       selectPromos.disabled = false;
-      filterProm('cdm');
+      getProm('cdm');
       break;
     case 'gdl':
       selectPromos.disabled = false;
-      filterProm('gdl');
+      getProm('gdl');
       break;
     case 'aqp':
       selectPromos.disabled = false;
-      filterProm('aqp');
+      getProm('aqp');
       break;
     default:
-      // selectPromos.innerHTML = "";
+      selectPromos.innerHTML = "";
       selectPromos.disabled = true;
       break;
   }
 }
 
-switchPromos = () => {
-
-}
-
-// Filtraciones de Cohorts por los 3primeros caracteres para ubicar a que sedes pertenece
-const filterProm = (promo) => {
+// promo = 3 letras
+const getProm = (promo) => {
   selectPromos.innerHTML = "";
   getData('../data/cohorts.json', (err, cohortjson) => {
     cohortjson.map((promotion) => {
@@ -49,19 +45,34 @@ const filterProm = (promo) => {
   });
 }
 
-const filterUsers = () => {
+filterByPromo = (idPromo) => {
+  // resultTable.innerHTML = "";
+  let users = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
     userjson.map((user) => {
-      name = user.name;
-      resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
+      if (idPromo === user.signupCohort) {
+        // name = user.name;
+        users.push(user);
+        // resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
+      } else console.log("No hay :(");
     });
+    console.log(users);
   });
 }
+
+// const getUsers = () => {
+//   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
+//     userjson.map((user) => {
+//       name = user.name;
+//       resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
+//     });
+//   });
+// }
 
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => filterUsers());
+selectPromos.addEventListener('change', () => filterByPromo(selectPromos.options[selectPromos.selectedIndex].value));
 
 // selectCursos.addEventListener('change', () => switchCursos(selectCursos.options[selectCursos.selectedIndex].value));
 
@@ -76,4 +87,3 @@ getProgress = () => {
     }
   });
 }
-
