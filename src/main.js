@@ -1,18 +1,6 @@
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
-
-// método para reducir condigo, solo cambia la url para el request
-const getData = (url, callback) => {
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onload = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let xhrjson = JSON.parse(xhr.responseText);
-      callback(null, xhrjson);
-    }
-  };
-  xhr.send();
-}
+const selectCursos = document.getElementById('selectCursos');
 
 switchSedes = (option) => {
   switch (option) {
@@ -53,23 +41,20 @@ const filterProm = (promo) => {
         selectPromos.innerHTML += "<option value='" + idPromo + "'>" + idPromo + "</option>";
       }
     });
-    filterUsers(cohortjson);
   });
 }
 
-const filterUsers = (cohortjson) => {
-  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
-  });
-}
-
-
+// const filterUsers = (cohortjson) => {
+//   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
+//   });
+// }
 
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
+// selectPromos.addEventListener('change', () => switchSedes(selectPromos.options[selectPromos.selectedIndex].value));
 
-
-
+// selectCursos.addEventListener('change', () => switchSedes(selectCursos.options[selectCursos.selectedIndex].value));
 
 
 

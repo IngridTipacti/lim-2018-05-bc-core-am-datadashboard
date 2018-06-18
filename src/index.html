@@ -8,10 +8,57 @@
 
   </html>
   <title>Data Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bitter" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+
+  <!-- Cabecera donde estara loggin del usuario -->
+  <header id="cabecera">
+    <div class="initial">AR</div>
+    <center>
+      <img src="../images/laboratoria.png" alt="Laboratoria código que transforma" class="laboratoria">
+      <div class="loggin">
+        <h3 class="woMarginBottom letterGray">ALEJANDRA RAMIREZ</h3>
+        <p class="woMarginTop letterGray">alejandraramirez@laboratoria.la</p>
+      </div>
+    </center>
+  </header>
+
+  <!-- Seccion de la izquierda donde estaran todos los selects para filtrar -->
+  <section id="menu">
+
+    <!-- Select de las sedes de Laboratoria -->
+    <div id="sedes">
+      <h3 class="woMarginBottom">Sedes</h3>
+      <select id="selectSedes">
+        <option value="">Sedes</option>
+        <option value="lim">Lima</option>
+        <option value="scl">Santiago</option>
+        <option value="cdm">Ciudad de México</option>
+        <option value="gdl">Guadalajara</option>
+        <option value="aqp">Arequipa</option>
+      </select>
+    </div>
+
+    <!-- Promociones por sedes -->
+    <div id="promociones">
+      <h3 class="woMarginBottom">Promociones</h3>
+      <select id="selectPromos" disabled>
+      </select>
+    </div>
+
+    <!-- Selects de cursos -->
+    <div id="cursos">
+      <h3 class="woMarginBottom">Cursos</h3>
+      <select id="selectCursos" disabled></select>
+    </div>
+
+  </section>
+
+  <section id="contenido">Hoola</section>
 
 
   <!-- Tabla para mostrar users y progreso -->
@@ -40,7 +87,7 @@
       </tr>
     </thead>
     <tbody> -->
-      <!-- <tr>
+  <!-- <tr>
         <th scope="row" rowspan="2">Ingrid</th>
         <th rowspan="2">CSS</th>
         <th rowspan="2">70%</th>
@@ -58,7 +105,7 @@
         <td>Suma1</td>
         <td>Promedio1</td>
       </tr> -->
-      <!-- <tr>
+  <!-- <tr>
           <th scope="row" rowspan="2" id="name-user"></th>
           <th rowspan="2" id="name-curse"></th>
           <th rowspan="2" id="percent"></th>
@@ -78,28 +125,6 @@
         </tr>
     </tbody>
   </table> -->
-
-
-
-  <!-- Select de las sedes de Laboratoria -->
-  <section id="sedes">
-    <h3 class="woMarginBottom">Sedes</h3>
-    <select id="selectSedes">
-      <option value="">Sedes</option>
-      <option value="lim">Lima</option>
-      <option value="scl">Santiago</option>
-      <option value="cdm">Ciudad de México</option>
-      <option value="gdl">Guadalajara</option>
-      <option value="aqp">Arequipa</option>
-    </select>
-  </section>
-
-  <!-- Promociones por sedes -->
-  <section id="promociones">
-    <h3 class="woMarginBottom">Promociones</h3>
-    <select id="selectPromos" disabled>
-    </select>
-  </section>
 
   <script src="data.js"></script>
   <script src="main.js"></script>
