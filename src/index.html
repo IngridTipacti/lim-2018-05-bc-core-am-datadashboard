@@ -3,17 +3,19 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <html lang="en">
 
   </html>
   <title>Data Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bitter" />
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="container-fluid">
 
   <!-- Cabecera donde estara loggin del usuario -->
   <header id="cabecera">
@@ -21,44 +23,84 @@
     <center>
       <img src="../images/laboratoria.png" alt="Laboratoria código que transforma" class="laboratoria">
       <div class="loggin">
-        <h3 class="woMarginBottom letterGray">ALEJANDRA RAMIREZ</h3>
-        <p class="woMarginTop letterGray">alejandraramirez@laboratoria.la</p>
+        <h4 class="h4">ALEJANDRA RAMIREZ</h4>
+        <p>alejandraramirez@laboratoria.la</p>
       </div>
     </center>
   </header>
 
-  <!-- Seccion de la izquierda donde estaran todos los selects para filtrar -->
-  <section id="menu">
+  <section class="row">
 
-    <!-- Select de las sedes de Laboratoria -->
-    <div id="sedes">
-      <h3 class="woMarginBottom">Sedes</h3>
-      <select id="selectSedes">
-        <option value="">Sedes</option>
-        <option value="lim">Lima</option>
-        <option value="scl">Santiago</option>
-        <option value="cdm">Ciudad de México</option>
-        <option value="gdl">Guadalajara</option>
-        <option value="aqp">Arequipa</option>
-      </select>
+    <!-- SELECTS Seccion de la izquierda donde estaran todos los selects para filtrar -->
+    <div id="menu" class="col-4 form-group">
+
+      <!-- Select de las sedes de Laboratoria -->
+      <div id="sedes">
+        <h4 class="h4">Sedes</h4>
+        <select id="selectSedes" class="form-control">
+          <option value="">Sedes</option>
+          <option value="lim">Lima</option>
+          <option value="scl">Santiago</option>
+          <option value="cdm">Ciudad de México</option>
+          <option value="gdl">Guadalajara</option>
+          <option value="aqp">Arequipa</option>
+        </select>
+      </div>
+
+      <!-- Promociones por sedes -->
+      <div id="promociones">
+        <h4 class="h4">Promociones</h4>
+        <select id="selectPromos" class="form-control" disabled>
+        </select>
+      </div>
+
+      <!-- Selects de cursos -->
+      <div id="cursos">
+        <h4 class="h4">Cursos</h4>
+        <select id="selectCursos" class="form-control" disabled></select>
+      </div>
+
     </div>
 
-    <!-- Promociones por sedes -->
-    <div id="promociones">
-      <h3 class="woMarginBottom">Promociones</h3>
-      <select id="selectPromos" disabled>
-      </select>
-    </div>
+    <!-- CONTENIDO donde se mostrará la tabla o empty component u otras cosas en la parte mas grande de la page-->
+    <div id="contenido" class="col-8">
 
-    <!-- Selects de cursos -->
-    <div id="cursos">
-      <h3 class="woMarginBottom">Cursos</h3>
-      <select id="selectCursos" disabled></select>
-    </div>
+      <!-- componente empty que mostrará que aun no selecciono algo -->
 
+      <!-- probando tabla de bootstrap -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Alumnas</th>
+            <th scope="col">Cursos</th>
+            <th scope="col">Progreso</th>
+            <th scope="col">Ejercicios</th>
+            <th scope="col">Lecturas</th>
+            <th scope="col">Quizzes</th>
+          </tr>
+        </thead>
+        <tbody id="resultTable"> </tbody>
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+          </tr> -->
+
+      </table>
+    </div>
   </section>
-
-  <section id="contenido">Hoola</section>
 
 
   <!-- Tabla para mostrar users y progreso -->

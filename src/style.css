@@ -17,7 +17,7 @@ header {
 /* se queda para las dos primeras iniciales de la persona del loggin */
 .initial {
   color: #fafafa;
-  background-color: #bdbdbd;
+  background-color: #999898;
   width: 60px;
   height: 60px;
   display: flex;
@@ -26,20 +26,16 @@ header {
   border-radius: 50%;
   justify-content: center;
   float: right;
-  margin-top: 8px;
 }
 /* nombre de la persona y correo */
 .loggin {
   float: right;
   margin-right: 10px;
   text-align: right;
+  color: gray;
 }
-.woMarginBottom {
-  margin-bottom: 0;
-}
-.woMarginTop {
-  margin-top: 0;
-}
-.letterGray {
-  color: #8d8a8a;
+
+/* editando clases de bootstrap */
+.container-fluid {
+  padding-top: 15px;
 }

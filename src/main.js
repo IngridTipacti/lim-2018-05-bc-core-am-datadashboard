@@ -1,6 +1,7 @@
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
+let resultTable = document.getElementById('resultTable');
 
 switchSedes = (option) => {
   switch (option) {
@@ -31,6 +32,10 @@ switchSedes = (option) => {
   }
 }
 
+switchPromos = () => {
+
+}
+
 // Filtraciones de Cohorts por los 3primeros caracteres para ubicar a que sedes pertenece
 const filterProm = (promo) => {
   selectPromos.innerHTML = "";
@@ -44,17 +49,21 @@ const filterProm = (promo) => {
   });
 }
 
-// const filterUsers = (cohortjson) => {
-//   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
-//   });
-// }
+const filterUsers = () => {
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
+    userjson.map((user) => {
+      name = user.name;
+      resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
+    });
+  });
+}
 
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-// selectPromos.addEventListener('change', () => switchSedes(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener('change', () => filterUsers());
 
-// selectCursos.addEventListener('change', () => switchSedes(selectCursos.options[selectCursos.selectedIndex].value));
+// selectCursos.addEventListener('change', () => switchCursos(selectCursos.options[selectCursos.selectedIndex].value));
 
 
 
