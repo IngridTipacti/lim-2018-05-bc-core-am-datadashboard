@@ -1,162 +1,41 @@
-* {
-  margin: 0px;
-  padding: 0px;
+body,select,option {
+  font-family: "Open Sans" !important;
 }
-
-/* body {
-    background: #b9b9b9;
-    color: #fff; */
-
-/* } */
-
-header {
-  background-color: white;
-  padding: 5px;
-}
-
-#Login {
-  display: inline-block;
-  background-color: white;
-  position: absolute;
-  right: 80px;
-  top: 17px;
-}
-
-#Login p {
-  display: inline-block;
-  background-color: white;
-}
-
-#logo {
-  display: inline-block;
-  background-color: white;
-}
-
-#logo img {
-  margin-top: 5px;
-  width: auto;
-  height: 50px;
-}
-
-#photo {
-  display: inline-block;
-  right: 20px;
-  position: absolute;
-  background-color: green;
-}
-
-#photo img {
-  width: 50px;
-  height: 50px;
-}
-
-#main {
-  background-color: white;
-  width: 100%;
-}
-
-#barra {
-  display: inline-block;
-  background-color: #56f89a;
-  height: 500px;
-  width: 20%;
-  margin: 0;
-}
-
-#contenido {
-  display: inline-block;
-  background-color: #ffe521;
-  height: 500px;
-  width: 79.5%;
-  margin: 0;
-}
-
-footer {
-  background-color: white;
-}
-
-footer h2 {
-  text-align: center;
-}
-
-body {
-  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
-}
-
 header {
   margin-bottom: 20px;
   display: inline-block;
   width: 100%;
+  /* font-family: Bitter !important; */
 }
 
+/* img del logo */
 .laboratoria {
   height: 70px;
   width: 190px;
   float: left;
 }
-
+/* se queda para las dos primeras iniciales de la persona del loggin */
 .initial {
   color: #fafafa;
-  background-color: #bdbdbd;
+  background-color: #999898;
   width: 60px;
   height: 60px;
   display: flex;
   font-size: 1.25rem;
-  font-family: museo-sans, "Helvetica Neue", Arial, sans-serif;
   align-items: center;
   border-radius: 50%;
   justify-content: center;
   float: right;
-  margin-top: 8px;
 }
-
+/* nombre de la persona y correo */
 .loggin {
   float: right;
   margin-right: 10px;
   text-align: right;
+  color: gray;
 }
 
-.woMarginBottom {
-  margin-bottom: 0;
-}
-
-.woMarginTop {
-  margin-top: 0;
-}
-
-.letterGray {
-  color: #8d8a8a;
-}
-
-/* .none {
-    display: none;
-} */
-
-#customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-}
-
-#customers td,
-#customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#customers tr:hover {
-  background-color: #ddd;
-}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
+/* editando clases de bootstrap */
+.container-fluid {
+  padding-top: 15px;
 }
