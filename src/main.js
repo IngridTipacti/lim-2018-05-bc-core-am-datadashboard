@@ -2,6 +2,8 @@ const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
 let resultTable = document.getElementById('resultTable');
+let empty = document.getElementById('empty');
+let tableData = document.getElementById('tableData');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -32,11 +34,29 @@ const switchSedes = (option) => {
   }
 }
 
-// promo = 3 letras solo muestra id de promos
-const showCohorts = (cohort) => {
+// método para reducir condigo, solo cambia la url para el request
+const getData = (url, callback) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let xhrjson = JSON.parse(xhr.responseText);
+      callback(null, xhrjson);
+    }
+  };
+  xhr.send();
+}
+
+// promo = 3 letras
+const getPromo = (promo) => {
   selectPromos.innerHTML = "";
-  cohort.map((promo) => {
-    selectPromos.innerHTML += "<option value='" + promo + "'>" + promo + "</option>";
+  getData('../data/cohorts.json', (err, cohortjson) => {
+    cohortjson.map((promotion) => {
+      let idPromo = promotion.id;
+      if (promo === idPromo.substring(0, 3)) {
+        selectPromos.innerHTML += "<option value='" + idPromo + "'>" + idPromo + "</option>";
+      }
+    });
   });
 }
 
@@ -50,6 +70,12 @@ const filterUsersByIdPromo = (idPromo) => {
         users.push(user);
       } else console.log("No hay :(");
     });
+    if (users.length > 0) {
+      empty.style.display = "none";
+      tableData.style.display = "block";
+    } else {
+      empty.style.display = "block";
+    }
     getData('../data/cohorts.json', (err, cohortjson) => {
       cohortjson.map((promotion) => {
         if (idPromo === promotion.id) {
@@ -71,15 +97,9 @@ const getProgress = (users, courses) => {
       }
     }
   });
-  filterProgressByUser(users, progress, courses);
+  computeUserStats(users, progress, courses);
 }
 
-const filterProgressByUser = (users, progress, courses) => {
-  resultTable.innerHTML = "";
-  console.log(users);
-  console.log(progress);
-  console.log(courses);
-}
 
 // const getUsers = () => {
 //  resultTable.innerHTML = "";

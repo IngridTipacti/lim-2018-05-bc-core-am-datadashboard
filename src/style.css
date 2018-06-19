@@ -39,3 +39,11 @@ header {
 .container-fluid {
   padding-top: 15px;
 }
+
+#empty {
+  width: 70%;
+}
+
+.with-empty {
+  display: block;
+}
