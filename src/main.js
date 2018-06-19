@@ -28,6 +28,7 @@ const switchSedes = (option) => {
       getPromo('aqp');
       break;
     default:
+    empty.style.display = "none";
       selectPromos.innerHTML = "";
       selectPromos.disabled = true;
       break;
