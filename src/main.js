@@ -3,7 +3,7 @@ const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
 let resultTable = document.getElementById('resultTable');
 
-switchSedes = (option) => {
+const switchSedes = (option) => {
   switch (option) {
     case 'lim':
       selectPromos.disabled = false;
@@ -32,7 +32,7 @@ switchSedes = (option) => {
   }
 }
 
-// promo = 3 letras
+// promo = 3 letras solo muestra id de promos
 const getProm = (promo) => {
   selectPromos.innerHTML = "";
   getData('../data/cohorts.json', (err, cohortjson) => {
@@ -45,22 +45,49 @@ const getProm = (promo) => {
   });
 }
 
-filterByPromo = (idPromo) => {
-  // resultTable.innerHTML = "";
+// idPromo es la promo seleccionada
+const filterUsersByIdPromo = (idPromo) => {
   let users = [];
+  let courses = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
     userjson.map((user) => {
       if (idPromo === user.signupCohort) {
-        // name = user.name;
         users.push(user);
-        // resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
       } else console.log("No hay :(");
     });
-    console.log(users);
+    getData('../data/cohorts.json', (err, cohortjson) => {
+      cohortjson.map((promotion) => {
+        if (idPromo === promotion.id) {
+          courses.push(promotion.coursesIndex);
+        }
+      });
+    });
+    getProgress(users, courses);
   });
 }
 
+// lista de usuarios que cumplen la condicion de ser estudiantes
+const getProgress = (users, courses) => {
+  let progress = [];
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+    for (const key in progressjson) {
+      if (progressjson[key].intro) {
+        progress.push(progressjson);
+      }
+    }
+  });
+  filterProgressByUser(users, progress, courses);
+}
+
+const filterProgressByUser = (users, progress, courses) => {
+  resultTable.innerHTML = "";
+  console.log(users);
+  console.log(progress);
+  console.log(courses);
+}
+
 // const getUsers = () => {
+//  resultTable.innerHTML = "";
 //   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
 //     userjson.map((user) => {
 //       name = user.name;
@@ -72,18 +99,6 @@ filterByPromo = (idPromo) => {
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => filterByPromo(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener('change', () => filterUsersByIdPromo(selectPromos.options[selectPromos.selectedIndex].value));
 
 // selectCursos.addEventListener('change', () => switchCursos(selectCursos.options[selectCursos.selectedIndex].value));
-
-
-
-// getProgress get getCohorts y getData son para jalar la data de manera global y reutilizar codigo
-getProgress = () => {
-  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    let arrProgress = Object.keys(progressjson);
-    for (let index = 0; index < arrProgress.length; index++) {
-      let element = arrProgress[index];
-    }
-  });
-}
