@@ -11,6 +11,18 @@ window.getData = (url, callback) => {
   xhr.send();
 }
 
+window.getPromo = (promo) => {
+  getData('../data/cohorts.json', (err, cohortjson) => {
+    let cohorts = [];
+    cohortjson.map((promotion) => {
+      if (promo ===promotion.id.substring(0, 3)) {
+        cohorts.push(promotion.id);
+      }
+    });
+    showCohorts(cohorts);
+  });
+}
+
 window.computeUserStats = (users, progress, courses) => {users, progress, courses}
 
 window.sortUsers = (users, orderBy, orderDirection) => {users, orderBy, orderDirection}

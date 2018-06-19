@@ -7,23 +7,23 @@ const switchSedes = (option) => {
   switch (option) {
     case 'lim':
       selectPromos.disabled = false;
-      getProm('lim');
+      getPromo('lim');
       break;
     case 'scl':
       selectPromos.disabled = false;
-      getProm('scl');
+      getPromo('scl');
       break;
     case 'cdm':
       selectPromos.disabled = false;
-      getProm('cdm');
+      getPromo('cdm');
       break;
     case 'gdl':
       selectPromos.disabled = false;
-      getProm('gdl');
+      getPromo('gdl');
       break;
     case 'aqp':
       selectPromos.disabled = false;
-      getProm('aqp');
+      getPromo('aqp');
       break;
     default:
       selectPromos.innerHTML = "";
@@ -33,15 +33,10 @@ const switchSedes = (option) => {
 }
 
 // promo = 3 letras solo muestra id de promos
-const getProm = (promo) => {
+const showCohorts = (cohort) => {
   selectPromos.innerHTML = "";
-  getData('../data/cohorts.json', (err, cohortjson) => {
-    cohortjson.map((promotion) => {
-      let idPromo = promotion.id;
-      if (promo === idPromo.substring(0, 3)) {
-        selectPromos.innerHTML += "<option value='" + idPromo + "'>" + idPromo + "</option>";
-      }
-    });
+  cohort.map((promo) => {
+    selectPromos.innerHTML += "<option value='" + promo + "'>" + promo + "</option>";
   });
 }
 
