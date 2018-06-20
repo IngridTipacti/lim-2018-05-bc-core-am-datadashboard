@@ -8,27 +8,32 @@ let tableData = document.getElementById('tableData');
 const switchSedes = (option) => {
   switch (option) {
     case 'lim':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('lim');
       break;
     case 'scl':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('scl');
       break;
     case 'cdm':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('cdm');
       break;
     case 'gdl':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('gdl');
       break;
     case 'aqp':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('aqp');
       break;
     default:
-    empty.style.display = "none";
+      empty.style.display = "none";
       selectPromos.innerHTML = "";
       selectPromos.disabled = true;
       break;
@@ -83,24 +88,36 @@ const filterUsersByIdPromo = (idPromo) => {
           courses.push(promotion.coursesIndex);
         }
       });
+      getProgress(users, courses);
     });
-    getProgress(users, courses);
   });
 }
 
 // lista de usuarios que cumplen la condicion de ser estudiantes
 const getProgress = (users, courses) => {
-  let progress = [];
+  // let progress = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    for (const key in progressjson) {
-      if (progressjson[key].intro) {
-        progress.push(progressjson);
-      }
-    }
+    // for (const key in progressjson) {
+    //   if (progressjson[key].intro) {
+    //     progress.push(progressjson[key]);
+    //   }
+    // }
+    createTable(users, progressjson, courses);
   });
-  computeUserStats(users, progress, courses);
 }
 
+const createTable = (users, progress, courses) => {
+  let arrProgress = Object.keys(progress);
+  resultTable.innerHTML = "";
+  for (const user of users) {
+    for (const key of arrProgress) {
+      if (user.id === key && progress[key].hasOwnProperty('intro')) {
+        // console.log(progress[key].intro.percent);
+        resultTable.innerHTML += "<tr><th scope='row'>" + user.name + "</th> <td>Intro</td> <td>" + progress[key].intro.percent +"%</td></tr>";
+      }
+    }
+  }
+}
 
 // const getUsers = () => {
 //  resultTable.innerHTML = "";

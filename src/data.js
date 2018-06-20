@@ -1,7 +1,7 @@
 window.computeUserStats = (users, progress, courses) => {
-  console.log(users);
-  console.log(progress);
-  console.log(courses);
+  // console.log(users);
+  // console.log(progress);
+  // console.log(courses);
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {users, orderBy, orderDirection}
