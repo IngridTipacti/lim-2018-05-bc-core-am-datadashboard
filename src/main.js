@@ -113,7 +113,7 @@ const createTable = (users, progress, courses) => {
     for (const key of arrProgress) {
       if (user.id === key && progress[key].hasOwnProperty('intro')) {
         // console.log(progress[key].intro.percent);
-        resultTable.innerHTML += "<tr><th scope='row'>" + user.name + "</th> <td>Intro</td> <td>" + progress[key].intro.percent +"</td></tr>";
+        resultTable.innerHTML += "<tr><th scope='row'>" + user.name + "</th> <td>Intro</td> <td>" + progress[key].intro.percent +"%</td></tr>";
       }
     }
   }
