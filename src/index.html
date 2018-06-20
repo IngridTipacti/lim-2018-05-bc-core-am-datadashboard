@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <html lang="en">
+
+  </html>
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bitter" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="container-fluid">
+
+  <!-- Cabecera donde estara loggin del usuario -->
+  <header id="cabecera">
+    <div class="initial">AR</div>
+    <center>
+      <img src="../images/laboratoria.png" alt="Laboratoria código que transforma" class="laboratoria">
+      <div class="loggin">
+        <h4 class="h4">ALEJANDRA RAMIREZ</h4>
+        <p>alejandraramirez@laboratoria.la</p>
+      </div>
+    </center>
+  </header>
+
+  <section class="row">
+
+    <!-- SELECTS Seccion de la izquierda donde estaran todos los selects para filtrar -->
+    <div id="menu" class="col-4 form-group">
+
+      <!-- Select de las sedes de Laboratoria -->
+      <div id="sedes">
+        <h4 class="h4">Sedes</h4>
+        <select id="selectSedes" class="form-control">
+          <option value="">Sedes</option>
+          <option value="lim">Lima</option>
+          <option value="scl">Santiago</option>
+          <option value="cdm">Ciudad de México</option>
+          <option value="gdl">Guadalajara</option>
+          <option value="aqp">Arequipa</option>
+        </select>
+      </div>
+
+      <!-- Promociones por sedes -->
+      <div id="promociones">
+        <h4 class="h4">Promociones</h4>
+        <select id="selectPromos" class="form-control" disabled>
+        </select>
+      </div>
+
+      <!-- Selects de cursos -->
+      <div id="cursos">
+        <h4 class="h4">Cursos</h4>
+        <select id="selectCursos" class="form-control" disabled></select>
+      </div>
+
+    </div>
+
+    <!-- CONTENIDO donde se mostrará la tabla o empty component u otras cosas en la parte mas grande de la page-->
+    <div id="contenido" class="col-8">
+
+      <!-- componente empty que mostrará que aun no selecciono algo -->
+      <center>
+        <img src="../images/empty-page.jpg" alt="empty" id="empty" style="display: none">
+      </center>
+
+      <!-- probando tabla de bootstrap -->
+      <table class="table table-hover" style="display: none;" id="tableData">
+        <thead>
+          <tr>
+            <th scope="col">Alumnas</th>
+            <th scope="col">Cursos</th>
+            <th scope="col">Progreso</th>
+            <th scope="col">Ejercicios</th>
+            <th scope="col">Lecturas</th>
+            <th scope="col">Quizzes</th>
+          </tr>
+        </thead>
+        <tbody id="resultTable"> </tbody>
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+          </tr> -->
+
+      </table>
+    </div>
+  </section>
+
+
+  <!-- Tabla para mostrar users y progreso -->
+  <!-- <table id="customers">
+    <thead>
+      <tr>
+        <th scope="row" rowspan="2">Alumnas</th>
+        <th rowspan="2">Cursos</th>
+        <th rowspan="2">Progreso</th>
+        <th colspan="3">Ejercicios</th>
+        <th colspan="3">Lecturas</th>
+        <th colspan="5">Quizzes</th>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>Completado</td>
+        <td>%</td>
+        <td>Total</td>
+        <td>Completado</td>
+        <td>%</td>
+        <td>Total</td>
+        <td>Completado</td>
+        <td>%</td>
+        <td>Suma</td>
+        <td>Promedio</td>
+      </tr>
+    </thead>
+    <tbody> -->
+  <!-- <tr>
+        <th scope="row" rowspan="2">Ingrid</th>
+        <th rowspan="2">CSS</th>
+        <th rowspan="2">70%</th>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>7</td>
+        <td>70%</td>
+        <td>10</td>
+        <td>7</td>
+        <td>70%</td>
+        <td>10</td>
+        <td>7</td>
+        <td>70%</td>
+        <td>Suma1</td>
+        <td>Promedio1</td>
+      </tr> -->
+  <!-- <tr>
+          <th scope="row" rowspan="2" id="name-user"></th>
+          <th rowspan="2" id="name-curse"></th>
+          <th rowspan="2" id="percent"></th>
+        </tr>
+        <tr>
+          <td id="total-unid-ejer"></td>
+          <td id="complet-unid-ejer"></td>
+          <td>70%</td>
+          <td>10</td>
+          <td>7</td>
+          <td>70%</td>
+          <td>10</td>
+          <td>7</td>
+          <td>70%</td>
+          <td>Suma1</td>
+          <td>Promedio1</td>
+        </tr>
+    </tbody>
+  </table> -->
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
