@@ -96,11 +96,6 @@ const filterUsersByIdPromo = (idPromo) => {
 // lista de usuarios que cumplen la condicion de ser estudiantes
 const getProgress = (users, courses) => {
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    // for (const key in progressjson) {
-    //   if (progressjson[key].intro) {
-    //     progress.push(progressjson[key]);
-    //   }
-    // }
     createTable(users, progressjson, courses);
   });
 }
@@ -114,7 +109,8 @@ const createTable = (users, progress, courses) => {
         const userProgress = progress[userCopia.id];
         if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
           const intro = userProgress.intro;
-          const progressTotal = Object.keys(intro.units).reduce((sumProgress, u) => {
+          const nameUnits = Object.keys(intro.units);
+          const progressTotal = nameUnits.reduce((sumProgress, u) => {
             sumProgress += intro.units[u].percent;
             return sumProgress;
           }, 0);
@@ -142,7 +138,8 @@ const createTable = (users, progress, courses) => {
         }
       }
   }
-  console.log(users);
+  usersWithStats = users;
+  console.log(usersWithStats);
 }
 
 const getUsers = () => {
