@@ -95,27 +95,31 @@ const filterUsersByIdPromo = (idPromo) => {
 
 // lista de usuarios que cumplen la condicion de ser estudiantes
 const getProgress = (users, courses) => {
-  // let progress = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     // for (const key in progressjson) {
     //   if (progressjson[key].intro) {
     //     progress.push(progressjson[key]);
     //   }
     // }
-    computeUsersStats(users, progressjson, courses);
+    createTable(users, progressjson, courses);
   });
 }
 
 const createTable = (users, progress, courses) => {
   let usersWithStats = [];
-  let arrProgress = Object.keys(progress);
   resultTable.innerHTML = "";
   for (const course of courses) {
     for (const user of users) {
-      for (const key of arrProgress) {
-        if (user.id === key && progress[key].hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(progress[key]).toString()) {
-          stats = {
-            percent: 0,
+      const userCopia = { ...user };
+        const userProgress = progress[userCopia.id];
+        if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
+          const intro = userProgress.intro;
+          const progressTotal = Object.keys(intro.units).reduce((sumProgress, u) => {
+            sumProgress += intro.units[u].percent;
+            return sumProgress;
+          }, 0);
+          user.stats = {
+            percent: progressTotal / Object.keys(intro.units).length,
             exercises: {
               total: 0,
               completed: 0,
@@ -134,18 +138,18 @@ const createTable = (users, progress, courses) => {
               scoreAvg: 0
             }
           }
-          // resultTable.innerHTML += "<tr><th scope='row'>" + user.name + "</th> <td>" + Object.keys(courses[0]).toString() + "</td> <td>" + progress[key].intro.percent + "%</td></tr>";
+          // resultTable.innerHTML += "<tr><th scope='row'>" + userCopia.name + "</th> <td>" + Object.keys(courses[0]).toString() + "</td> <td>" + progress[key].intro.percent + "%</td></tr>";
         }
       }
-    }
   }
+  console.log(users);
 }
 
 const getUsers = () => {
   //  resultTable.innerHTML = "";
   //   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
   //     userjson.map((user) => {
-  //       name = user.name;
+  //       name = userCopia.name;
   //       resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
   //     });
   //   });

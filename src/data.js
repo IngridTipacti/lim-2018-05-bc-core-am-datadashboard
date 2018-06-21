@@ -7,6 +7,7 @@ window.computeUsersStats = (users, progress, courses) => {
       for (const key of arrProgress) {
         if (user.id === key && progress[key].hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(progress[key]).toString()) {
           let nameCourse = Object.keys(progress[key]).toString();
+          
           // console.log(progress[key].nameCourse.percent) aun no estabien esta parte
           // stats = {
           //   percent: progress[key].nameCourse.percent,
