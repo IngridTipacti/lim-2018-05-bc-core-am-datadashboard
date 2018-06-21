@@ -146,23 +146,33 @@ proyecto son:
 
 #### 1) Definición del producto
 
-En el `README.md` cuéntanos cómo pensaste y te acercaste a los usuarios al
-desarrollar tu producto (Tip: entrevistas) y cuál fue tu proceso para definir
-el producto final a nivel de experiencia y de interfaz. Es importante que
-detalles:
+Partimos de identificar la problemática y entender el contexto de trabajo para formular una guía de entrevista, tuvimos un primer acercamiento con la TM de Lima (Alejandra Ramirez) en una entrevista para presentarle un boceto (hecho a mano) recibimos feedback respecto a presentación de interfaz y requerimientos según necesidades, priorizamos a través de un sketch básico y trabajaremos enfocadas en ella para el 1° sprint.
 
 * Quiénes son los principales usuarios de producto.
+
+El equipo de Laboratoria y principalmente las Training Manager de las diferentes sedes. 
+
 * Cuáles son los objetivos de estos usuarios en relación con el producto.
+
+Obtener estadísticas comparativas e informativas de los avances por sede para decisiones de mejora a nivel macro; por ejemplo: ¿Qué se tiene que seguir haciendo? O ¿qué dejar de hacer?.
+
 * Cuáles son los datos más relevantes que quieren ver en la interfaz y
   por qué. Cómo los descubriste.
+
+Los datos relevantes son: ¿Datos específicos de alumnos? ¿Cómo avanza el grupo? ¿Cómo está cada sede? Porque son su principal fuente para tomar decisiones según lo señalado en la entrevista.
+
 * Cuándo revisan normalmente estos datos los usuarios.
+
+En momentos épicos como: Inicio y Final de Bootcamp, Final de proyectos por squad, revisión de progreso.
+
 * Cómo crees que el producto les está resolviendo sus problemas.
-* Cómo fue tu proceso de diseño.
+
+Mayor organización, orden y utilidad.
+
 
 #### 2) Sketch de la solución (prototipo de baja fidelidad)
 
-Debes hacer un _sketch_ (boceto) de tu solución usando papel y lápiz, tomarle
-una foto, subirla a tu repositorio y hacer mención del _sketch_ en tu `README.md`.
+![Sin titulo](http://subirimagen.me/uploads/20180614171643.14) 
 
 #### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
 
