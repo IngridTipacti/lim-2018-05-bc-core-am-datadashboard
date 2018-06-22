@@ -44,7 +44,10 @@ header {
 }
 
 #tableData thead th {
-  background-color: rgb(255, 238, 0);
+  background-color:#FFE521;
+}
+#tableData td, #tableData thead th{
+  text-align: center;
 }
 
 /* editando clases de bootstrap */
