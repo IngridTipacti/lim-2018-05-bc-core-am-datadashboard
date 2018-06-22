@@ -82,6 +82,10 @@ body,select,option {
   text-align: center;
 }
 
+#tableData td {
+  text-align: center;
+}
+
 /* editando clases de bootstrap */
 .container-fluid {
   padding-top: 15px;
