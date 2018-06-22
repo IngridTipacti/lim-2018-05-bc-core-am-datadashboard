@@ -47,6 +47,10 @@ header {
   background-color: rgb(255, 238, 0);
 }
 
+#tableData td {
+  text-align: center;
+}
+
 /* editando clases de bootstrap */
 .container-fluid {
   padding-top: 15px;
