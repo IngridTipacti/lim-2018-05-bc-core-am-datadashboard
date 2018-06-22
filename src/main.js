@@ -125,7 +125,7 @@ const createTable = (users, progress, courses) => {
         // const exerTotal = nameUnits.map(name => {return name});
         // console.log(exerTotal);
         user.stats = {
-          percent: progressTotal / Object.keys(intro.units).length,
+          percent: Math.round(progressTotal / Object.keys(intro.units).length),
           totalUnits: uniTotales,
           completedUnits: uniCompletadas
           // exercises: {
