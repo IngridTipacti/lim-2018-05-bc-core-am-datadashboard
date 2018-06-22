@@ -43,6 +43,10 @@ header {
   display: block;
 }
 
+#tableData thead th {
+  background-color: rgb(255, 238, 0);
+}
+
 /* editando clases de bootstrap */
 .container-fluid {
   padding-top: 15px;
