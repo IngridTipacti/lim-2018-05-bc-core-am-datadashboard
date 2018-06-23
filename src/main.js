@@ -96,10 +96,16 @@ const getCohortsJson = (idCohort) => {
     selectCursos.disabled = false;
     let nameCourses = Object.keys(courses);
     nameCourses.map((course) => {
-      let keyCourse = Object.keys(courses[course]);
-      keyCourse.map((key) => {
-        selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
-      });
+      if (courses[course] !== undefined) {
+        let keyCourse = Object.keys(courses[course]);
+        keyCourse.map((key) => {
+          selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
+        });
+      }
+      else {
+        selectCursos.disabled = true;
+        empty.style.display = "block";
+      }
     });
     // }
   });
@@ -126,16 +132,23 @@ const getProgress = (idCohort, course) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
       computeUsersStats(users, progressjson, courses);
-      // console.log(courses);
-      // console.log(users);
     }
     else empty.style.display = "block";
   });
 }
 
-
-// document.getElementById("probando-funciones").addEventListener("click", () => probandoTres());
-
+const percentStats = (progress, courses) => {
+  let suma = 0;
+  courses.forEach(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress[nameCourse] !== undefined) {
+      suma += progress[nameCourse].percent;
+    } else {
+      console.log("no tiene porcentaje");
+    }
+  });
+  return suma / courses.length;
+}
 
 
 //antiguo codigoooooooooooooooooooooooooooooooooooooooooooooooooooooo
