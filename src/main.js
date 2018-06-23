@@ -10,32 +10,44 @@ const switchSedes = (option) => {
     case 'lim':
       empty.style.display = "none";
       selectPromos.disabled = false;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       getPromo('lim');
       break;
     case 'scl':
       empty.style.display = "none";
       selectPromos.disabled = false;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       getPromo('scl');
       break;
     case 'cdm':
       empty.style.display = "none";
       selectPromos.disabled = false;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       getPromo('cdm');
       break;
     case 'gdl':
       empty.style.display = "none";
       selectPromos.disabled = false;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       getPromo('gdl');
       break;
     case 'aqp':
       empty.style.display = "none";
       selectPromos.disabled = false;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       getPromo('aqp');
       break;
     default:
       empty.style.display = "none";
       selectPromos.innerHTML = "";
       selectPromos.disabled = true;
+      selectCursos.innerHTML = "";
+      selectCursos.disabled = true;
       break;
   }
 }
@@ -66,6 +78,73 @@ const getPromo = (promo) => {
   });
 }
 
+
+//NUEVO CODIGO
+
+const selectCurso = (course) => {
+  // if(course === ) {}
+}
+
+// validacion por curso de cohorts para select
+const getCohortsJson = (idCohort) => {
+  selectCursos.disabled = true;
+  selectCursos.innerHTML = "";
+  let courses = [];
+  getData('../data/cohorts.json', (err, cohortjson) => {
+    cohortjson.map((cohort) => {
+      if (cohort.id === idCohort ) {courses.push(cohort.coursesIndex);}
+    });
+    // if (courses[0].intro) {
+      selectCursos.disabled = false;
+      let nameCourses = Object.keys(courses);
+      nameCourses.map((course) => {
+        let keyCourse = Object.keys(courses[course]);
+        keyCourse.map((key) => {
+          selectCursos.innerHTML += "<option value='" + keyCourse.toString() +"'>" + courses[course][key].title + "</option>";
+        });
+      });
+    // }
+  });
+  return courses;
+}
+
+// debe recibir el id seleccionado en la parte de la promocion
+const getUsersJson = (idCohort) => {
+  let newUsers = [];
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
+    userjson.map((user) => {
+      if (user.signupCohort === idCohort) {
+        newUsers.push(user);
+      } else console.log("No hay :(");
+    });
+  });
+  return newUsers;
+}
+
+const getProgress = (idCohort) => {
+  const courses = getCohortsJson(idCohort);
+  const users = getUsersJson(idCohort);
+  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+    if (users.length > 0) {
+      // console.log(courses);
+      // console.log(users);
+      // console.log(progressjson);
+      return progressjson;
+    }
+  });
+}
+
+
+const probandoTres = () => {
+
+}
+
+document.getElementById("probando-funciones").addEventListener("click", () => probandoTres());
+
+
+
+//antiguo codigoooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
 // idPromo es la promo seleccionada
 const filterUsersByIdPromo = (idPromo) => {
   let users = [];
@@ -94,11 +173,11 @@ const filterUsersByIdPromo = (idPromo) => {
 }
 
 // lista de usuarios que cumplen la condicion de ser estudiantes
-const getProgress = (users, courses) => {
-  getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    createTable(users, progressjson, courses);
-  });
-}
+// const getProgress = (users, courses) => {
+//   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
+//     createTable(users, progressjson, courses);
+//   });
+// }
 
 const createTable = (users, progress, courses) => {
   let usersWithStats = [];
@@ -114,13 +193,15 @@ const createTable = (users, progress, courses) => {
           sumProgress += intro.units[u].percent;
           return sumProgress;
         }, 0);
-        const uniTotales = nameUnits.reduce((sumTotales, u) => {
-          sumTotales += intro.units[u].totalParts;
+        const uniTotales = nameUnits.reduce((sumTotales) => {
+          sumTotales = intro.totalUnits;
           return sumTotales;
         }, 0);
-        const uniCompletadas = nameUnits.reduce((sumCompletadas, u) => {
-          sumCompletadas += intro.units[u].completedParts;
-          return sumCompletadas;
+        const uniCompletadas = nameUnits.reduce((sumCompletadas) => {
+          sumCompletadas = intro.completedUnits;
+          if(sumCompletadas % 1 == 0 ) return sumCompletadas;
+          else return sumCompletadas.toFixed(2);
+          // return sumCompletadas;
         }, 0);
         // const exerTotal = nameUnits.map(name => {return name});
         // console.log(exerTotal);
@@ -156,6 +237,6 @@ const createTable = (users, progress, courses) => {
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => filterUsersByIdPromo(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener('change', () => getProgress(selectPromos.options[selectPromos.selectedIndex].value));
 
-// selectCursos.addEventListener('change', () => switchCursos(selectCursos.options[selectCursos.selectedIndex].value));
+selectCursos.addEventListener('change', () => selectCurso(selectCursos.options[selectCursos.selectedIndex].value));

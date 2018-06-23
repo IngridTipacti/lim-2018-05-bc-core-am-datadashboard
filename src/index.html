@@ -36,11 +36,11 @@
       <!-- Select de las sedes de Laboratoria -->
       <div id="sedes">
         <h4 class="h4">Sedes</h4>
-        <select id="selectSedes" class="form-control">
-          <option value="">Sedes</option>
+        <select id="selectSedes" class="form-control" onmousedown="this.value='';" name="type">
+          <!-- <option value="">Sedes</option> -->
           <option value="lim">Lima</option>
           <option value="scl">Santiago</option>
-          <option value="cdm">Ciudad de México</option>
+          <option value="cdm" selected>Ciudad de México</option>
           <option value="gdl">Guadalajara</option>
           <option value="aqp">Arequipa</option>
         </select>
@@ -49,20 +49,23 @@
       <!-- Promociones por sedes -->
       <div id="promociones">
         <h4 class="h4">Promociones</h4>
-        <select id="selectPromos" class="form-control" disabled>
+        <select id="selectPromos" class="form-control" disabled onmousedown="this.value='';" name="type">
         </select>
       </div>
 
       <!-- Selects de cursos -->
       <div id="cursos">
         <h4 class="h4">Cursos</h4>
-        <select id="selectCursos" class="form-control" disabled></select>
+        <select id="selectCursos" class="form-control" disabled onmousedown="this.value='';" name="type"></select>
       </div>
 
     </div>
 
     <!-- CONTENIDO donde se mostrará la tabla o empty component u otras cosas en la parte mas grande de la page-->
     <div id="contenido" class="col-8">
+
+      <!-- boton que probara las funciones que cree  sprint 2 por mejrar-->
+      <button id="probando-funciones">TAMOS PROBANDO</button>
 
       <!-- componente empty que mostrará que aun no selecciono algo -->
       <center>
