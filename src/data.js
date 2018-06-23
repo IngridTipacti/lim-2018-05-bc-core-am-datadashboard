@@ -1,4 +1,16 @@
 window.computeUsersStats = (users, progress, courses) => {
+  console.log(users);
+  console.log(progress);
+  console.log(courses);
+
+
+
+
+
+
+
+
+
   // const coursesProgress = courses.map((course) => {
   //   let usersWithStats = users.map((user) => {
   //     const userBackup = { ...user };

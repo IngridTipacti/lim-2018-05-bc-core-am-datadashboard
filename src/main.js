@@ -119,35 +119,22 @@ const getUsersJson = (idCohort) => {
   return newUsers;
 }
 
-const getProgress = (idCohort) => {
+const getProgress = (idCohort, course) => {
   const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    if (users.length > 0) {
+    if (users.length > 0 && course === "intro") {
+      empty.style.display = "none";
+      computeUsersStats(users, progressjson, courses);
       // console.log(courses);
       // console.log(users);
-      // console.log(progressjson);
-      // return users, progressjson, courses;
     }
-
-    // return progressjson;
+    else empty.style.display = "block";
   });
-  console.log(courses);
-  console.log(users);
-  // return users, courses;
 }
 
-const showTable = (users, progress, course) => {
-  if (course !== "intro") {
-    empty.style.display = "block";
-  } else empty.style.display = "none";
-}
 
-const probandoTres = () => {
-  console.log(getProgress());
-}
-
-document.getElementById("probando-funciones").addEventListener("click", () => probandoTres());
+// document.getElementById("probando-funciones").addEventListener("click", () => probandoTres());
 
 
 
@@ -248,4 +235,4 @@ selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[sel
 
 selectPromos.addEventListener('change', () => getCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
-selectCursos.addEventListener('change', () => getProgress(selectPromos.options[selectPromos.selectedIndex].value));
+selectCursos.addEventListener('change', () => getProgress((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
