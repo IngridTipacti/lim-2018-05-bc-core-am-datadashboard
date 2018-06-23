@@ -81,10 +81,6 @@ const getPromo = (promo) => {
 
 //NUEVO CODIGO
 
-const selectCurso = (course) => {
-  // if(course === ) {}
-}
-
 // validacion por curso de cohorts para select
 const getCohortsJson = (idCohort) => {
   selectCursos.disabled = true;
@@ -92,17 +88,19 @@ const getCohortsJson = (idCohort) => {
   let courses = [];
   getData('../data/cohorts.json', (err, cohortjson) => {
     cohortjson.map((cohort) => {
-      if (cohort.id === idCohort ) {courses.push(cohort.coursesIndex);}
+      if (cohort.id === idCohort) {
+        courses.push(cohort.coursesIndex);
+      }
     });
     // if (courses[0].intro) {
-      selectCursos.disabled = false;
-      let nameCourses = Object.keys(courses);
-      nameCourses.map((course) => {
-        let keyCourse = Object.keys(courses[course]);
-        keyCourse.map((key) => {
-          selectCursos.innerHTML += "<option value='" + keyCourse.toString() +"'>" + courses[course][key].title + "</option>";
-        });
+    selectCursos.disabled = false;
+    let nameCourses = Object.keys(courses);
+    nameCourses.map((course) => {
+      let keyCourse = Object.keys(courses[course]);
+      keyCourse.map((key) => {
+        selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
       });
+    });
     // }
   });
   return courses;
@@ -129,14 +127,24 @@ const getProgress = (idCohort) => {
       // console.log(courses);
       // console.log(users);
       // console.log(progressjson);
-      return progressjson;
+      // return users, progressjson, courses;
     }
+
+    // return progressjson;
   });
+  console.log(courses);
+  console.log(users);
+  // return users, courses;
 }
 
+const showTable = (users, progress, course) => {
+  if (course !== "intro") {
+    empty.style.display = "block";
+  } else empty.style.display = "none";
+}
 
 const probandoTres = () => {
-
+  console.log(getProgress());
 }
 
 document.getElementById("probando-funciones").addEventListener("click", () => probandoTres());
@@ -184,7 +192,8 @@ const createTable = (users, progress, courses) => {
   resultTable.innerHTML = "";
   for (const course of courses) {
     for (const user of users) {
-      const userCopia = { ...user };
+      const userCopia = { ...user
+      };
       const userProgress = progress[userCopia.id];
       if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
         const intro = userProgress.intro;
@@ -199,7 +208,7 @@ const createTable = (users, progress, courses) => {
         }, 0);
         const uniCompletadas = nameUnits.reduce((sumCompletadas) => {
           sumCompletadas = intro.completedUnits;
-          if(sumCompletadas % 1 == 0 ) return sumCompletadas;
+          if (sumCompletadas % 1 == 0) return sumCompletadas;
           else return sumCompletadas.toFixed(2);
           // return sumCompletadas;
         }, 0);
@@ -237,6 +246,6 @@ const createTable = (users, progress, courses) => {
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => getProgress(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener('change', () => getCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
-selectCursos.addEventListener('change', () => selectCurso(selectCursos.options[selectCursos.selectedIndex].value));
+selectCursos.addEventListener('change', () => getProgress(selectPromos.options[selectPromos.selectedIndex].value));
