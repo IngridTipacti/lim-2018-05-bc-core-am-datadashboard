@@ -150,6 +150,31 @@ const percentStats = (progress, courses) => {
   return suma / courses.length;
 }
 
+const exerTotal = () => {}
+
+const exerCompleted = () => {}
+
+const exerPercent = () => {}
+
+const readTotal = () => {}
+
+const readCompleted = () => {}
+
+const readPercent = () => {}
+
+const quizTotal = () => {}
+
+const quizCompleted = () => {}
+
+const quizPercent = () => {}
+
+const quizScoreSum = () => {}
+
+const quizScoreAvg = () => {}
+
+
+
+
 
 //antiguo codigoooooooooooooooooooooooooooooooooooooooooooooooooooooo
 

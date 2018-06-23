@@ -3,21 +3,21 @@ window.computeUsersStats = (users, progress, courses) => {
     user.stats = {
       percent: percentStats(progress[user.id], courses),
       exercises: {
-        total: 0,
-        completed: 0,
-        percent: 0
+        total: exerTotal(),
+        completed: exerCompleted(),
+        percent: exerPercent()
       },
       reads: {
-        total: 0,
-        completed: 0,
-        percent: 0
+        total: readTotal(),
+        completed: readCompleted(),
+        percent: readPercent()
       },
       quizzes: {
-        total: 0,
-        completed: 0,
-        percent: 0,
-        scoreSum: 0,
-        scoreAvg: 0
+        total: quizTotal(),
+        completed: quizCompleted(),
+        percent: quizPercent(),
+        scoreSum: quizScoreSum(),
+        scoreAvg: quizScoreAvg()
       }
     }
     return user;
