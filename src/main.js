@@ -115,10 +115,10 @@ const getCohortsJson = (idCohort) => {
 const getUsersJson = (idCohort) => {
   let newUsers = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
-    userjson.map((user) => {
+    userjson.map(user => {
       if (user.signupCohort === idCohort) {
         newUsers.push(user);
-      } else console.log("No hay :(");
+      }
     });
   });
   return newUsers;
@@ -136,7 +136,7 @@ const getProgressJson = (idCohort, course) => {
 }
 
 const percentStats = (progress, courses) => {
-  courses.forEach(course => {
+  courses.map(course => {
     nameCourse = Object.keys(course).toString();
     if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
       const units = progress.intro.units;
@@ -153,7 +153,31 @@ const percentStats = (progress, courses) => {
   return progressTotal;
 }
 
-const exerTotal = (progress, courses) => {}
+const exerTotal = (progress, courses) => {
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (progress.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
+            const exercises = progress.intro.units[nameUnit].parts[namePart].exercises;
+            const nameExercises = Object.keys(exercises);
+            totalExer = nameExercises.map(nameExercise => {
+              let total = Object.keys(progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise]);
+              return total;
+            });
+            return totalExer;
+          }
+        });
+      });
+    }
+  });
+  return totalExer;
+}
 
 const exerCompleted = () => {}
 

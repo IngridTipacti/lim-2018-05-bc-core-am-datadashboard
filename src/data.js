@@ -3,7 +3,7 @@ window.computeUsersStats = (users, progress, courses) => {
     user.stats = {
       percent: Math.round(percentStats(progress[user.id], courses)),
       exercises: {
-        total: exerTotal(progress[user.id], courses),
+        total: exerTotal(progress[user.id], courses).length,
         completed: exerCompleted(progress[user.id], courses),
         percent: exerPercent(progress[user.id], courses)
       },
@@ -69,28 +69,3 @@ window.processCohortData = (options) => {
   // });
   // console.log(obj)
 
-  // const percentTotal = nameUnits.reduce((sumProgress, u) => {
-  //   sumProgress += intro.units[u].percent / nameUnits.length;
-  //   return sumProgress;
-  // }, 0);
-  // const exeTotal;
-  // const exeCompleted;
-  // const exePercent;
-  // const readTotal;
-  // const readCompleted;
-  // const readPercent;
-  // const quizzTotal;
-  // const quizzCompleted;
-  // const quizzPercent;
-  // const quizzScoreSum;
-  // const quizzScoreAvg;
-
-  // return percentTotal;
-  //   return obj;
-  // }
-  // return user;
-  // });
-  // console.log(usersWithStats);
-  // return course;
-  // });
-  // console.log(coursesProgress);
