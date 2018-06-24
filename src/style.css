@@ -75,6 +75,17 @@ body,select,option {
   color: gray;
 } */
 
+#tableData thead th {
+  background-color:#FFE521;
+}
+#tableData td, #tableData thead th{
+  text-align: center;
+}
+
+#tableData td {
+  text-align: center;
+}
+
 /* editando clases de bootstrap */
 .container-fluid {
   padding-top: 15px;
