@@ -1,23 +1,23 @@
 window.computeUsersStats = (users, progress, courses) => {
   let usersWithStats = users.map((user) => {
     user.stats = {
-      percent: percentStats(progress[user.id], courses),
+      percent: Math.round(percentStats(progress[user.id], courses)),
       exercises: {
-        total: exerTotal(),
-        completed: exerCompleted(),
-        percent: exerPercent()
+        total: exerTotal(progress[user.id], courses),
+        completed: exerCompleted(progress[user.id], courses),
+        percent: exerPercent(progress[user.id], courses)
       },
       reads: {
-        total: readTotal(),
-        completed: readCompleted(),
+        total: readTotal(progress[user.id], courses),
+        completed: readCompleted(progress[user.id], courses),
         percent: readPercent()
       },
       quizzes: {
-        total: quizTotal(),
-        completed: quizCompleted(),
-        percent: quizPercent(),
-        scoreSum: quizScoreSum(),
-        scoreAvg: quizScoreAvg()
+        total: quizTotal(progress[user.id], courses),
+        completed: quizCompleted(progress[user.id], courses),
+        percent: quizPercent(progress[user.id], courses),
+        scoreSum: quizScoreSum(progress[user.id], courses),
+        scoreAvg: quizScoreAvg(progress[user.id], courses)
       }
     }
     return user;

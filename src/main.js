@@ -101,8 +101,7 @@ const getCohortsJson = (idCohort) => {
         keyCourse.map((key) => {
           selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
         });
-      }
-      else {
+      } else {
         selectCursos.disabled = true;
         empty.style.display = "block";
       }
@@ -132,25 +131,29 @@ const getProgress = (idCohort, course) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
       computeUsersStats(users, progressjson, courses);
-    }
-    else empty.style.display = "block";
+    } else empty.style.display = "block";
   });
 }
 
 const percentStats = (progress, courses) => {
-  let suma = 0;
   courses.forEach(course => {
     nameCourse = Object.keys(course).toString();
-    if (progress[nameCourse] !== undefined) {
-      suma += progress[nameCourse].percent;
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      progressTotal = nameUnits.reduce((sumProgress, u) => {
+        sumProgress += units[u].percent / nameUnits.length;
+        return sumProgress;
+      }, 0);
+      return progressTotal;
     } else {
       console.log("no tiene porcentaje");
     }
   });
-  return suma / courses.length;
+  return progressTotal;
 }
 
-const exerTotal = () => {}
+const exerTotal = (progress, courses) => {}
 
 const exerCompleted = () => {}
 
