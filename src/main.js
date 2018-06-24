@@ -216,7 +216,7 @@ const exerPercent = (completed, total) => {
 }
 
 const readTotal = (progress, courses) => {
-  let total = 0;
+  let reads = [];
   courses.map(course => {
     nameCourse = Object.keys(course).toString();
     if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
@@ -227,17 +227,40 @@ const readTotal = (progress, courses) => {
         const nameParts = Object.keys(parts);
         nameParts.map(namePart => {
           if (parts[namePart].type === 'read'){
-            total = Object.keys(progress.intro.units[nameUnit].parts[namePart]);
-            return total.length;
+            reads.push(parts[namePart]);
+            return reads;
           }
         });
       });
     }
   });
-  return total.length;
+  return reads.length;
 }
 
-const readCompleted = (progress, courses) => {}
+const readCompleted = (progress, courses) => {
+  let sumCompleted = 0;
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (parts[namePart].type === 'read'){
+            let completed = progress.intro.units[nameUnit].parts[namePart].completed;
+            if(completed > 0) {
+              sumCompleted += completed;
+              return sumCompleted;
+            }
+          }
+        });
+      });
+    }
+  });
+  return sumCompleted;
+}
 
 const readPercent = (progress, courses) => {}
 
@@ -267,7 +290,7 @@ const filterUsersByIdPromo = (idPromo) => {
         users.push(user);
       } else console.log("No hay :(");
     });
-    if (users.length > 0) {
+    if (users > 0) {
       empty.style.display = "none";
       tableData.style.display = "block";
     } else {
