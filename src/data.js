@@ -5,7 +5,7 @@ window.computeUsersStats = (users, progress, courses) => {
       exercises: {
         total: exerTotal(progress[user.id], courses).length,
         completed: exerCompleted(progress[user.id], courses),
-        percent: exerPercent(progress[user.id], courses)
+        percent: exerPercent(exerCompleted(progress[user.id], courses), exerTotal(progress[user.id], courses).length)
       },
       reads: {
         total: readTotal(progress[user.id], courses),

@@ -179,25 +179,57 @@ const exerTotal = (progress, courses) => {
   return totalExer;
 }
 
-const exerCompleted = () => {}
+const exerCompleted = (progress, courses) => {
+  let sumCompleted = 0;
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (progress.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
+            const exercises = progress.intro.units[nameUnit].parts[namePart].exercises;
+            const nameExercises = Object.keys(exercises);
+            nameExercises.map(nameExercise => {
+              if (progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise].hasOwnProperty('completed')) {
+                let completed = progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise].completed;
+                if (completed > 0) {
+                  sumCompleted += completed;
+                  return sumCompleted;
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+  });
+  return sumCompleted;
+}
 
-const exerPercent = () => {}
+const exerPercent = (completed, total) => {
+  const percent = (completed / total) * 100;
+  return percent;
+}
 
-const readTotal = () => {}
+const readTotal = (progress, courses) => {}
 
-const readCompleted = () => {}
+const readCompleted = (progress, courses) => {}
 
-const readPercent = () => {}
+const readPercent = (progress, courses) => {}
 
-const quizTotal = () => {}
+const quizTotal = (progress, courses) => {}
 
-const quizCompleted = () => {}
+const quizCompleted = (progress, courses) => {}
 
-const quizPercent = () => {}
+const quizPercent = (progress, courses) => {}
 
-const quizScoreSum = () => {}
+const quizScoreSum = (progress, courses) => {}
 
-const quizScoreAvg = () => {}
+const quizScoreAvg = (progress, courses) => {}
 
 
 
