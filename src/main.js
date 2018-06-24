@@ -319,9 +319,33 @@ const quizPercent = (completed, total) => {
   return percent;
 }
 
-const quizScoreSum = (progress, courses) => {}
+const quizScoreSum = (progress, courses) => {
+  let sumScore = 0;
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (parts[namePart].type === 'quiz' && parts[namePart].hasOwnProperty('score')){
+            let score = progress.intro.units[nameUnit].parts[namePart].score;
+            sumScore += score;
+            return sumScore;
+          }
+        });
+      });
+    }
+  });
+  return sumScore;
+}
 
-const quizScoreAvg = (progress, courses) => {}
+const quizScoreAvg = (sumScore, completed) => {
+  const percent = sumScore / completed;
+  return percent;
+}
 
 
 
@@ -368,8 +392,8 @@ const createTable = (users, progress, courses) => {
   resultTable.innerHTML = "";
   for (const course of courses) {
     for (const user of users) {
-      const userCopia = { ...user
-      };
+      // const userCopia = { ...user
+      // };
       const userProgress = progress[userCopia.id];
       if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
         const intro = userProgress.intro;
