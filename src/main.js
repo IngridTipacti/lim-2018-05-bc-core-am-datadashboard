@@ -124,7 +124,7 @@ const getUsersJson = (idCohort) => {
   return newUsers;
 }
 
-const getProgress = (idCohort, course) => {
+const getProgressJson = (idCohort, course) => {
   const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
@@ -276,4 +276,4 @@ selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[sel
 
 selectPromos.addEventListener('change', () => getCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
-selectCursos.addEventListener('change', () => getProgress((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
+selectCursos.addEventListener('change', () => getProgressJson((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
