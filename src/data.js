@@ -22,7 +22,6 @@ window.computeUsersStats = (users, progress, courses) => {
     }
     return user;
   });
-  console.log(usersWithStats);
   return usersWithStats;
 }
 

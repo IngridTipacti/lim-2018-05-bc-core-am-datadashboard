@@ -30,7 +30,10 @@
 
   <section class="row">
 
-    <!-- SELECTS Seccion de la izquierda donde estaran todos los selects para filtrar -->
+    <!-- TODO: BUSCADOR POR NOMBRE DE ALUMNAS -->
+    <!-- <div id="searching"></div> -->
+
+    <!-- MENU Seccion de la izquierda donde estaran todos los selects para filtrar -->
     <div id="menu" class="col-2 form-group">
 
       <!-- Select de las sedes de Laboratoria -->
@@ -61,18 +64,18 @@
 
     </div>
 
-    <!-- CONTENIDO donde se mostrará la tabla o empty component u otras cosas en la parte mas grande de la page-->
+    <!-- CONTENIDO donde se mostrará la tabla y/o empty component u otras cosas en la parte mas grande de la page-->
     <div id="contenido" class="col-10">
 
-      <!-- componente empty que mostrará que aun no selecciono algo -->
+      <!-- componente empty que mostrará que no hay data-->
       <center>
         <img src="../images/empty.png" alt="empty" id="empty" style="display: none">
       </center>
 
       <!-- probando tabla de bootstrap -->
-      <table class="table-sm table-hover table-responsive"  id="tableData">
-        <thead>
-          <tr>
+      <table class="table-sm table-hover table-responsive" id="tableData">
+        <thead id="headTable">
+          <!-- <tr>
             <th scope="col" rowspan="2">Alumnas</th>
             <th scope="col" rowspan="2">Porcentaje</th>
             <th scope="col" colspan="3">Ejercicios</th>
@@ -91,27 +94,9 @@
             <td scope="col">Porcentaje</td>
             <td scope="col">SumScore</td>
             <td scope="col">AvgScore</td>
-          </tr>
+          </tr> -->
         </thead>
         <tbody id="resultTable"> </tbody>
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr> -->
-
       </table>
     </div>
   </section>

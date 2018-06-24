@@ -3,6 +3,7 @@ const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
 let empty = document.getElementById('empty');
 let tableData = document.getElementById('tableData');
+let headTable = document.getElementById('headTable');
 let resultTable = document.getElementById('resultTable');
 
 const switchSedes = (option) => {
@@ -93,13 +94,16 @@ const getCohortsJson = (idCohort) => {
     selectCursos.disabled = false;
     let nameCourses = Object.keys(courses);
     nameCourses.map((course) => {
-      if (courses[course] !== undefined) {
+      if (courses[course] !== undefined && Object.values(courses[course]).length > 0) {
+        empty.style.display = "none";
         let keyCourse = Object.keys(courses[course]);
         keyCourse.map((key) => {
           selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
         });
       } else {
         selectCursos.disabled = true;
+        headTable.innerHTML = "";
+        resultTable.innerHTML = "";
         empty.style.display = "block";
       }
     });
@@ -128,7 +132,11 @@ const getProgressJson = (idCohort, course) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
       createTableWithData(users, progressjson, courses);
-    } else empty.style.display = "block";
+    } else {
+      empty.style.display = "block";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+    }
   });
 }
 
@@ -345,6 +353,24 @@ const quizScoreAvg = (sumScore, completed) => {
 }
 
 const createTableWithData = (users, progress, courses) => {
+  headTable.innerHTML = "";
+  resultTable.innerHTML = "";
+  headTable.innerHTML = "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
+                        "<th scope='col' rowspan='2'>Porcentaje</th>" +
+                        "<th scope='col' colspan='3'>Ejercicios</th>" +
+                        "<th scope='col' colspan='3'>Lecturas</th>" +
+                        "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
+                        "<tr> <td scope='col'>Total</td>" +
+                        "<td scope='col'>Completado</td>" +
+                        "<td scope='col'>Porcentaje</td>" +
+                        "<td scope='col'>Total</td>" +
+                        "<td scope='col'>Completado</td>" +
+                        "<td scope='col'>Porcentaje</td>" +
+                        "<td scope='col'>Total</td>" +
+                        "<td scope='col'>Completado</td>" +
+                        "<td scope='col'>Porcentaje</td>" +
+                        "<td scope='col'>SumScore</td>" +
+                        "<td scope='col'>AvgScore</td> </tr>";
   const data = computeUsersStats(users, progress, courses);
   data.map(d => {
     resultTable.innerHTML += "<tr><th scope='row'>" + d.name +
@@ -362,101 +388,6 @@ const createTableWithData = (users, progress, courses) => {
       "</td> <td>" + d.stats.quizzes.scoreAvg +
       "</td></tr>";
   });
-}
-
-
-
-//antiguo codigoooooooooooooooooooooooooooooooooooooooooooooooooooooo
-
-// idPromo es la promo seleccionada
-const filterUsersByIdPromo = (idPromo) => {
-  let users = [];
-  let courses = [];
-  getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
-    userjson.map((user) => {
-      if (idPromo === user.signupCohort) {
-        users.push(user);
-      } else console.log("No hay :(");
-    });
-    if (users > 0) {
-      empty.style.display = "none";
-      tableData.style.display = "block";
-    } else {
-      empty.style.display = "block";
-    }
-    getData('../data/cohorts.json', (err, cohortjson) => {
-      cohortjson.map((promotion) => {
-        if (idPromo === promotion.id) {
-          courses.push(promotion.coursesIndex);
-        }
-      });
-      getProgress(users, courses);
-    });
-  });
-}
-
-// lista de usuarios que cumplen la condicion de ser estudiantes
-const getProgress = (users, courses) => {
-  //   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-  //     createTable(users, progressjson, courses);
-  //   });
-}
-
-const createTable = (users, progress, courses) => {
-  let usersWithStats = [];
-  resultTable.innerHTML = "";
-  for (const course of courses) {
-    for (const user of users) {
-      // const userCopia = { ...user
-      // };
-      const userProgress = progress[userCopia.id];
-      if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
-        const intro = userProgress.intro;
-        const nameUnits = Object.keys(intro.units);
-        const progressTotal = nameUnits.reduce((sumProgress, u) => {
-          sumProgress += intro.units[u].percent;
-          return sumProgress;
-        }, 0);
-        const uniTotales = nameUnits.reduce((sumTotales) => {
-          sumTotales = intro.totalUnits;
-          return sumTotales;
-        }, 0);
-        const uniCompletadas = nameUnits.reduce((sumCompletadas) => {
-          sumCompletadas = intro.completedUnits;
-          if (sumCompletadas % 1 == 0) return sumCompletadas;
-          else return sumCompletadas.toFixed(2);
-          // return sumCompletadas;
-        }, 0);
-        // const exerTotal = nameUnits.map(name => {return name});
-        // console.log(exerTotal);
-        user.stats = {
-          percent: Math.round(progressTotal / Object.keys(intro.units).length),
-          totalUnits: uniTotales,
-          completedUnits: uniCompletadas
-          // exercises: {
-          //   total: 0,
-          //   completed: 0,
-          //   percent: 0
-          // },
-          // reads: {
-          //   total: 0,
-          //   completed: 0,
-          //   percent: 0
-          // },
-          // quizzes: {
-          //   total: 0,
-          //   completed: 0,
-          //   percent: 0,
-          //   scoreSum: 0,
-          //   scoreAvg: 0
-          // }
-        }
-        resultTable.innerHTML += "<tr><th scope='row'>" + userCopia.name + "</th> <td>" + Object.keys(courses[0]).toString() + "</td> <td>" + user.stats.totalUnits + "</td> <td>" + user.stats.completedUnits + "</td> <td>" + user.stats.percent + "%</td></tr>";
-      }
-    }
-  }
-  usersWithStats = users;
-  console.log(usersWithStats);
 }
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
