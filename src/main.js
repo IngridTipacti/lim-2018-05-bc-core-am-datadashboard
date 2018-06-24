@@ -215,7 +215,27 @@ const exerPercent = (completed, total) => {
   return percent;
 }
 
-const readTotal = (progress, courses) => {}
+const readTotal = (progress, courses) => {
+  let total = 0;
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (parts[namePart].type === 'read'){
+            total = Object.keys(progress.intro.units[nameUnit].parts[namePart]);
+            return total.length;
+          }
+        });
+      });
+    }
+  });
+  return total.length;
+}
 
 const readCompleted = (progress, courses) => {}
 
