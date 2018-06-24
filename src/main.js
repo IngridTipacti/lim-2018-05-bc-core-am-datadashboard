@@ -8,27 +8,32 @@ let tableData = document.getElementById('tableData');
 const switchSedes = (option) => {
   switch (option) {
     case 'lim':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('lim');
       break;
     case 'scl':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('scl');
       break;
     case 'cdm':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('cdm');
       break;
     case 'gdl':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('gdl');
       break;
     case 'aqp':
+      empty.style.display = "none";
       selectPromos.disabled = false;
       getPromo('aqp');
       break;
     default:
-    empty.style.display = "none";
+      empty.style.display = "none";
       selectPromos.innerHTML = "";
       selectPromos.disabled = true;
       break;
@@ -83,35 +88,71 @@ const filterUsersByIdPromo = (idPromo) => {
           courses.push(promotion.coursesIndex);
         }
       });
+      getProgress(users, courses);
     });
-    getProgress(users, courses);
   });
 }
 
 // lista de usuarios que cumplen la condicion de ser estudiantes
 const getProgress = (users, courses) => {
-  let progress = [];
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
-    for (const key in progressjson) {
-      if (progressjson[key].intro) {
-        progress.push(progressjson);
-      }
-    }
+    createTable(users, progressjson, courses);
   });
-  computeUserStats(users, progress, courses);
 }
 
-
-// const getUsers = () => {
-//  resultTable.innerHTML = "";
-//   getData('../data/cohorts/lim-2018-03-pre-core-pw/users.json', (err, userjson) => {
-//     userjson.map((user) => {
-//       name = user.name;
-//       resultTable.innerHTML += "<tr> <th scope='row'>" + name + "</th> </tr>";
-//     });
-//   });
-// }
-
+const createTable = (users, progress, courses) => {
+  let usersWithStats = [];
+  resultTable.innerHTML = "";
+  for (const course of courses) {
+    for (const user of users) {
+      const userCopia = { ...user };
+      const userProgress = progress[userCopia.id];
+      if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
+        const intro = userProgress.intro;
+        const nameUnits = Object.keys(intro.units);
+        const progressTotal = nameUnits.reduce((sumProgress, u) => {
+          sumProgress += intro.units[u].percent;
+          return sumProgress;
+        }, 0);
+        const uniTotales = nameUnits.reduce((sumTotales, u) => {
+          sumTotales += intro.units[u].totalParts;
+          return sumTotales;
+        }, 0);
+        const uniCompletadas = nameUnits.reduce((sumCompletadas, u) => {
+          sumCompletadas += intro.units[u].completedParts;
+          return sumCompletadas;
+        }, 0);
+        // const exerTotal = nameUnits.map(name => {return name});
+        // console.log(exerTotal);
+        user.stats = {
+          percent: Math.round(progressTotal / Object.keys(intro.units).length),
+          totalUnits: uniTotales,
+          completedUnits: uniCompletadas
+          // exercises: {
+          //   total: 0,
+          //   completed: 0,
+          //   percent: 0
+          // },
+          // reads: {
+          //   total: 0,
+          //   completed: 0,
+          //   percent: 0
+          // },
+          // quizzes: {
+          //   total: 0,
+          //   completed: 0,
+          //   percent: 0,
+          //   scoreSum: 0,
+          //   scoreAvg: 0
+          // }
+        }
+        resultTable.innerHTML += "<tr><th scope='row'>" + userCopia.name + "</th> <td>" + Object.keys(courses[0]).toString() + "</td> <td>" + user.stats.totalUnits + "</td> <td>" + user.stats.completedUnits + "</td> <td>" + user.stats.percent + "%</td></tr>";
+      }
+    }
+  }
+  usersWithStats = users;
+  console.log(usersWithStats);
+}
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
