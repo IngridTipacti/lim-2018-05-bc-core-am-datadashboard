@@ -15,7 +15,7 @@ window.computeUsersStats = (users, progress, courses) => {
       quizzes: {
         total: quizTotal(progress[user.id], courses),
         completed: quizCompleted(progress[user.id], courses),
-        percent: quizPercent(),
+        percent: Math.round(quizPercent(quizCompleted(progress[user.id], courses), quizTotal(progress[user.id], courses))),
         scoreSum: quizScoreSum(progress[user.id], courses),
         scoreAvg: quizScoreAvg(progress[user.id], courses)
       }

@@ -267,11 +267,57 @@ const readPercent = (completed, total) => {
   return percent;
 }
 
-const quizTotal = (progress, courses) => {}
+const quizTotal = (progress, courses) => {
+  let quiz = [];
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (parts[namePart].type === 'quiz'){
+            quiz.push(parts[namePart]);
+            return quiz;
+          }
+        });
+      });
+    }
+  });
+  return quiz.length;
+}
 
-const quizCompleted = (progress, courses) => {}
+const quizCompleted = (progress, courses) => {
+  let sumCompleted = 0;
+  courses.map(course => {
+    nameCourse = Object.keys(course).toString();
+    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
+      const units = progress.intro.units;
+      const nameUnits = Object.keys(units);
+      nameUnits.map(nameUnit => {
+        const parts = progress.intro.units[nameUnit].parts;
+        const nameParts = Object.keys(parts);
+        nameParts.map(namePart => {
+          if (parts[namePart].type === 'quiz'){
+            let completed = progress.intro.units[nameUnit].parts[namePart].completed;
+            if(completed > 0) {
+              sumCompleted += completed;
+              return sumCompleted;
+            }
+          }
+        });
+      });
+    }
+  });
+  return sumCompleted;
+}
 
-const quizPercent = (completed, total) => {}
+const quizPercent = (completed, total) => {
+  const percent = (completed / total) * 100;
+  return percent;
+}
 
 const quizScoreSum = (progress, courses) => {}
 
