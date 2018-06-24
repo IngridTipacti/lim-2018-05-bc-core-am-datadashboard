@@ -5,17 +5,17 @@ window.computeUsersStats = (users, progress, courses) => {
       exercises: {
         total: exerTotal(progress[user.id], courses).length,
         completed: exerCompleted(progress[user.id], courses),
-        percent: exerPercent(exerCompleted(progress[user.id], courses), exerTotal(progress[user.id], courses).length)
+        percent: Math.round(exerPercent(exerCompleted(progress[user.id], courses), exerTotal(progress[user.id], courses).length))
       },
       reads: {
         total: readTotal(progress[user.id], courses),
         completed: readCompleted(progress[user.id], courses),
-        percent: readPercent()
+        percent: Math.round(readPercent(readCompleted(progress[user.id], courses), readTotal(progress[user.id], courses)))
       },
       quizzes: {
         total: quizTotal(progress[user.id], courses),
         completed: quizCompleted(progress[user.id], courses),
-        percent: quizPercent(progress[user.id], courses),
+        percent: quizPercent(),
         scoreSum: quizScoreSum(progress[user.id], courses),
         scoreAvg: quizScoreAvg(progress[user.id], courses)
       }

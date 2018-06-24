@@ -262,13 +262,16 @@ const readCompleted = (progress, courses) => {
   return sumCompleted;
 }
 
-const readPercent = (progress, courses) => {}
+const readPercent = (completed, total) => {
+  const percent = (completed / total) * 100;
+  return percent;
+}
 
 const quizTotal = (progress, courses) => {}
 
 const quizCompleted = (progress, courses) => {}
 
-const quizPercent = (progress, courses) => {}
+const quizPercent = (completed, total) => {}
 
 const quizScoreSum = (progress, courses) => {}
 
