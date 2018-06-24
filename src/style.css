@@ -44,15 +44,15 @@ header {
 }
 
 #tableData thead th {
-  background-color: rgb(255, 238, 0);
+  /* background-color: rgb(255, 238, 0); */
   border: 1px solid white;
 }
 
-#tableData td {
+#tableData td, #tableData th  {
   text-align: center;
 }
 
-#tableData table td{
+#tableData thead td, #tableData thead th, #tableData tbody td, #tableData tbody th{
   border: 1px solid rgb(255, 238, 0);
 }
 

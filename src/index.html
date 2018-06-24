@@ -31,7 +31,7 @@
   <section class="row">
 
     <!-- SELECTS Seccion de la izquierda donde estaran todos los selects para filtrar -->
-    <div id="menu" class="col-4 form-group">
+    <div id="menu" class="col-2 form-group">
 
       <!-- Select de las sedes de Laboratoria -->
       <div id="sedes">
@@ -62,7 +62,7 @@
     </div>
 
     <!-- CONTENIDO donde se mostrará la tabla o empty component u otras cosas en la parte mas grande de la page-->
-    <div id="contenido" class="col-8">
+    <div id="contenido" class="col-10">
 
       <!-- componente empty que mostrará que aun no selecciono algo -->
       <center>
@@ -70,17 +70,27 @@
       </center>
 
       <!-- probando tabla de bootstrap -->
-      <table class="table table-hover" style="display: none;" id="tableData">
+      <table class="table-sm table-hover table-responsive"  id="tableData">
         <thead>
           <tr>
-            <th scope="col">Alumnas</th>
-            <th scope="col">Curso</th>
-            <th scope="col">Unidades Totales</th>
-            <th scope="col">Total Completadas</th>
-            <th scope="col">Porcentaje</th>
-            <!-- <th scope="col">Ejercicios</th>
-            <th scope="col">Lecturas</th>
-            <th scope="col">Quizzes</th> -->
+            <th scope="col" rowspan="2">Alumnas</th>
+            <th scope="col" rowspan="2">Porcentaje</th>
+            <th scope="col" colspan="3">Ejercicios</th>
+            <th scope="col" colspan="3">Lecturas</th>
+            <th scope="col" colspan="5">Quizzes</th>
+          </tr>
+          <tr>
+            <td scope="col">Total</td>
+            <td scope="col">Completado</td>
+            <td scope="col">Porcentaje</td>
+            <td scope="col">Total</td>
+            <td scope="col">Completado</td>
+            <td scope="col">Porcentaje</td>
+            <td scope="col">Total</td>
+            <td scope="col">Completado</td>
+            <td scope="col">Porcentaje</td>
+            <td scope="col">SumScore</td>
+            <td scope="col">AvgScore</td>
           </tr>
         </thead>
         <tbody id="resultTable"> </tbody>

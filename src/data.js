@@ -40,32 +40,3 @@ window.filterUsers = (users, search) => {
 window.processCohortData = (options) => {
   options
 }
-
-
-// const coursesProgress = courses.map((course) => {
-  //   let usersWithStats = users.map((user) => {
-  //     const userBackup = { ...user };
-  //     const userProgress = progress[userBackup.id];
-  //     const coursesName = Object.keys(userProgress);
-  //     if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
-  //arre acá va la logica de la funcion
-  // const intro = userProgress.intro;
-  // const nameUnits = Object.keys(intro.units);
-
-  // RECORRIDO PARA COMPROBAR LOS EJERCICIOS.
-  // const obj = coursesName.map(course => {
-  //   const unitsName = Object.keys(progress[user.id][course].units);
-  //   unitsName.map(unitName => {
-  //     const partsName = Object.keys(progress[user.id][course].units[unitName].parts);
-  //     partsName.map(partName => {
-  //       if (progress[user.id][course].units[unitName].parts[partName].hasOwnProperty('exercises')) {
-  //         const size = Object.values(progress[user.id][course].units[unitName].parts[partName].exercises);
-  //         return size;
-  //       }
-  //     });
-  // return partsName;
-  // });
-  // return unitsName;
-  // });
-  // console.log(obj)
-
