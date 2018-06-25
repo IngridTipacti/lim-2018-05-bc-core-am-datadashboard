@@ -5,6 +5,7 @@ let empty = document.getElementById('empty');
 let tableData = document.getElementById('tableData');
 let headTable = document.getElementById('headTable');
 let resultTable = document.getElementById('resultTable');
+let loader = document.getElementById('loader');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -126,6 +127,8 @@ const getUsersJson = (idCohort) => {
 }
 
 const getProgressJson = (idCohort, course) => {
+  // crear el loading
+  loader.style.display = "block";
   const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
@@ -136,6 +139,7 @@ const getProgressJson = (idCohort, course) => {
       empty.style.display = "block";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      loader.style.display = "none";
     }
   });
 }
@@ -355,39 +359,43 @@ const quizScoreAvg = (sumScore, completed) => {
 const createTableWithData = (users, progress, courses) => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
-  headTable.innerHTML = "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
-                        "<th scope='col' rowspan='2'>Porcentaje</th>" +
-                        "<th scope='col' colspan='3'>Ejercicios</th>" +
-                        "<th scope='col' colspan='3'>Lecturas</th>" +
-                        "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
-                        "<tr> <td scope='col'>Total</td>" +
-                        "<td scope='col'>Completado</td>" +
-                        "<td scope='col'>Porcentaje</td>" +
-                        "<td scope='col'>Total</td>" +
-                        "<td scope='col'>Completado</td>" +
-                        "<td scope='col'>Porcentaje</td>" +
-                        "<td scope='col'>Total</td>" +
-                        "<td scope='col'>Completado</td>" +
-                        "<td scope='col'>Porcentaje</td>" +
-                        "<td scope='col'>SumScore</td>" +
-                        "<td scope='col'>AvgScore</td> </tr>";
+  headTable.innerHTML =
+    "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
+    "<th scope='col' rowspan='2'>Porcentaje</th>" +
+    "<th scope='col' colspan='3'>Ejercicios</th>" +
+    "<th scope='col' colspan='3'>Lecturas</th>" +
+    "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
+    "<tr> <td scope='col'>Total</td>" +
+    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Porcentaje</td>" +
+    "<td scope='col'>Total</td>" +
+    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Porcentaje</td>" +
+    "<td scope='col'>Total</td>" +
+    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Porcentaje</td>" +
+    "<td scope='col'>SumScore</td>" +
+    "<td scope='col'>AvgScore</td> </tr>";
   const data = computeUsersStats(users, progress, courses);
   data.map(d => {
-    resultTable.innerHTML += "<tr><th scope='row'>" + d.name +
-      "</th> <td>" + d.stats.percent +
-      "%</td> <td>" + d.stats.exercises.total +
-      "</td> <td>" + d.stats.exercises.completed +
-      "</td> <td>" + d.stats.exercises.percent +
-      "%</td> <td>" + d.stats.reads.total +
-      "</td> <td>" + d.stats.reads.completed +
-      "</td> <td>" + d.stats.reads.percent +
-      "%</td> <td>" + d.stats.quizzes.total +
-      "</td> <td>" + d.stats.quizzes.completed +
-      "</td> <td>" + d.stats.quizzes.percent +
-      "</td> <td>" + d.stats.quizzes.scoreSum +
-      "</td> <td>" + d.stats.quizzes.scoreAvg +
-      "</td></tr>";
+    resultTable.innerHTML +=
+    "<tr><th scope='row'>" + d.name +
+    "</th> <td>" + d.stats.percent +
+    "%</td> <td>" + d.stats.exercises.total +
+    "</td> <td>" + d.stats.exercises.completed +
+    "</td> <td>" + d.stats.exercises.percent +
+    "%</td> <td>" + d.stats.reads.total +
+    "</td> <td>" + d.stats.reads.completed +
+    "</td> <td>" + d.stats.reads.percent +
+    "%</td> <td>" + d.stats.quizzes.total +
+    "</td> <td>" + d.stats.quizzes.completed +
+    "</td> <td>" + d.stats.quizzes.percent +
+    "</td> <td>" + d.stats.quizzes.scoreSum +
+    "</td> <td>" + d.stats.quizzes.scoreAvg +
+    "</td></tr>";
   });
+  //se cierra el loading
+  loader.style.display = "none";
 }
 
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
