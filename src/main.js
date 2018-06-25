@@ -6,6 +6,7 @@ let tableData = document.getElementById('tableData');
 let headTable = document.getElementById('headTable');
 let resultTable = document.getElementById('resultTable');
 let loader = document.getElementById('loader');
+let inputSearch = document.getElementById('input-search');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -419,8 +420,26 @@ const createTableWithData = (users, progress, courses) => {
   loader.style.display = "none";
 }
 
+const searchByName = () => {
+  let filter = inputSearch.value.toUpperCase();
+  tr = resultTable.getElementsByTagName("tr");
+  // console.log(tr);
+  for (let i = 0; i < tr.length; i++) {
+    let th = tr[i].getElementsByTagName("th")[0];
+    if(th) {
+      if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      }
+      else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
 selectPromos.addEventListener('change', () => getCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
 selectCursos.addEventListener('change', () => getProgressJson((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
+
+inputSearch.addEventListener("keyup", () => searchByName());
