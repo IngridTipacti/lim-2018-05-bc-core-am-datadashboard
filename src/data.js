@@ -39,5 +39,3 @@ window.filterUsers = (users, search) => {
 window.processCohortData = (options) => {
   options
 }
-
-//

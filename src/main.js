@@ -8,7 +8,6 @@ let resultTable = document.getElementById('resultTable');
 let loader = document.getElementById('loader');
 let inputSearch = document.getElementById('input-search');
 
-//
 const switchSedes = (option) => {
   switch (option) {
     case 'lim':
