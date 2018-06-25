@@ -352,8 +352,11 @@ const quizScoreSum = (progress, courses) => {
 }
 
 const quizScoreAvg = (sumScore, completed) => {
-  const percent = sumScore / completed;
-  return percent;
+  if (sumScore !==0 && completed !==0) {
+    const percent = sumScore / completed;
+    return percent;
+  }
+  else return 0;
 }
 
 const createTableWithData = (users, progress, courses) => {
@@ -378,21 +381,39 @@ const createTableWithData = (users, progress, courses) => {
     "<td scope='col'>AvgScore</td> </tr>";
   const data = computeUsersStats(users, progress, courses);
   data.map(d => {
-    resultTable.innerHTML +=
-    "<tr><th scope='row'>" + d.name +
-    "</th> <td>" + d.stats.percent +
-    "%</td> <td>" + d.stats.exercises.total +
-    "</td> <td>" + d.stats.exercises.completed +
-    "</td> <td>" + d.stats.exercises.percent +
-    "%</td> <td>" + d.stats.reads.total +
-    "</td> <td>" + d.stats.reads.completed +
-    "</td> <td>" + d.stats.reads.percent +
-    "%</td> <td>" + d.stats.quizzes.total +
-    "</td> <td>" + d.stats.quizzes.completed +
-    "</td> <td>" + d.stats.quizzes.percent +
-    "</td> <td>" + d.stats.quizzes.scoreSum +
-    "</td> <td>" + d.stats.quizzes.scoreAvg +
-    "</td></tr>";
+    if (progress[d.id].hasOwnProperty('intro')) {
+      resultTable.innerHTML +=
+        "<tr><th scope='row'>" + d.name +
+        "</th> <td>" + d.stats.percent +
+        "%</td> <td>" + d.stats.exercises.total +
+        "</td> <td>" + d.stats.exercises.completed +
+        "</td> <td>" + d.stats.exercises.percent +
+        "%</td> <td>" + d.stats.reads.total +
+        "</td> <td>" + d.stats.reads.completed +
+        "</td> <td>" + d.stats.reads.percent +
+        "%</td> <td>" + d.stats.quizzes.total +
+        "</td> <td>" + d.stats.quizzes.completed +
+        "</td> <td>" + d.stats.quizzes.percent +
+        "</td> <td>" + d.stats.quizzes.scoreSum +
+        "</td> <td>" + d.stats.quizzes.scoreAvg +
+        "</td></tr>";
+    } else {
+      resultTable.innerHTML +=
+        "<tr><th scope='row'>" + d.name +
+        "</th> <td>" + 0 +
+        "%</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "%</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "%</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td></tr>";
+    }
   });
   //se cierra el loading
   loader.style.display = "none";
