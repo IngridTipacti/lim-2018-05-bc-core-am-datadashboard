@@ -105,7 +105,7 @@ const createTable = (users, progress, courses) => {
   resultTable.innerHTML = "";
   for (const course of courses) {
     for (const user of users) {
-      const userCopia = { ...user };
+      // const userCopia = { ...user };
       const userProgress = progress[userCopia.id];
       if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
         const intro = userProgress.intro;
