@@ -1,8 +1,6 @@
 window.computeUsersStats = (users, progress, courses) => {
-  let usersWithStats = users;
-  usersWithStats.map((user) => {
+  let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
-
     courses.map(course => {
       nameCourse = Object.keys(course).toString();
       if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
@@ -191,13 +189,14 @@ window.computeUsersStats = (users, progress, courses) => {
             scoreAvg: Math.round(quizScoreAvg(quizScoreSum(), quizCompleted()))
           }
         }
-        return user;
+        // return user;
       }
     });
-    return usersWithStats;
+    // console.log(user);
+    return user;
   });
   // usersWithStats = user;
-  // console.log(usersWithStats);
+  console.log(usersWithStats);
   return usersWithStats;
 }
 
