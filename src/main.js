@@ -153,7 +153,7 @@ const createTableWithData = (users, progress, courses) => {
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
     "<th scope='col' colspan='3'>Ejercicios</th>" +
     "<th scope='col' colspan='3'>Lecturas</th>" +
-    "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
+    "<th scope='col' colspan='5'>Quizzes</th> </tr>" +
     "<tr> <td scope='col'>Total</td>" +
     "<td scope='col'>Completado</td>" +
     "<td scope='col'>Porcentaje</td>" +
