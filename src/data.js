@@ -164,7 +164,7 @@ window.computeUsersStats = (users, progress, courses) => {
         let quizScoreAvg = (sumScore, completed) => {
           if (sumScore !== 0 && completed !== 0) {
             const percent = sumScore / completed;
-            return percent;
+            return Math.round(percent);
           }
           else return 0;
         }
@@ -186,7 +186,7 @@ window.computeUsersStats = (users, progress, courses) => {
             completed: quizCompleted(),
             percent: quizPercent(quizCompleted(), quizTotal()),
             scoreSum: quizScoreSum(),
-            scoreAvg: Math.round(quizScoreAvg(quizScoreSum(), quizCompleted()))
+            scoreAvg: quizScoreAvg(quizScoreSum(), quizCompleted())
           }
         }
         // return user;
@@ -196,7 +196,7 @@ window.computeUsersStats = (users, progress, courses) => {
     return user;
   });
   // usersWithStats = user;
-  console.log(usersWithStats);
+  // console.log(usersWithStats);
   return usersWithStats;
 }
 
