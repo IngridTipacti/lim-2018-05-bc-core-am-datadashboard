@@ -18,6 +18,8 @@ const headTable = document.getElementById('headTable');
 const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
+const radioAsc = document.getElementById('asc');
+const radioDes = document.getElementById('des');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -234,20 +236,22 @@ const createTableWithData = (users, progress, courses) => {
 }
 
 const searchByName = () => {
-  let filter = inputSearch.value.toUpperCase();
-  tr = resultTable.getElementsByTagName("tr");
-  // console.log(tr);
-  for (let i = 0; i < tr.length; i++) {
-    let th = tr[i].getElementsByTagName("th")[0];
-    if(th) {
-      if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      }
-      else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
+  options.search = inputSearch.value.toUpperCase();
+  processCohortData(options);
+  // let filter = inputSearch.value.toUpperCase();
+  // tr = resultTable.getElementsByTagName("tr");
+  // // console.log(tr);
+  // for (let i = 0; i < tr.length; i++) {
+  //   let th = tr[i].getElementsByTagName("th")[0];
+  //   if(th) {
+  //     if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
+  //       tr[i].style.display = "";
+  //     }
+  //     else {
+  //       tr[i].style.display = "none";
+  //     }
+  //   }
+  // }
 }
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 

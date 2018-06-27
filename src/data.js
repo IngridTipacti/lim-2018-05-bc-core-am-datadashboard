@@ -204,13 +204,21 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 }
 
 window.filterUsers = (users, search) => {
-  users,
-  search
+  let filterByUsers = users.filter(user => {
+    return user.name.toUpperCase().indexOf(search) > -1;
+  });
+  console.log(filterByUsers)
+  return filterByUsers;
 }
 
 window.processCohortData = (options) => {
   const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  console.log(compute);
+  // console.log(compute);
+  const sort = sortUsers(compute, options.orderBy, options.orderDirection);
+  if(options.search !== '') {
+    let filterU = filterUsers(compute, options.search);
+  }
+
   // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
   //   if (options.search !== '') {
