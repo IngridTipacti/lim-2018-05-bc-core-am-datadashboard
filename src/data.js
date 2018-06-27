@@ -1,8 +1,9 @@
 window.computeUsersStats = (users, progress, courses) => {
   let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
-    courses.map(course => {
-      nameCourse = Object.keys(course).toString();
+    // courses.map(course => {
+      nameCourse = courses.toString();
+      // console.log(nameCourse);
       if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
         const units = prog.intro.units;
         const nameUnits = Object.keys(units);
@@ -164,7 +165,7 @@ window.computeUsersStats = (users, progress, courses) => {
         let quizScoreAvg = (sumScore, completed) => {
           if (sumScore !== 0 && completed !== 0) {
             const percent = sumScore / completed;
-            return percent;
+            return Math.round(percent);
           }
           else return 0;
         }
@@ -186,16 +187,12 @@ window.computeUsersStats = (users, progress, courses) => {
             completed: quizCompleted(),
             percent: quizPercent(quizCompleted(), quizTotal()),
             scoreSum: quizScoreSum(),
-            scoreAvg: Math.round(quizScoreAvg(quizScoreSum(), quizCompleted()))
+            scoreAvg: quizScoreAvg(quizScoreSum(), quizCompleted())
           }
         }
-        // return user;
       }
-    });
-    // console.log(user);
     return user;
   });
-  // usersWithStats = user;
   console.log(usersWithStats);
   return usersWithStats;
 }

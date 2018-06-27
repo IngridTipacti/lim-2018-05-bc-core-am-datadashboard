@@ -128,14 +128,15 @@ const getUsersJson = (idCohort) => {
 }
 
 const getProgressJson = (idCohort, course) => {
-  // crear el loading
   loader.style.display = "block";
-  const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
-      createTableWithData(users, progressjson, courses);
+      let arrCourse = [];
+      arrCourse.push(course);
+      //nombre de la función que llamará a processCohortData
+      createTableWithData(users, progressjson, arrCourse);
     } else {
       empty.style.display = "block";
       headTable.innerHTML = "";
@@ -153,7 +154,7 @@ const createTableWithData = (users, progress, courses) => {
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
     "<th scope='col' colspan='3'>Ejercicios</th>" +
     "<th scope='col' colspan='3'>Lecturas</th>" +
-    "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
+    "<th scope='col' colspan='5'>Quizzes</th> </tr>" +
     "<tr> <td scope='col'>Total</td>" +
     "<td scope='col'>Completado</td>" +
     "<td scope='col'>Porcentaje</td>" +
