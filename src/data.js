@@ -1,8 +1,9 @@
 window.computeUsersStats = (users, progress, courses) => {
   let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
-    courses.map(course => {
-      nameCourse = Object.keys(course).toString();
+    // courses.map(course => {
+      nameCourse = courses.toString();
+      // console.log(nameCourse);
       if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
         const units = prog.intro.units;
         const nameUnits = Object.keys(units);
@@ -189,13 +190,9 @@ window.computeUsersStats = (users, progress, courses) => {
             scoreAvg: quizScoreAvg(quizScoreSum(), quizCompleted())
           }
         }
-        // return user;
       }
-    });
-    // console.log(user);
     return user;
   });
-  // usersWithStats = user;
   // console.log(usersWithStats);
   return usersWithStats;
 }
@@ -207,10 +204,25 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 }
 
 window.filterUsers = (users, search) => {
-  users,
-  search
+  let filterByUsers = users.filter(user => {
+    return user.name.toUpperCase().indexOf(search) > -1;
+  });
+  console.log(filterByUsers)
+  return filterByUsers;
 }
 
 window.processCohortData = (options) => {
-  options
+  const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+  // console.log(compute);
+  const sort = sortUsers(compute, options.orderBy, options.orderDirection);
+  if(options.search !== '') {
+    let filterU = filterUsers(compute, options.search);
+  }
+
+  // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
+  //   if (options.search !== '') {
+  //     estudiantes = filterUsers(users, search);
+  //   }
+  //   return estudiantes;
 }
