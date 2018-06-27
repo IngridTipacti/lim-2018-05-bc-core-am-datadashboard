@@ -1,56 +1,203 @@
 window.computeUsersStats = (users, progress, courses) => {
-  // const coursesProgress = courses.map((course) => {
-  //   let usersWithStats = users.map((user) => {
-  //     const userBackup = { ...user };
-  //     const userProgress = progress[userBackup.id];
-  //     const coursesName = Object.keys(userProgress);
-  //     if (userProgress.hasOwnProperty('intro') && Object.keys(course).toString() === Object.keys(userProgress).toString()) {
-        //arre acá va la logica de la funcion
-        // const intro = userProgress.intro;
-        // const nameUnits = Object.keys(intro.units);
+  let usersWithStats = users.map((user) => {
+    const prog = progress[user.id];
+    courses.map(course => {
+      nameCourse = Object.keys(course).toString();
+      if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
+        const units = prog.intro.units;
+        const nameUnits = Object.keys(units);
 
-        // RECORRIDO PARA COMPROBAR LOS EJERCICIOS.
-        // const obj = coursesName.map(course => {
-        //   const unitsName = Object.keys(progress[user.id][course].units);
-        //   unitsName.map(unitName => {
-        //     const partsName = Object.keys(progress[user.id][course].units[unitName].parts);
-        //     partsName.map(partName => {
-        //       if (progress[user.id][course].units[unitName].parts[partName].hasOwnProperty('exercises')) {
-        //         const size = Object.values(progress[user.id][course].units[unitName].parts[partName].exercises);
-        //         return size;
-        //       }
-        //     });
-            // return partsName;
-          // });
-          // return unitsName;
-        // });
-        // console.log(obj)
+        let percentStats = () => {
+          progressTotal = nameUnits.reduce((sumProgress, u) => {
+            sumProgress += units[u].percent / nameUnits.length;
+            return sumProgress;
+          }, 0);
+          return Math.round(progressTotal);
+        }
 
-        // const percentTotal = nameUnits.reduce((sumProgress, u) => {
-        //   sumProgress += intro.units[u].percent / nameUnits.length;
-        //   return sumProgress;
-        // }, 0);
-        // const exeTotal;
-        // const exeCompleted;
-        // const exePercent;
-        // const readTotal;
-        // const readCompleted;
-        // const readPercent;
-        // const quizzTotal;
-        // const quizzCompleted;
-        // const quizzPercent;
-        // const quizzScoreSum;
-        // const quizzScoreAvg;
+        let exerTotal = () => {
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (prog.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
+                const exercises = prog.intro.units[nameUnit].parts[namePart].exercises;
+                const nameExercises = Object.keys(exercises);
+                totalExer = nameExercises.map(nameExercise => {
+                  let total = Object.keys(prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise]);
+                  return total;
+                });
+                return totalExer.length;
+              }
+            });
+          });
+          return totalExer.length;
+        }
 
-        // return percentTotal;
-      //   return obj;
-      // }
-      // return user;
-    // });
-    // console.log(usersWithStats);
-    // return course;
-  // });
-  // console.log(coursesProgress);
+        let exerCompleted = () => {
+          let sumCompleted = 0;
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (prog.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
+                const exercises = prog.intro.units[nameUnit].parts[namePart].exercises;
+                const nameExercises = Object.keys(exercises);
+                nameExercises.map(nameExercise => {
+                  if (prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise].hasOwnProperty('completed')) {
+                    let completed = prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise].completed;
+                    if (completed > 0) {
+                      sumCompleted += completed;
+                      return sumCompleted;
+                    }
+                  }
+                });
+              }
+            });
+          });
+          return sumCompleted;
+        }
+
+        let exerPercent = (completed, total) => {
+          if (completed !== 0 && total !== 0) {
+            const percent = (completed / total) * 100;
+            return Math.round(percent);
+          } else return 0;
+        }
+
+        let readTotal = () => {
+          let reads = [];
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (parts[namePart].type === 'read') {
+                reads.push(parts[namePart]);
+                return reads;
+              }
+            });
+          });
+          return reads.length;
+        }
+
+        let readCompleted = () => {
+          let sumCompleted = 0;
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (parts[namePart].type === 'read') {
+                let completed = prog.intro.units[nameUnit].parts[namePart].completed;
+                if (completed > 0) {
+                  sumCompleted += completed;
+                  return sumCompleted;
+                }
+              }
+            });
+          });
+          return sumCompleted;
+        }
+
+        let readPercent = (completed, total) => {
+          if (completed !== 0 && total !== 0) {
+            const percent = (completed / total) * 100;
+            return Math.round(percent);
+          } else return 0;
+        }
+
+        let quizTotal = () => {
+          let quiz = [];
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (parts[namePart].type === 'quiz') {
+                quiz.push(parts[namePart]);
+                return quiz;
+              }
+            });
+          });
+          return quiz.length;
+        }
+
+        let quizCompleted = () => {
+          let sumCompleted = 0;
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (parts[namePart].type === 'quiz') {
+                let completed = prog.intro.units[nameUnit].parts[namePart].completed;
+                if (completed > 0) {
+                  sumCompleted += completed;
+                  return sumCompleted;
+                }
+              }
+            });
+          });
+          return sumCompleted;
+        }
+
+        let quizPercent = (completed, total) => {
+          if (completed !== 0 && total !== 0) {
+            const percent = (completed / total) * 100;
+            return Math.round(percent);
+          } else return 0;
+        }
+
+        let quizScoreSum = () => {
+          let sumScore = 0;
+          nameUnits.map(nameUnit => {
+            const parts = prog.intro.units[nameUnit].parts;
+            const nameParts = Object.keys(parts);
+            nameParts.map(namePart => {
+              if (parts[namePart].type === 'quiz' && parts[namePart].hasOwnProperty('score')) {
+                let score = prog.intro.units[nameUnit].parts[namePart].score;
+                sumScore += score;
+                return sumScore;
+              }
+            });
+          });
+          return sumScore;
+        }
+
+        let quizScoreAvg = (sumScore, completed) => {
+          if (sumScore !== 0 && completed !== 0) {
+            const percent = sumScore / completed;
+            return percent;
+          }
+          else return 0;
+        }
+
+        user.stats = {
+          percent: percentStats(),
+          exercises: {
+            total: exerTotal(),
+            completed: exerCompleted(),
+            percent: exerPercent(exerCompleted(), exerTotal()),
+          },
+          reads: {
+            total: readTotal(),
+            completed: readCompleted(),
+            percent:readPercent(readCompleted(), readTotal())
+          },
+          quizzes: {
+            total: quizTotal(),
+            completed: quizCompleted(),
+            percent: quizPercent(quizCompleted(), quizTotal()),
+            scoreSum: quizScoreSum(),
+            scoreAvg: Math.round(quizScoreAvg(quizScoreSum(), quizCompleted()))
+          }
+        }
+        // return user;
+      }
+    });
+    // console.log(user);
+    return user;
+  });
+  // usersWithStats = user;
+  console.log(usersWithStats);
+  return usersWithStats;
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
