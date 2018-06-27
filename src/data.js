@@ -193,7 +193,7 @@ window.computeUsersStats = (users, progress, courses) => {
       }
     return user;
   });
-  console.log(usersWithStats);
+  // console.log(usersWithStats);
   return usersWithStats;
 }
 
@@ -209,6 +209,8 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
+  const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+  console.log(compute);
   // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
   //   if (options.search !== '') {

@@ -1,3 +1,14 @@
+let options = {
+  cohort: '',
+  cohortData: {
+    users: '',
+    progress: ''
+  },
+  orderBy: '',
+  orderDirection: '',
+  search: ''
+}
+
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
@@ -136,7 +147,7 @@ const getProgressJson = (idCohort, course) => {
       let arrCourse = [];
       arrCourse.push(course);
       //nombre de la función que llamará a processCohortData
-      createTableWithData(users, progressjson, arrCourse);
+      pasandoDatos(users, progressjson, arrCourse);
     } else {
       empty.style.display = "block";
       headTable.innerHTML = "";
@@ -144,6 +155,16 @@ const getProgressJson = (idCohort, course) => {
       loader.style.display = "none";
     }
   });
+}
+
+const pasandoDatos = (users, progress, courses) => {
+  options.cohort = courses;
+  options.cohortData.users = users;
+  options.cohortData.progress = progress;
+  options.orderBy = "name";
+  options.orderDirection = "asc";
+  options.search = "";
+  processCohortData(options);
 }
 
 const createTableWithData = (users, progress, courses) => {
@@ -166,6 +187,10 @@ const createTableWithData = (users, progress, courses) => {
     "<td scope='col'>Porcentaje</td>" +
     "<td scope='col'>SumScore</td>" +
     "<td scope='col'>AvgScore</td> </tr>";
+    const option = {
+      cohort: cohort,
+
+    }
   const data = computeUsersStats(users, progress, courses);
   // console.log(data[0]);
   data.map(d => {
