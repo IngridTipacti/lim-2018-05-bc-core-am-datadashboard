@@ -1,12 +1,25 @@
+let options = {
+  cohort: '',
+  cohortData: {
+    users: '',
+    progress: ''
+  },
+  orderBy: '',
+  orderDirection: '',
+  search: ''
+}
+
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
-let empty = document.getElementById('empty');
-let tableData = document.getElementById('tableData');
-let headTable = document.getElementById('headTable');
-let resultTable = document.getElementById('resultTable');
-let loader = document.getElementById('loader');
-let inputSearch = document.getElementById('input-search');
+const empty = document.getElementById('empty');
+const tableData = document.getElementById('tableData');
+const headTable = document.getElementById('headTable');
+const resultTable = document.getElementById('resultTable');
+const loader = document.getElementById('loader');
+const inputSearch = document.getElementById('input-search');
+const radioAsc = document.getElementById('asc');
+const radioDes = document.getElementById('des');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -128,14 +141,15 @@ const getUsersJson = (idCohort) => {
 }
 
 const getProgressJson = (idCohort, course) => {
-  // crear el loading
   loader.style.display = "block";
-  const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
-      createTableWithData(users, progressjson, courses);
+      let arrCourse = [];
+      arrCourse.push(course);
+      //nombre de la función que llamará a processCohortData
+      pasandoDatos(users, progressjson, arrCourse);
     } else {
       empty.style.display = "block";
       headTable.innerHTML = "";
@@ -143,6 +157,16 @@ const getProgressJson = (idCohort, course) => {
       loader.style.display = "none";
     }
   });
+}
+
+const pasandoDatos = (users, progress, courses) => {
+  options.cohort = courses;
+  options.cohortData.users = users;
+  options.cohortData.progress = progress;
+  options.orderBy = "name";
+  options.orderDirection = "asc";
+  options.search = "";
+  processCohortData(options);
 }
 
 const createTableWithData = (users, progress, courses) => {
@@ -165,6 +189,10 @@ const createTableWithData = (users, progress, courses) => {
     "<td scope='col'>Porcentaje</td>" +
     "<td scope='col'>SumScore</td>" +
     "<td scope='col'>AvgScore</td> </tr>";
+    const option = {
+      cohort: cohort,
+
+    }
   const data = computeUsersStats(users, progress, courses);
   // console.log(data[0]);
   data.map(d => {
@@ -208,20 +236,22 @@ const createTableWithData = (users, progress, courses) => {
 }
 
 const searchByName = () => {
-  let filter = inputSearch.value.toUpperCase();
-  tr = resultTable.getElementsByTagName("tr");
-  // console.log(tr);
-  for (let i = 0; i < tr.length; i++) {
-    let th = tr[i].getElementsByTagName("th")[0];
-    if(th) {
-      if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      }
-      else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
+  options.search = inputSearch.value.toUpperCase();
+  processCohortData(options);
+  // let filter = inputSearch.value.toUpperCase();
+  // tr = resultTable.getElementsByTagName("tr");
+  // // console.log(tr);
+  // for (let i = 0; i < tr.length; i++) {
+  //   let th = tr[i].getElementsByTagName("th")[0];
+  //   if(th) {
+  //     if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
+  //       tr[i].style.display = "";
+  //     }
+  //     else {
+  //       tr[i].style.display = "none";
+  //     }
+  //   }
+  // }
 }
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 

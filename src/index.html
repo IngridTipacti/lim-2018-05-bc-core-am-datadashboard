@@ -36,8 +36,8 @@
       <!-- Select de las sedes de Laboratoria -->
       <div id="sedes">
         <h4 class="h4">Sedes</h4>
-        <select id="selectSedes" class="form-control" onmousedown="this.value='';" name="type">
-          <!-- <option value="" selected>Sedes</option> -->
+        <select id="selectSedes" class="form-control" name="type">
+          <option value="" selected></option>
           <option value="lim">Lima</option>
           <option value="scl">Santiago</option>
           <option value="cdm">Ciudad de México</option>
@@ -49,7 +49,7 @@
       <!-- Promociones por sedes -->
       <div id="promociones">
         <h4 class="h4">Cohort</h4>
-        <select id="selectPromos" class="form-control" disabled onmousedown="this.value='';" name="type">
+        <select id="selectPromos" class="form-control" disabled name="type">
         </select>
       </div>
 
@@ -69,9 +69,36 @@
         <img src="../images/empty.png" alt="empty" id="empty" style="display: none">
       </center>
 
-      <!-- TODO: BUSCADOR POR NOMBRE DE ALUMNAS -->
-      <div id="searching">
-        <input id="input-search" class="form-control" style="display: none" type="text" name="search" placeholder="Search for names..">
+      <!-- select para ordenar de forma ascendentes o descendentes -->
+      <div class="row">
+        <!-- TODO: BUSCADOR POR NOMBRE DE ALUMNAS -->
+        <div id="searching" class="col-5">
+          <input id="input-search" class="form-control" type="text" name="search" placeholder="Search for names..">
+        </div>
+        <div class="col-3">
+          <!-- <h6>Ordenar por</h6> -->
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="optradio" value="asc" id="asc" checked>Ascendente
+            </label>
+          </div>
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="optradio" value="des" id="des">Descendente
+            </label>
+          </div>
+        </div>
+        <div class="col-4">
+          <select id="" class="form-control" placeholder="Filtra por orden de...">
+            <option value=""></option>
+            <option value="name">Nombre</option>
+            <option value="asc">% Completitud</option>
+            <option value="asc">% Ejercicios</option>
+            <option value="asc">% Quizzes</option>
+            <option value="asc">Score Quizzes</option>
+            <option value="asc">% Lecturas</option>
+          </select>
+        </div>
       </div>
 
       <!-- loader -->
