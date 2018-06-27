@@ -212,5 +212,10 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
-  options
+  // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
+  //   if (options.search !== '') {
+  //     estudiantes = filterUsers(users, search);
+  //   }
+  //   return estudiantes;
 }

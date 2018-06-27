@@ -1,12 +1,12 @@
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
-let empty = document.getElementById('empty');
-let tableData = document.getElementById('tableData');
-let headTable = document.getElementById('headTable');
-let resultTable = document.getElementById('resultTable');
-let loader = document.getElementById('loader');
-let inputSearch = document.getElementById('input-search');
+const empty = document.getElementById('empty');
+const tableData = document.getElementById('tableData');
+const headTable = document.getElementById('headTable');
+const resultTable = document.getElementById('resultTable');
+const loader = document.getElementById('loader');
+const inputSearch = document.getElementById('input-search');
 
 const switchSedes = (option) => {
   switch (option) {
