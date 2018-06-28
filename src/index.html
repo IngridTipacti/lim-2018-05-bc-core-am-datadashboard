@@ -56,7 +56,7 @@
       <!-- Selects de cursos -->
       <div id="cursos">
         <h4 class="h4">Cursos</h4>
-        <select id="selectCursos" class="form-control" disabled onmousedown="this.value='';" name="type"></select>
+        <select id="selectCursos" class="form-control" disabled name="type"></select>
       </div>
 
     </div>
@@ -71,34 +71,29 @@
 
       <!-- select para ordenar de forma ascendentes o descendentes -->
       <div class="row">
-        <!-- TODO: BUSCADOR POR NOMBRE DE ALUMNAS -->
-        <div id="searching" class="col-5">
-          <input id="input-search" class="form-control" type="text" name="search" placeholder="Search for names..">
+        <!-- BUSCADOR POR NOMBRE DE ALUMNAS -->
+        <div id="searching" class="col-8">
+          <input id="input-search" class="form-control" type="text" style="display: none" name="search" placeholder="Search for names..">
         </div>
-        <div class="col-3">
-          <!-- <h6>Ordenar por</h6> -->
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio" value="asc" id="asc" checked>Ascendente
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optradio" value="des" id="des">Descendente
-            </label>
-          </div>
-        </div>
-        <div class="col-4">
-          <select id="orderBy" class="form-control" placeholder="Filtra por orden de...">
-            <option value=""></option>
-            <option value="name">Nombre</option>
-            <option value="asc">% Completitud</option>
-            <option value="asc">% Ejercicios</option>
-            <option value="asc">% Quizzes</option>
-            <option value="asc">Score Quizzes</option>
-            <option value="asc">% Lecturas</option>
-          </select>
-        </div>
+        <!-- FILTRAR POR -->
+        <select id="orderBy" class="col-4 form-control" style="display: none">
+          <optgroup label="Ascendente">
+            <option value="ascname">Nombre</option>
+            <option value="ascperc">% Completitud</option>
+            <option value="ascexer">% Ejercicios</option>
+            <option value="ascquiz">% Quizzes</option>
+            <option value="ascread">% Lecturas</option>
+            <option value="ascscor">Score Quizzes</option>
+          </optgroup>
+          <optgroup label="Descendente">
+            <option value="desname">Nombre</option>
+            <option value="desperc">% Completitud</option>
+            <option value="desexer">% Ejercicios</option>
+            <option value="desquiz">% Quizzes</option>
+            <option value="desread">% Lecturas</option>
+            <option value="desscor">Score Quizzes</option>
+          </optgroup>
+        </select>
       </div>
 
       <!-- loader -->
@@ -106,30 +101,8 @@
         <div id="loader" style="display: none"></div>
       </center>
 
-      <!-- probando tabla de bootstrap -->
       <table class="table-sm table-hover table-responsive" id="tableData">
-        <thead id="headTable">
-          <!-- <tr>
-            <th scope="col" rowspan="2">Alumnas</th>
-            <th scope="col" rowspan="2">Porcentaje</th>
-            <th scope="col" colspan="3">Ejercicios</th>
-            <th scope="col" colspan="3">Lecturas</th>
-            <th scope="col" colspan="5">Quizzes</th>
-          </tr>
-          <tr>
-            <td scope="col">Total</td>
-            <td scope="col">Completado</td>
-            <td scope="col">Porcentaje</td>
-            <td scope="col">Total</td>
-            <td scope="col">Completado</td>
-            <td scope="col">Porcentaje</td>
-            <td scope="col">Total</td>
-            <td scope="col">Completado</td>
-            <td scope="col">Porcentaje</td>
-            <td scope="col">SumScore</td>
-            <td scope="col">AvgScore</td>
-          </tr> -->
-        </thead>
+        <thead id="headTable"> </thead>
         <tbody id="resultTable"> </tbody>
       </table>
     </div>
