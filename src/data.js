@@ -212,12 +212,15 @@ window.filterUsers = (users, search) => {
 }
 
 window.processCohortData = (options) => {
-  const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  // console.log(compute);
+  let arr = Object.keys(options.cohort);
+  let courses = Object.keys(options.cohort[arr].coursesIndex);
+  let compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  // console.log(compute)
   const sort = sortUsers(compute, options.orderBy, options.orderDirection);
   if(options.search !== '') {
     let filterU = filterUsers(compute, options.search);
   }
+  return compute;
 
   // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
@@ -225,4 +228,14 @@ window.processCohortData = (options) => {
   //     estudiantes = filterUsers(users, search);
   //   }
   //   return estudiantes;
+
+  // let arr = Object.keys(options.cohort);
+  // let courses = Object.keys(options.cohort[arr].coursesIndex);
+  // let compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  // compute = sortUsers(compute, options.orderBy, options.orderDirection);
+  // if(options.search !== '') {
+  //   compute = filterUsers(compute, options.search);
+  // }
+  // console.log(compute);
+  // return compute;
 }
