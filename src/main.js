@@ -185,63 +185,49 @@ const pasandoDatos = (users, progress, cohorts) => {
 const createTableWithData = () => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
-  //se esta reduciendo  lo de total con completado cvon el nombre COMPLETE
   headTable.innerHTML =
     "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
-    "<th scope='col' colspan='3'>Ejercicios</th>" +
-    "<th scope='col' colspan='3'>Lecturas</th>" +
-    "<th scope='col' colspan='5'>Quizzes</th> </tr>" +
-    "<tr> <td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<th scope='col' colspan='2'>Ejercicios</th>" +
+    "<th scope='col' colspan='2'>Lecturas</th>" +
+    "<th scope='col' colspan='4'>Quizzes</th> </tr>" +
+    "<tr> <td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
     "<td scope='col'>SumScore</td>" +
     "<td scope='col'>AvgScore</td> </tr>";
-  //generar la tabla general por defecto
+  //generar la tabla general
   let todo = processCohortData(options);
   todo.map(d => {
-    // console.log(d.stats)
     if (d.stats !== undefined) {
-      // console.log('toma')
-      //se esta reduciendo  lo de total con completado cvon el nombre COMPLETE
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + d.stats.percent +
-        "%</td> <td>" + d.stats.exercises.total +
-        "</td> <td>" + d.stats.exercises.completed +
+        "%</td> <td>" + d.stats.exercises.completed + " / " + d.stats.exercises.total +
         "</td> <td>" + d.stats.exercises.percent +
-        "%</td> <td>" + d.stats.reads.total +
-        "</td> <td>" + d.stats.reads.completed +
+        "%</td> <td>" + d.stats.reads.completed + " / " + d.stats.reads.total +
         "</td> <td>" + d.stats.reads.percent +
-        "%</td> <td>" + d.stats.quizzes.total +
-        "</td> <td>" + d.stats.quizzes.completed +
+        "%</td> <td>" + d.stats.quizzes.completed + " / " + d.stats.quizzes.total +
         "</td> <td>" + d.stats.quizzes.percent +
         "</td> <td>" + d.stats.quizzes.scoreSum +
         "</td> <td>" + d.stats.quizzes.scoreAvg +
         "</td></tr>";
     } else {
-      // console.log(d.id)
       resultTable.innerHTML +=
-        "<tr><th scope='row'>" + d.name +
-        "</th> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td></tr>";
+      "<tr><th scope='row'>" + d.name +
+      "</th> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "</td> <td>" + 0 +
+      "</td> <td>" + 0 +
+      "</td></tr>";
     }
   });
   //se cierra el loading
