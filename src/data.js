@@ -207,7 +207,7 @@ window.filterUsers = (users, search) => {
   let filterByUsers = users.filter(user => {
     return user.name.toUpperCase().indexOf(search) > -1;
   });
-  console.log(filterByUsers)
+  // console.log(filterByUsers)
   return filterByUsers;
 }
 
@@ -218,7 +218,8 @@ window.processCohortData = (options) => {
   // console.log(compute)
   const sort = sortUsers(compute, options.orderBy, options.orderDirection);
   if(options.search !== '') {
-    let filterU = filterUsers(compute, options.search);
+    compute = filterUsers(compute, options.search);
+    return compute;
   }
   return compute;
 

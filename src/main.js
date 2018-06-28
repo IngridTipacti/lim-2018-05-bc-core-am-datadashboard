@@ -185,6 +185,7 @@ const pasandoDatos = (users, progress, cohorts) => {
 const createTableWithData = () => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
+  //se esta reduciendo  lo de total con completado cvon el nombre COMPLETE
   headTable.innerHTML =
     "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
@@ -208,6 +209,7 @@ const createTableWithData = () => {
     // console.log(d.stats)
     if (d.stats !== undefined) {
       // console.log('toma')
+      //se esta reduciendo  lo de total con completado cvon el nombre COMPLETE
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + d.stats.percent +
@@ -249,6 +251,8 @@ const createTableWithData = () => {
 
 const searchByName = () => {
   options.search = inputSearch.value.toUpperCase();
+  processCohortData(options);
+  createTableWithData()
   // let filter = inputSearch.value.toUpperCase();
   // tr = resultTable.getElementsByTagName("tr");
   // // console.log(tr);
