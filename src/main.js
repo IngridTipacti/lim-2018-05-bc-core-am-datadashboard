@@ -1,12 +1,26 @@
+let options = {
+  cohort: '',
+  cohortData: {
+    users: '',
+    progress: ''
+  },
+  orderBy: '',
+  orderDirection: '',
+  search: ''
+}
+
 const selectSedes = document.getElementById('selectSedes');
 const selectPromos = document.getElementById('selectPromos');
 const selectCursos = document.getElementById('selectCursos');
-let empty = document.getElementById('empty');
-let tableData = document.getElementById('tableData');
-let headTable = document.getElementById('headTable');
-let resultTable = document.getElementById('resultTable');
-let loader = document.getElementById('loader');
-let inputSearch = document.getElementById('input-search');
+const empty = document.getElementById('empty');
+const tableData = document.getElementById('tableData');
+const headTable = document.getElementById('headTable');
+const resultTable = document.getElementById('resultTable');
+const loader = document.getElementById('loader');
+const inputSearch = document.getElementById('input-search');
+const radioAsc = document.getElementById('asc');
+const radioDes = document.getElementById('des');
+const selectOrderBy = document.getElementById('orderBy');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -82,7 +96,7 @@ const getPromo = (promo) => {
 }
 
 // validacion por curso de cohorts para select
-const getCohortsJson = (idCohort) => {
+const setCohortsJson = (idCohort) => {
   selectCursos.disabled = true;
   selectCursos.innerHTML = "";
   let courses = [];
@@ -127,15 +141,27 @@ const getUsersJson = (idCohort) => {
   return newUsers;
 }
 
+const getCohortsJson = (idCohort) => {
+  let cohorts = [];
+  getData('../data/cohorts.json', (err, cohortjson) => {
+    cohortjson.map(cohort => {
+      if(cohort.id === idCohort) {
+        cohorts.push(cohort);
+      }
+    });
+  });
+  return cohorts;
+}
+
 const getProgressJson = (idCohort, course) => {
-  // crear el loading
   loader.style.display = "block";
-  const courses = getCohortsJson(idCohort);
   const users = getUsersJson(idCohort);
+  const cohorts = getCohortsJson(idCohort);
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
-      createTableWithData(users, progressjson, courses);
+      //nombre de la función que llamará a processCohortData
+      pasandoDatos(users, progressjson, cohorts);
     } else {
       empty.style.display = "block";
       headTable.innerHTML = "";
@@ -145,301 +171,95 @@ const getProgressJson = (idCohort, course) => {
   });
 }
 
-const percentStats = (progress, courses) => {
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      progressTotal = nameUnits.reduce((sumProgress, u) => {
-        sumProgress += units[u].percent / nameUnits.length;
-        return sumProgress;
-      }, 0);
-      return progressTotal;
-    } else {
-      console.log("no tiene porcentaje");
-    }
-  });
-  return progressTotal;
+const pasandoDatos = (users, progress, cohorts) => {
+  options.cohort = cohorts;
+  options.cohortData.users = users;
+  options.cohortData.progress = progress;
+  options.orderBy = "name";
+  options.orderDirection = "asc";
+  options.search = "";
+  processCohortData(options);
+  createTableWithData()
 }
 
-const exerTotal = (progress, courses) => {
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (progress.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
-            const exercises = progress.intro.units[nameUnit].parts[namePart].exercises;
-            const nameExercises = Object.keys(exercises);
-            totalExer = nameExercises.map(nameExercise => {
-              let total = Object.keys(progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise]);
-              return total;
-            });
-            return totalExer;
-          }
-        });
-      });
-    }
-  });
-  return totalExer;
-}
-
-const exerCompleted = (progress, courses) => {
-  let sumCompleted = 0;
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (progress.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
-            const exercises = progress.intro.units[nameUnit].parts[namePart].exercises;
-            const nameExercises = Object.keys(exercises);
-            nameExercises.map(nameExercise => {
-              if (progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise].hasOwnProperty('completed')) {
-                let completed = progress.intro.units[nameUnit].parts[namePart].exercises[nameExercise].completed;
-                if (completed > 0) {
-                  sumCompleted += completed;
-                  return sumCompleted;
-                }
-              }
-            });
-          }
-        });
-      });
-    }
-  });
-  return sumCompleted;
-}
-
-const exerPercent = (completed, total) => {
-  const percent = (completed / total) * 100;
-  return percent;
-}
-
-const readTotal = (progress, courses) => {
-  let reads = [];
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (parts[namePart].type === 'read') {
-            reads.push(parts[namePart]);
-            return reads;
-          }
-        });
-      });
-    }
-  });
-  return reads.length;
-}
-
-const readCompleted = (progress, courses) => {
-  let sumCompleted = 0;
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (parts[namePart].type === 'read') {
-            let completed = progress.intro.units[nameUnit].parts[namePart].completed;
-            if (completed > 0) {
-              sumCompleted += completed;
-              return sumCompleted;
-            }
-          }
-        });
-      });
-    }
-  });
-  return sumCompleted;
-}
-
-const readPercent = (completed, total) => {
-  const percent = (completed / total) * 100;
-  return percent;
-}
-
-const quizTotal = (progress, courses) => {
-  let quiz = [];
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (parts[namePart].type === 'quiz') {
-            quiz.push(parts[namePart]);
-            return quiz;
-          }
-        });
-      });
-    }
-  });
-  return quiz.length;
-}
-
-const quizCompleted = (progress, courses) => {
-  let sumCompleted = 0;
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (parts[namePart].type === 'quiz') {
-            let completed = progress.intro.units[nameUnit].parts[namePart].completed;
-            if (completed > 0) {
-              sumCompleted += completed;
-              return sumCompleted;
-            }
-          }
-        });
-      });
-    }
-  });
-  return sumCompleted;
-}
-
-const quizPercent = (completed, total) => {
-  const percent = (completed / total) * 100;
-  return percent;
-}
-
-const quizScoreSum = (progress, courses) => {
-  let sumScore = 0;
-  courses.map(course => {
-    nameCourse = Object.keys(course).toString();
-    if (progress.hasOwnProperty(nameCourse) && progress.intro.hasOwnProperty('units')) {
-      const units = progress.intro.units;
-      const nameUnits = Object.keys(units);
-      nameUnits.map(nameUnit => {
-        const parts = progress.intro.units[nameUnit].parts;
-        const nameParts = Object.keys(parts);
-        nameParts.map(namePart => {
-          if (parts[namePart].type === 'quiz' && parts[namePart].hasOwnProperty('score')) {
-            let score = progress.intro.units[nameUnit].parts[namePart].score;
-            sumScore += score;
-            return sumScore;
-          }
-        });
-      });
-    }
-  });
-  return sumScore;
-}
-
-const quizScoreAvg = (sumScore, completed) => {
-  if (sumScore !==0 && completed !==0) {
-    const percent = sumScore / completed;
-    return percent;
-  }
-  else return 0;
-}
-
-const createTableWithData = (users, progress, courses) => {
+const createTableWithData = () => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
   headTable.innerHTML =
     "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
-    "<th scope='col' colspan='3'>Ejercicios</th>" +
-    "<th scope='col' colspan='3'>Lecturas</th>" +
-    "<th scope='col' colspan='5'>Lecturas</th> </tr>" +
-    "<tr> <td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<th scope='col' colspan='2'>Ejercicios</th>" +
+    "<th scope='col' colspan='2'>Lecturas</th>" +
+    "<th scope='col' colspan='4'>Quizzes</th> </tr>" +
+    "<tr> <td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Total</td>" +
-    "<td scope='col'>Completado</td>" +
+    "<td scope='col'>Resuelto</td>" +
     "<td scope='col'>Porcentaje</td>" +
     "<td scope='col'>SumScore</td>" +
     "<td scope='col'>AvgScore</td> </tr>";
-  const data = computeUsersStats(users, progress, courses);
-  data.map(d => {
-    if (progress[d.id].hasOwnProperty('intro')) {
+  //generar la tabla general
+  let todo = processCohortData(options);
+  todo.map(d => {
+    if (d.stats !== undefined) {
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + d.stats.percent +
-        "%</td> <td>" + d.stats.exercises.total +
-        "</td> <td>" + d.stats.exercises.completed +
+        "%</td> <td>" + d.stats.exercises.completed + " / " + d.stats.exercises.total +
         "</td> <td>" + d.stats.exercises.percent +
-        "%</td> <td>" + d.stats.reads.total +
-        "</td> <td>" + d.stats.reads.completed +
+        "%</td> <td>" + d.stats.reads.completed + " / " + d.stats.reads.total +
         "</td> <td>" + d.stats.reads.percent +
-        "%</td> <td>" + d.stats.quizzes.total +
-        "</td> <td>" + d.stats.quizzes.completed +
+        "%</td> <td>" + d.stats.quizzes.completed + " / " + d.stats.quizzes.total +
         "</td> <td>" + d.stats.quizzes.percent +
         "</td> <td>" + d.stats.quizzes.scoreSum +
         "</td> <td>" + d.stats.quizzes.scoreAvg +
         "</td></tr>";
     } else {
       resultTable.innerHTML +=
-        "<tr><th scope='row'>" + d.name +
-        "</th> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td> <td>" + 0 +
-        "</td></tr>";
+      "<tr><th scope='row'>" + d.name +
+      "</th> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "%</td> <td>" + 0 + " / " + 0 +
+      "</td> <td>" + 0 +
+      "</td> <td>" + 0 +
+      "</td> <td>" + 0 +
+      "</td></tr>";
     }
   });
   //se cierra el loading
   loader.style.display = "none";
+  inputSearch.style.display = "block";
 }
 
 const searchByName = () => {
-  let filter = inputSearch.value.toUpperCase();
-  tr = resultTable.getElementsByTagName("tr");
-  // console.log(tr);
-  for (let i = 0; i < tr.length; i++) {
-    let th = tr[i].getElementsByTagName("th")[0];
-    if(th) {
-      if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      }
-      else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
+  options.search = inputSearch.value.toUpperCase();
+  processCohortData(options);
+  createTableWithData()
+  // let filter = inputSearch.value.toUpperCase();
+  // tr = resultTable.getElementsByTagName("tr");
+  // // console.log(tr);
+  // for (let i = 0; i < tr.length; i++) {
+  //   let th = tr[i].getElementsByTagName("th")[0];
+  //   if(th) {
+  //     if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
+  //       tr[i].style.display = "";
+  //     }
+  //     else {
+  //       tr[i].style.display = "none";
+  //     }
+  //   }
+  // }
 }
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => getCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener('change', () => setCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
 selectCursos.addEventListener('change', () => getProgressJson((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
 
 inputSearch.addEventListener("keyup", () => searchByName());
+
+// selectOrderBy.addEventListener();
