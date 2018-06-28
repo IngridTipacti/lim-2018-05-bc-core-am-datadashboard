@@ -100,7 +100,9 @@ describe("data", () => {
 
     describe("processCohortData({ cohortData, orderBy, orderDirection, filterBy })", () => {
 
-        it("debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter");
+        it("debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter", () => {
+            
+        });
 
     });
 
