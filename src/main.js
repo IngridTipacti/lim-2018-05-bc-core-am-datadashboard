@@ -18,8 +18,6 @@ const headTable = document.getElementById('headTable');
 const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
-const radioAsc = document.getElementById('asc');
-const radioDes = document.getElementById('des');
 const selectOrderBy = document.getElementById('orderBy');
 
 const switchSedes = (option) => {
@@ -112,6 +110,7 @@ const setCohortsJson = (idCohort) => {
     nameCourses.map((course) => {
       if (courses[course] !== undefined && Object.values(courses[course]).length > 0) {
         empty.style.display = "none";
+        getProgressJson(idCohort, "intro");
         let keyCourse = Object.keys(courses[course]);
         keyCourse.map((key) => {
           selectCursos.innerHTML += "<option value='" + keyCourse.toString() + "'>" + courses[course][key].title + "</option>";
@@ -185,6 +184,69 @@ const pasandoDatos = (users, progress, cohorts) => {
 const createTableWithData = () => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
+  // debe mostrarse el buscador y el select de filter
+  inputSearch.style.display = "block";
+  orderBy.style.display= "block";
+  // const tr1 = document.createElement("tr");
+  // const tr2 = document.createElement("tr");
+  // const thAlumnas = document.createElement("th");
+  // const thCompletitud = document.createElement("th");
+  // const thExercises= document.createElement("th");
+  // const thReads = document.createElement("th");
+  // const thQuizzes = document.createElement("th");
+  //sub bloque
+  // const tdResExer = document.createElement("td");
+  // const tdPerExer = document.createElement("td");
+  // const tdResRead = document.createElement("td");
+  // const tdPerRead = document.createElement("td");
+  // const tdResQuiz = document.createElement("td");
+  // const tdPerQuiz = document.createElement("td");
+  // const tdSumScor = document.createElement("td");
+  // const tdAvgScor= document.createElement("td");
+  //valor
+  // const valueAlumnas = document.createTextNode("Alumnas");
+  // const valueCompletitud = document.createTextNode("%");
+  // const valueExercises= document.createElement("Ejercicios");
+  // const valueReads = document.createElement("Lecturas");
+  // const valueQuizzes = document.createElement("Quizzes");
+  //sub bloque
+  // const valueResExer = document.createTextNode("Resuelto");
+  // const valuePerExer = document.createTextNode("Porcentaje");
+  // const valueResRead = document.createTextNode("Resuelto");
+  // const valuePerRead = document.createTextNode("Porcentaje");
+  // const valueResQuiz = document.createTextNode("Resuelto");
+  // const valuePerQuiz = document.createTextNode("Porcentaje");
+  // const valueSumScor = document.createTextNode("SumScore");
+  // const valueAvgScor= document.createTextNode("AvgScore");
+
+  // thAlumnas.appendChild(valueAlumnas);
+  // thCompletitud.appendChild(valueCompletitud);
+  // thExercises.appendChild(valueExercises);
+  // thReads.appendChild(valueReads);
+  // thQuizzes.appendChild(valueQuizzes);
+
+  // tdResExer.appendChild(valueResExer);
+  // tdPerExer.appendChild(valuePerExer);
+  // tdResRead.appendChild(valueResRead);
+  // tdPerRead.appendChild(valuePerRead);
+  // tdResQuiz.appendChild(valueResQuiz);
+  // tdPerQuiz.appendChild(valuePerQuiz);
+  // tdSumScor.appendChild(valueSumScor);
+  // tdAvgScor.appendChild(valueAvgScor);
+
+  // tr1.appendChild(thAlumnas);
+  // tr1.appendChild(thCompletitud);
+  // tr1.appendChild(thExercises);
+  // tr1.appendChild(thReads);
+  // tr1.appendChild(thQuizzes);
+
+  // tr2.appendChild();
+  // tr2.appendChild();
+  // tr2.appendChild();
+  // tr2.appendChild();
+  // tr2.appendChild();
+  // tr2.appendChild();
+
   headTable.innerHTML =
     "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
     "<th scope='col' rowspan='2'>Porcentaje</th>" +
@@ -215,13 +277,13 @@ const createTableWithData = () => {
       const tdScoreSumQuiz = document.createElement("td");
       const tdScoreAvgQuiz = document.createElement("td");
       const valueName = document.createTextNode(d.name);
-      const valuePercent = document.createTextNode(d.stats.percent);
+      const valuePercent = document.createTextNode(d.stats.percent + "%");
       const valueResueltoExer = document.createTextNode(d.stats.exercises.completed + " / " + d.stats.exercises.total);
-      const valuePercentExer = document.createTextNode(d.stats.exercises.percent);
+      const valuePercentExer = document.createTextNode(d.stats.exercises.percent + "%");
       const valueResueltoRead = document.createTextNode(d.stats.reads.completed + " / " + d.stats.reads.total);
-      const valuePercentRead = document.createTextNode(d.stats.reads.percent);
+      const valuePercentRead = document.createTextNode(d.stats.reads.percent + "%");
       const valueResueltoQuiz = document.createTextNode(d.stats.quizzes.completed + " / " + d.stats.quizzes.total);
-      const valuePercentQuiz = document.createTextNode(d.stats.quizzes.percent);
+      const valuePercentQuiz = document.createTextNode(d.stats.quizzes.percent + "%");
       const valueScoreSumQuiz = document.createTextNode(d.stats.quizzes.scoreSum);
       const valueScoreAvgQuiz = document.createTextNode(d.stats.quizzes.scoreAvg);
       thName.appendChild(valueName);
