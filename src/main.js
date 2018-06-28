@@ -150,6 +150,7 @@ const getProgressJson = (idCohort, course) => {
       arrCourse.push(course);
       //nombre de la función que llamará a processCohortData
       pasandoDatos(users, progressjson, arrCourse);
+      
     } else {
       empty.style.display = "block";
       headTable.innerHTML = "";
@@ -163,11 +164,12 @@ const pasandoDatos = (users, progress, courses) => {
   options.cohort = courses;
   options.cohortData.users = users;
   options.cohortData.progress = progress;
-  options.orderBy = "name";
+  options.orderBy = "percent";
   options.orderDirection = "asc";
   options.search = "";
-  processCohortData(options);
+  //processCohortData(options);
 }
+
 
 const createTableWithData = (users, progress, courses) => {
   headTable.innerHTML = "";
@@ -194,19 +196,21 @@ const createTableWithData = (users, progress, courses) => {
 
     }
   const data = computeUsersStats(users, progress, courses);
+  console.log(data);
+  
   // console.log(data[0]);
   data.map(d => {
     if (progress[d.id].hasOwnProperty('intro')) {
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + d.stats.percent +
-        "%|</td> <td>" + d.stats.exercises.total +
+        "</td> <td>" + d.stats.exercises.total +
         "</td> <td>" + d.stats.exercises.completed +
         "</td> <td>" + d.stats.exercises.percent +
-        "%</td> <td>" + d.stats.reads.total +
+        "</td> <td>" + d.stats.reads.total +
         "</td> <td>" + d.stats.reads.completed +
         "</td> <td>" + d.stats.reads.percent +
-        "%</td> <td>" + d.stats.quizzes.total +
+        "</td> <td>" + d.stats.quizzes.total +
         "</td> <td>" + d.stats.quizzes.completed +
         "</td> <td>" + d.stats.quizzes.percent +
         "</td> <td>" + d.stats.quizzes.scoreSum +
@@ -216,13 +220,13 @@ const createTableWithData = (users, progress, courses) => {
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + 0 +
-        "%</td> <td>" + 0 +
         "</td> <td>" + 0 +
         "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
         "</td> <td>" + 0 +
         "</td> <td>" + 0 +
-        "%</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
+        "</td> <td>" + 0 +
         "</td> <td>" + 0 +
         "</td> <td>" + 0 +
         "</td> <td>" + 0 +

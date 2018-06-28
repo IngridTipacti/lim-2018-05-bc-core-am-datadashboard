@@ -3,11 +3,11 @@ window.computeUsersStats = (users, progress, courses) => {
   // Recorriendo data users con map porque es un array de objetos
   let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
-    console.log(prog)
-    console.log(courses)
+    // console.log(prog)
+    // console.log(courses)
     // courses.map(course => {
     nameCourse = courses.toString();
-    console.log(nameCourse);
+    // console.log(nameCourse);
     if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
       const units = prog.intro.units;
       const nameUnits = Object.keys(units);
@@ -197,47 +197,83 @@ window.computeUsersStats = (users, progress, courses) => {
     }
     return user;
   });
-  // console.log(usersWithStats);
   return usersWithStats;
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-      const orderByName = users.sort(function (a, b) {
-      // console.log(a);
-      // console.log(b);
-      var x = a.name.toLowerCase();
-      var y = b.name.toLowerCase();
-      if (x < y) { return -1; }
-      if (x > y) { return 1; }
-      return 0;
-    });
-    console.log(orderByName);
-    // return orderByName;
-  
-  
-}
+  console.log(users)
+
+  // if (orderBy === 'name' & orderDirection === 'asc') {
+  //     const orderByNameAsc = users.sort(function (a, b) {
+  //     var x = a.name.toLowerCase();
+  //     var y = b.name.toLowerCase();
+  //     if (x < y) { return -1; }
+  //     if (x > y) { return 1; }
+  //     return 0;
+  //   });
+  //   console.log(orderByNameAsc);
+  //   // return orderByNameAsc;
+  // } else if (orderBy === 'name' & orderDirection === 'des') {
+  //       const orderByNameDes = users.sort(function (a, b) {
+  //       var x = a.name.toLowerCase();
+  //       var y = b.name.toLowerCase();      
+  //       if (x < y) { return 1; }
+  //       if (x > y) { return -1; }
+  //       return 0;
+  //      });
+  //   console.log(orderByNameDes);
+  //   // return orderByNameDes;
 
 
-window.filterUsers = (users, search) => {
-  let filterByUsers = users.filter(user => {
-    return user.name.toUpperCase().indexOf(search) > -1;
-  });
-  console.log(filterByUsers)
-  return filterByUsers;
-}
 
-window.processCohortData = (options) => {
-  const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  // console.log(compute);
-  const sort = sortUsers(compute, options.orderBy, options.orderDirection);
-  if (options.search !== '') {
-    let filterU = filterUsers(compute, options.search);
+  if (orderBy === 'percent' & orderDirection === 'asc') {
+    const orderByPercent = users.sort(function (a, b) { a.stats.percent - b.stats.percent });
+    // const orderByPercent = users.sort(function (a, b) {
+    //   console.log(user.stats.percent)
+    // if (a.stats.percent < b.stats.percent) { return -1; }
+    // if (a.stats.percent > b.stats.percent) { return 1; }
+    // return 0;
+    console.log(orderByPercent);
+    // };
+
+
+
+    // if (orderBy === 'percent' & orderDirection === 'asc') {
+
+    //   orderByPercent = users.sort(function (a, b) {
+    //     return a.stats.percent - b.stats.percent
+    //   });
+    //   console.log(orderByPercent);
+    // }
+
+
+
+
   }
 
-  // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
-  //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
-  //   if (options.search !== '') {
-  //     estudiantes = filterUsers(users, search);
-  //   }
-  //   return estudiantes;
-}
+
+  window.filterUsers = (users, search) => {
+    let filterByUsers = users.filter(user => {
+      return user.name.toUpperCase().indexOf(search) > -1;
+    });
+    console.log(filterByUsers)
+    return filterByUsers;
+  }
+
+  window.processCohortData = (options) => {
+    const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+    // console.log(compute);
+    const sort = sortUsers(compute, options.orderBy, options.orderDirection);
+    if (options.search !== '') {
+      let filterU = filterUsers(compute, options.search);
+    }
+
+    // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+    //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
+    //   if (options.search !== '') {
+    //     estudiantes = filterUsers(users, search);
+    //   }
+    //   return estudiantes;
+
+  }
+  }
