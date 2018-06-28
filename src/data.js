@@ -243,9 +243,6 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     const order = users.reverse();
     //console.log(order);
   }
-
-
-
 }
 
 
