@@ -49,7 +49,7 @@
       <!-- Promociones por sedes -->
       <div id="promociones">
         <h4 class="h4">Cohort</h4>
-        <select id="selectPromos" class="form-control" disabled name="type">
+        <select id="selectPromos" class="form-control" disabled name="type" onmousedown="this.value='';">
         </select>
       </div>
 
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="col-4">
-          <select id="" class="form-control" placeholder="Filtra por orden de...">
+          <select id="orderBy" class="form-control" placeholder="Filtra por orden de...">
             <option value=""></option>
             <option value="name">Nombre</option>
             <option value="asc">% Completitud</option>
