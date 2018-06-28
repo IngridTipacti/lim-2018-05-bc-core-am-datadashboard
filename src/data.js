@@ -202,10 +202,9 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-  if (orderBy === 'name' & orderDirection === 'asc') {
-    const orderByName = users.sort(function (a, b) {
-      console.log(a);
-      console.log(b);
+      const orderByName = users.sort(function (a, b) {
+      // console.log(a);
+      // console.log(b);
       var x = a.name.toLowerCase();
       var y = b.name.toLowerCase();
       if (x < y) { return -1; }
@@ -214,35 +213,8 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     console.log(orderByName);
     // return orderByName;
-  } else if (orderBy === 'name' & orderDirection === 'desc') {
-    const nuevo = users.reverse();
-    //console.log(nuevo);
-    return nuevo;
-  } else if (orderBy === 'percent' & orderDirection === 'asc') {
-    const order = users.sort(function (a, b) { return a.stats.percent - b.stats.percent });
-    //console.log(order);
-  } else if (orderBy === 'percent' & orderDirection === 'desc') {
-    const order = users.reverse();
-    //console.log(order);
-  } else if (orderBy === 'exercises' & orderDirection === 'asc') {
-    const order = users.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
-    //console.log(order);
-  } else if (orderBy === 'exercises' & orderDirection === 'desc') {
-    const order = users.reverse();
-    //console.log(order);
-  } else if (orderBy === 'quizzes' & orderDirection === 'asc') {
-    const order = users.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
-    //console.log(order);
-  } else if (orderBy === 'quizzes' & orderDirection === 'desc') {
-    const order = users.reverse();
-    //console.log(order);
-  } else if (orderBy === 'reads' & orderDirection === 'asc') {
-    const order = users.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
-    //console.log(order);
-  } else if (orderBy === 'reads' & orderDirection === 'desc') {
-    const order = users.reverse();
-    //console.log(order);
-  }
+  
+  
 }
 
 
