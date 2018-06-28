@@ -200,7 +200,7 @@ const createTableWithData = (users, progress, courses) => {
       resultTable.innerHTML +=
         "<tr><th scope='row'>" + d.name +
         "</th> <td>" + d.stats.percent +
-        "%</td> <td>" + d.stats.exercises.total +
+        "%|</td> <td>" + d.stats.exercises.total +
         "</td> <td>" + d.stats.exercises.completed +
         "</td> <td>" + d.stats.exercises.percent +
         "%</td> <td>" + d.stats.reads.total +
