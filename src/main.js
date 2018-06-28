@@ -175,7 +175,7 @@ const pasandoDatos = (users, progress, cohorts) => {
   options.cohortData.users = users;
   options.cohortData.progress = progress;
   options.orderBy = "name";
-  options.orderDirection = "asc";
+  options.orderDirection = "des";
   options.search = "";
   processCohortData(options);
   createTableWithData()
