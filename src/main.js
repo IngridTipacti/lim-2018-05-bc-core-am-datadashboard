@@ -177,92 +177,79 @@ const pasandoDatos = (users, progress, cohorts) => {
   options.orderBy = "name";
   options.orderDirection = "asc";
   options.search = "";
-  processCohortData(options);
-  createTableWithData()
+  let todo = processCohortData(options);
+  createTableWithData(todo);
 }
 
-const createTableWithData = () => {
+const createTableWithData = (todo) => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
-  // debe mostrarse el buscador y el select de filter
   inputSearch.style.display = "block";
   orderBy.style.display= "block";
-  // const tr1 = document.createElement("tr");
-  // const tr2 = document.createElement("tr");
-  // const thAlumnas = document.createElement("th");
-  // const thCompletitud = document.createElement("th");
-  // const thExercises= document.createElement("th");
-  // const thReads = document.createElement("th");
-  // const thQuizzes = document.createElement("th");
-  //sub bloque
-  // const tdResExer = document.createElement("td");
-  // const tdPerExer = document.createElement("td");
-  // const tdResRead = document.createElement("td");
-  // const tdPerRead = document.createElement("td");
-  // const tdResQuiz = document.createElement("td");
-  // const tdPerQuiz = document.createElement("td");
-  // const tdSumScor = document.createElement("td");
-  // const tdAvgScor= document.createElement("td");
-  //valor
-  // const valueAlumnas = document.createTextNode("Alumnas");
-  // const valueCompletitud = document.createTextNode("%");
-  // const valueExercises= document.createElement("Ejercicios");
-  // const valueReads = document.createElement("Lecturas");
-  // const valueQuizzes = document.createElement("Quizzes");
-  //sub bloque
-  // const valueResExer = document.createTextNode("Resuelto");
-  // const valuePerExer = document.createTextNode("Porcentaje");
-  // const valueResRead = document.createTextNode("Resuelto");
-  // const valuePerRead = document.createTextNode("Porcentaje");
-  // const valueResQuiz = document.createTextNode("Resuelto");
-  // const valuePerQuiz = document.createTextNode("Porcentaje");
-  // const valueSumScor = document.createTextNode("SumScore");
-  // const valueAvgScor= document.createTextNode("AvgScore");
+  const tr1 = document.createElement("tr");
+  const tr2 = document.createElement("tr");
+  const thAlumnas = document.createElement("th");
+  const thCompletitud = document.createElement("th");
+  const thExercises= document.createElement("th");
+  const thReads = document.createElement("th");
+  const thQuizzes = document.createElement("th");
+  const tdResExer = document.createElement("td");
+  const tdPerExer = document.createElement("td");
+  const tdResRead = document.createElement("td");
+  const tdPerRead = document.createElement("td");
+  const tdResQuiz = document.createElement("td");
+  const tdPerQuiz = document.createElement("td");
+  const tdSumScor = document.createElement("td");
+  const tdAvgScor= document.createElement("td");
+  const valueAlumnas = document.createTextNode("Alumnas");
+  const valueCompletitud = document.createTextNode("%");
+  const valueExercises= document.createTextNode("Ejercicios");
+  const valueReads = document.createTextNode("Lecturas");
+  const valueQuizzes = document.createTextNode("Quizzes");
+  const valueResExer = document.createTextNode("Resuelto");
+  const valuePerExer = document.createTextNode("Porcentaje");
+  const valueResRead = document.createTextNode("Resuelto");
+  const valuePerRead = document.createTextNode("Porcentaje");
+  const valueResQuiz = document.createTextNode("Resuelto");
+  const valuePerQuiz = document.createTextNode("Porcentaje");
+  const valueSumScor = document.createTextNode("SumScore");
+  const valueAvgScor= document.createTextNode("AvgScore");
+  thAlumnas.appendChild(valueAlumnas);
+  thAlumnas.rowSpan = "2";
+  thCompletitud.appendChild(valueCompletitud);
+  thCompletitud.rowSpan = "2";
+  thExercises.appendChild(valueExercises);
+  thExercises.colSpan = "2";
+  thReads.appendChild(valueReads);
+  thReads.colSpan = "2";
+  thQuizzes.appendChild(valueQuizzes);
+  thQuizzes.colSpan = "4";
+  tdResExer.appendChild(valueResExer);
+  tdPerExer.appendChild(valuePerExer);
+  tdResRead.appendChild(valueResRead);
+  tdPerRead.appendChild(valuePerRead);
+  tdResQuiz.appendChild(valueResQuiz);
+  tdPerQuiz.appendChild(valuePerQuiz);
+  tdSumScor.appendChild(valueSumScor);
+  tdAvgScor.appendChild(valueAvgScor);
+  tr1.appendChild(thAlumnas);
+  tr1.appendChild(thCompletitud);
+  tr1.appendChild(thExercises);
+  tr1.appendChild(thReads);
+  tr1.appendChild(thQuizzes);
+  tr2.appendChild(tdResExer);
+  tr2.appendChild(tdPerExer);
+  tr2.appendChild(tdResRead);
+  tr2.appendChild(tdPerRead);
+  tr2.appendChild(tdResQuiz);
+  tr2.appendChild(tdPerQuiz);
+  tr2.appendChild(tdSumScor);
+  tr2.appendChild(tdAvgScor);
+  headTable.appendChild(tr1);
+  headTable.appendChild(tr2);
 
-  // thAlumnas.appendChild(valueAlumnas);
-  // thCompletitud.appendChild(valueCompletitud);
-  // thExercises.appendChild(valueExercises);
-  // thReads.appendChild(valueReads);
-  // thQuizzes.appendChild(valueQuizzes);
-
-  // tdResExer.appendChild(valueResExer);
-  // tdPerExer.appendChild(valuePerExer);
-  // tdResRead.appendChild(valueResRead);
-  // tdPerRead.appendChild(valuePerRead);
-  // tdResQuiz.appendChild(valueResQuiz);
-  // tdPerQuiz.appendChild(valuePerQuiz);
-  // tdSumScor.appendChild(valueSumScor);
-  // tdAvgScor.appendChild(valueAvgScor);
-
-  // tr1.appendChild(thAlumnas);
-  // tr1.appendChild(thCompletitud);
-  // tr1.appendChild(thExercises);
-  // tr1.appendChild(thReads);
-  // tr1.appendChild(thQuizzes);
-
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-
-  headTable.innerHTML =
-    "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
-    "<th scope='col' rowspan='2'>Porcentaje</th>" +
-    "<th scope='col' colspan='2'>Ejercicios</th>" +
-    "<th scope='col' colspan='2'>Lecturas</th>" +
-    "<th scope='col' colspan='4'>Quizzes</th> </tr>" +
-    "<tr> <td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>SumScore</td>" +
-    "<td scope='col'>AvgScore</td> </tr>";
   //generar la tabla general
-  let todo = processCohortData(options);
+  // let todo = processCohortData(options);
   todo.map(d => {
     if (d.stats !== undefined) {
       const tr = document.createElement("tr");
@@ -357,24 +344,9 @@ const createTableWithData = () => {
 }
 
 const searchByName = (str) => {
-  console.log(str);
-  options.search = inputSearch.value.toUpperCase();
-  processCohortData(options);
-  createTableWithData()
-  // let filter = inputSearch.value.toUpperCase();
-  // tr = resultTable.getElementsByTagName("tr");
-  // // console.log(tr);
-  // for (let i = 0; i < tr.length; i++) {
-  //   let th = tr[i].getElementsByTagName("th")[0];
-  //   if(th) {
-  //     if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
-  //       tr[i].style.display = "";
-  //     }
-  //     else {
-  //       tr[i].style.display = "none";
-  //     }
-  //   }
-  // }
+  options.search = str.toUpperCase();
+  let todo = processCohortData(options);
+  createTableWithData(todo);
 }
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
