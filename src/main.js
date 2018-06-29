@@ -9,16 +9,16 @@ let options = {
   search: ''
 }
 
-const selectSedes = document.getElementById('selectSedes');
-const selectPromos = document.getElementById('selectPromos');
-const selectCursos = document.getElementById('selectCursos');
+const selectSedes = document.getElementById('select-sedes');
+const selectPromos = document.getElementById('select-promos');
+const selectCursos = document.getElementById('select-cursos');
 const empty = document.getElementById('empty');
 const tableData = document.getElementById('tableData');
 const headTable = document.getElementById('headTable');
 const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
-const selectOrderBy = document.getElementById('orderBy');
+const selectOrderBy = document.getElementById('order-by');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -27,6 +27,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('lim');
       break;
     case 'scl':
@@ -34,6 +36,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('scl');
       break;
     case 'cdm':
@@ -41,6 +45,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('cdm');
       break;
     case 'gdl':
@@ -48,6 +54,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -55,6 +63,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('aqp');
       break;
     default:
@@ -63,6 +73,78 @@ const switchSedes = (option) => {
       selectPromos.disabled = true;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
+      break;
+  }
+}
+
+const switchOrderBy = (option) => {
+  switch (option) {
+    case "ascname":
+      options.orderBy = "name";
+      options.orderDirection = "asc";
+      let ascname = processCohortData(options);
+      createTableWithData(ascname);
+      break;
+    case "ascperc":
+      options.orderBy = "perc";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      let ascperc = processCohortData(options);
+      createTableWithData(ascperc);
+      break;
+    case "ascexer":
+      options.orderBy = "exer";
+      options.orderDirection = "asc";
+      let ascexer = processCohortData(options);
+      createTableWithData(ascexer);
+      break;
+    case "ascread":
+      options.orderBy = "read";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascquiz":
+      options.orderBy = "quiz";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascscor":
+      options.orderBy = "scor";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "desname":
+      options.orderBy = "name";
+      options.orderDirection = "des";
+      let desname = processCohortData(options);
+      createTableWithData(desname);
+      break;
+    case "desperc":
+      options.orderBy = "perc";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desexer":
+      options.orderBy = "exer";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desread":
+      options.orderBy = "read";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desquiz":
+      options.orderBy = "quiz";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desscor":
+      options.orderBy = "scor";
+      options.orderDirection = "des";
+      processCohortData(options);
       break;
   }
 }
@@ -119,6 +201,8 @@ const setCohortsJson = (idCohort) => {
         selectCursos.disabled = true;
         headTable.innerHTML = "";
         resultTable.innerHTML = "";
+        inputSearch.style.display = "none";
+        selectOrderBy.style.display = "none";
         empty.style.display = "block";
       }
     });
@@ -163,6 +247,8 @@ const getProgressJson = (idCohort, course) => {
       pasandoDatos(users, progressjson, cohorts);
     } else {
       empty.style.display = "block";
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
       loader.style.display = "none";
@@ -174,96 +260,92 @@ const pasandoDatos = (users, progress, cohorts) => {
   options.cohort = cohorts;
   options.cohortData.users = users;
   options.cohortData.progress = progress;
-  options.orderBy = "exercises";
+  options.orderBy = "name";
   options.orderDirection = "asc";
   options.search = "";
-  processCohortData(options);
-  createTableWithData()
+  let todo = processCohortData(options);
+  createTableWithData(todo);
 }
 
-const createTableWithData = () => {
+const createTableWithData = (todo) => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
-  // debe mostrarse el buscador y el select de filter
   inputSearch.style.display = "block";
-  orderBy.style.display= "block";
-  // const tr1 = document.createElement("tr");
-  // const tr2 = document.createElement("tr");
-  // const thAlumnas = document.createElement("th");
-  // const thCompletitud = document.createElement("th");
-  // const thExercises= document.createElement("th");
-  // const thReads = document.createElement("th");
-  // const thQuizzes = document.createElement("th");
-  //sub bloque
-  // const tdResExer = document.createElement("td");
-  // const tdPerExer = document.createElement("td");
-  // const tdResRead = document.createElement("td");
-  // const tdPerRead = document.createElement("td");
-  // const tdResQuiz = document.createElement("td");
-  // const tdPerQuiz = document.createElement("td");
-  // const tdSumScor = document.createElement("td");
-  // const tdAvgScor= document.createElement("td");
-  //valor
-  // const valueAlumnas = document.createTextNode("Alumnas");
-  // const valueCompletitud = document.createTextNode("%");
-  // const valueExercises= document.createElement("Ejercicios");
-  // const valueReads = document.createElement("Lecturas");
-  // const valueQuizzes = document.createElement("Quizzes");
-  //sub bloque
-  // const valueResExer = document.createTextNode("Resuelto");
-  // const valuePerExer = document.createTextNode("Porcentaje");
-  // const valueResRead = document.createTextNode("Resuelto");
-  // const valuePerRead = document.createTextNode("Porcentaje");
-  // const valueResQuiz = document.createTextNode("Resuelto");
-  // const valuePerQuiz = document.createTextNode("Porcentaje");
-  // const valueSumScor = document.createTextNode("SumScore");
-  // const valueAvgScor= document.createTextNode("AvgScore");
+  selectOrderBy.style.display = "block";
+  const tr1 = document.createElement("tr");
+  const tr2 = document.createElement("tr");
+  const thAlumnas = document.createElement("th");
+  const thCompletitud = document.createElement("th");
+  const thExercises = document.createElement("th");
+  const thReads = document.createElement("th");
+  const thQuizzes = document.createElement("th");
+  const tdResExer = document.createElement("td");
+  const tdPerExer = document.createElement("td");
+  const tdResRead = document.createElement("td");
+  const tdPerRead = document.createElement("td");
+  const tdResQuiz = document.createElement("td");
+  const tdPerQuiz = document.createElement("td");
+  const tdSumScor = document.createElement("td");
+  const tdAvgScor = document.createElement("td");
+  const valueAlumnas = document.createTextNode("Alumnas");
+  const valueCompletitud = document.createTextNode("%");
+  const valueExercises = document.createTextNode("Ejercicios");
+  const valueReads = document.createTextNode("Lecturas");
+  const valueQuizzes = document.createTextNode("Quizzes");
+  const valueResExer = document.createTextNode("Resuelto");
+  const valuePerExer = document.createTextNode("Porcentaje");
+  const valueResRead = document.createTextNode("Resuelto");
+  const valuePerRead = document.createTextNode("Porcentaje");
+  const valueResQuiz = document.createTextNode("Resuelto");
+  const valuePerQuiz = document.createTextNode("Porcentaje");
+  const valueSumScor = document.createTextNode("SumScore");
+  const valueAvgScor = document.createTextNode("AvgScore");
+  thAlumnas.appendChild(valueAlumnas);
+  thAlumnas.setAttribute("class", "color-gray");
+  thAlumnas.rowSpan = "2";
+  thCompletitud.appendChild(valueCompletitud);
+  thCompletitud.rowSpan = "2";
+  thExercises.appendChild(valueExercises);
+  thExercises.colSpan = "2";
+  thExercises.setAttribute("class", "color-gray");
+  thReads.appendChild(valueReads);
+  thReads.colSpan = "2";
+  thReads.setAttribute("class", "color-gray");
+  thQuizzes.appendChild(valueQuizzes);
+  thQuizzes.setAttribute("class", "color-gray");
+  thQuizzes.colSpan = "4";
+  tdResExer.appendChild(valueResExer);
+  tdResExer.setAttribute("class", "color-gray");
+  tdPerExer.appendChild(valuePerExer);
+  tdPerExer.setAttribute("class", "color-percent");
+  tdResRead.appendChild(valueResRead);
+  tdResRead.setAttribute("class", "color-gray");
+  tdPerRead.appendChild(valuePerRead);
+  tdResQuiz.appendChild(valueResQuiz);
+  tdResQuiz.setAttribute("class", "color-gray");
+  tdPerQuiz.appendChild(valuePerQuiz);
+  tdPerQuiz.setAttribute("class", "color-percent");
+  tdSumScor.appendChild(valueSumScor);
+  tdSumScor.setAttribute("class", "color-gray");
+  tdAvgScor.appendChild(valueAvgScor);
+  tdAvgScor.setAttribute("class", "color-percent");
+  tr1.appendChild(thAlumnas);
+  tr1.appendChild(thCompletitud);
+  tr1.appendChild(thExercises);
+  tr1.appendChild(thReads);
+  tr1.appendChild(thQuizzes);
+  tr2.appendChild(tdResExer);
+  tr2.appendChild(tdPerExer);
+  tr2.appendChild(tdResRead);
+  tr2.appendChild(tdPerRead);
+  tr2.appendChild(tdResQuiz);
+  tr2.appendChild(tdPerQuiz);
+  tr2.appendChild(tdSumScor);
+  tr2.appendChild(tdAvgScor);
+  headTable.appendChild(tr1);
+  headTable.appendChild(tr2);
 
-  // thAlumnas.appendChild(valueAlumnas);
-  // thCompletitud.appendChild(valueCompletitud);
-  // thExercises.appendChild(valueExercises);
-  // thReads.appendChild(valueReads);
-  // thQuizzes.appendChild(valueQuizzes);
-
-  // tdResExer.appendChild(valueResExer);
-  // tdPerExer.appendChild(valuePerExer);
-  // tdResRead.appendChild(valueResRead);
-  // tdPerRead.appendChild(valuePerRead);
-  // tdResQuiz.appendChild(valueResQuiz);
-  // tdPerQuiz.appendChild(valuePerQuiz);
-  // tdSumScor.appendChild(valueSumScor);
-  // tdAvgScor.appendChild(valueAvgScor);
-
-  // tr1.appendChild(thAlumnas);
-  // tr1.appendChild(thCompletitud);
-  // tr1.appendChild(thExercises);
-  // tr1.appendChild(thReads);
-  // tr1.appendChild(thQuizzes);
-
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-  // tr2.appendChild();
-
-  headTable.innerHTML =
-    "<tr> <th scope='col' rowspan='2'>Alumnas</th>" +
-    "<th scope='col' rowspan='2'>Porcentaje</th>" +
-    "<th scope='col' colspan='2'>Ejercicios</th>" +
-    "<th scope='col' colspan='2'>Lecturas</th>" +
-    "<th scope='col' colspan='4'>Quizzes</th> </tr>" +
-    "<tr> <td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>Resuelto</td>" +
-    "<td scope='col'>Porcentaje</td>" +
-    "<td scope='col'>SumScore</td>" +
-    "<td scope='col'>AvgScore</td> </tr>";
   //generar la tabla general
-  let todo = processCohortData(options);
-  console.log(options)
   todo.map(d => {
     if (d.stats !== undefined) {
       const tr = document.createElement("tr");
@@ -288,15 +370,23 @@ const createTableWithData = () => {
       const valueScoreSumQuiz = document.createTextNode(d.stats.quizzes.scoreSum);
       const valueScoreAvgQuiz = document.createTextNode(d.stats.quizzes.scoreAvg);
       thName.appendChild(valueName);
+      thName.setAttribute("class", "color-gray");
       tdPercent.appendChild(valuePercent);
       tdResueltoExer.appendChild(valueResueltoExer);
+      tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
+      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
+      tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
+      tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
+      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
+      tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
+      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -321,25 +411,34 @@ const createTableWithData = () => {
       const tdScoreSumQuiz = document.createElement("td");
       const tdScoreAvgQuiz = document.createElement("td");
       const valueName = document.createTextNode(d.name);
-      const valuePercent = document.createTextNode(0);
+      const valuePercent = document.createTextNode(0 + "%");
       const valueResueltoExer = document.createTextNode(0 + " / " + 0);
-      const valuePercentExer = document.createTextNode(0);
+      const valuePercentExer = document.createTextNode(0 + "%");
       const valueResueltoRead = document.createTextNode(0 + " / " + 0);
-      const valuePercentRead = document.createTextNode(0);
+      const valuePercentRead = document.createTextNode(0 + "%");
       const valueResueltoQuiz = document.createTextNode(0 + " / " + 0);
-      const valuePercentQuiz = document.createTextNode(0);
+      const valuePercentQuiz = document.createTextNode(0 + "%");
       const valueScoreSumQuiz = document.createTextNode(0);
       const valueScoreAvgQuiz = document.createTextNode(0);
       thName.appendChild(valueName);
+      thName.setAttribute("class", "color-gray");
       tdPercent.appendChild(valuePercent);
       tdResueltoExer.appendChild(valueResueltoExer);
+      tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
+      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
+      tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
+      tdPercentRead.setAttribute("class", "color-percent");
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
+      tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
+      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
+      tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
+      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -358,25 +457,11 @@ const createTableWithData = () => {
 }
 
 const searchByName = (str) => {
-  console.log(str);
-  options.search = inputSearch.value.toUpperCase();
-  processCohortData(options);
-  createTableWithData()
-  // let filter = inputSearch.value.toUpperCase();
-  // tr = resultTable.getElementsByTagName("tr");
-  // // console.log(tr);
-  // for (let i = 0; i < tr.length; i++) {
-  //   let th = tr[i].getElementsByTagName("th")[0];
-  //   if(th) {
-  //     if(th.innerHTML.toUpperCase().indexOf(filter) > -1) {
-  //       tr[i].style.display = "";
-  //     }
-  //     else {
-  //       tr[i].style.display = "none";
-  //     }
-  //   }
-  // }
+  options.search = str.toUpperCase();
+  let todo = processCohortData(options);
+  createTableWithData(todo);
 }
+
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
 selectPromos.addEventListener('change', () => setCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
@@ -385,4 +470,4 @@ selectCursos.addEventListener('change', () => getProgressJson((selectPromos.opti
 
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
-// selectOrderBy.addEventListener();
+selectOrderBy.addEventListener("change", () => switchOrderBy(selectOrderBy.options[selectOrderBy.selectedIndex].value));

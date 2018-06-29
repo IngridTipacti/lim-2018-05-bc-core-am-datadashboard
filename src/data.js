@@ -1,13 +1,7 @@
-// Creando función con tres parametros y exportando al global
 window.computeUsersStats = (users, progress, courses) => {
-  // Recorriendo data users con map porque es un array de objetos
   let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
-    // console.log(prog)
-    // console.log(courses)
-    // courses.map(course => {
     nameCourse = courses.toString();
-    // console.log(nameCourse);
     if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
       const units = prog.intro.units;
       const nameUnits = Object.keys(units);
@@ -170,8 +164,7 @@ window.computeUsersStats = (users, progress, courses) => {
         if (sumScore !== 0 && completed !== 0) {
           const percent = sumScore / completed;
           return Math.round(percent);
-        }
-        else return 0;
+        } else return 0;
       }
 
       user.stats = {
@@ -201,35 +194,56 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-  console.log(users)
-  const nuevosUsuarios = users.filter(user => user.stats !== undefined)
+  // console.log(users)
+  const nuevosUsuarios = users.filter(user => user.stats !== undefined);
+
+  // if (orderDirection === "asc") {
+  //   if(orderBy === "name") {}
+  //   else if(orderBy === "perc") {}
+  //   else if(orderBy === "scor") {}
+  // }
+  // else if(orderDirection === "des") {
+  //   if(orderBy === "name") {}
+  //   else if(orderBy === "perc") {}
+  //   else if(orderBy === "scor") {}
+  // }
 
   if (orderBy === 'name' & orderDirection === 'asc') {
-    const orderByNameAsc = users.sort(function (a, b) {
-    var x = a.name.toLowerCase();
-    var y = b.name.toLowerCase();
-    if (x < y) { return -1; }
-    if (x > y) { return 1; }
-    return 0;
+    const orderByNameAsc = nuevosUsuarios.sort(function (a, b) {
+      var x = a.name.toLowerCase();
+      var y = b.name.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
     });
-  // console.log(orderByNameAsc);
-  return orderByNameAsc;
+    // console.log(orderByNameAsc);
+    return orderByNameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
-     const orderByNameDes = users.sort(function (a, b) {
-     var x = a.name.toLowerCase();
-     var y = b.name.toLowerCase();      
-     if (x < y) { return 1; }
-     if (x > y) { return -1; }
-     return 0;
-   });
-  // console.log(orderByNameDes);
-  return orderByNameDes;
- } else if (orderBy === 'exercises' & orderDirection === 'asc') {
-  // users.map(user => console.log(user.stats))
-  console.log(nuevosUsuarios)
-  const orderByExercises = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
-  console.log(orderByExercises);
-  return orderByExercises;
+    const orderByNameDes = nuevosUsuarios.sort(function (a, b) {
+      var x = a.name.toLowerCase();
+      var y = b.name.toLowerCase();
+      if (x < y) {
+        return 1;
+      }
+      if (x > y) {
+        return -1;
+      }
+      return 0;
+    });
+    // console.log(orderByNameDes);
+    return orderByNameDes;
+  } else if (orderBy === 'exer' & orderDirection === 'asc') {
+    // users.map(user => console.log(user.stats))
+    // console.log(nuevosUsuarios)
+    const orderByExercises = nuevosUsuarios.sort(function (a, b) {
+      return a.stats.exercises.percent - b.stats.exercises.percent
+    });
+    // console.log(orderByExercises);
+    return orderByExercises;
   }
 }
 
@@ -245,22 +259,10 @@ window.processCohortData = (options) => {
   let arr = Object.keys(options.cohort);
   let courses = Object.keys(options.cohort[arr].coursesIndex);
   let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
-  estudiantes= sortUsers(estudiantes, options.orderBy, options.orderDirection);
-  if(options.search !== '') {
+  estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
+  if (options.search !== '') {
     estudiantes = filterUsers(estudiantes, options.search);
     return estudiantes;
   }
   return estudiantes;
-
-
-
-  
-
-  // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
-  //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
-  //   if (options.search !== '') {
-  //     estudiantes = filterUsers(users, search);
-  //   }
-  //   return estudiantes;
-
 }
