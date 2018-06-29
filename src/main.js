@@ -9,16 +9,16 @@ let options = {
   search: ''
 }
 
-const selectSedes = document.getElementById('selectSedes');
-const selectPromos = document.getElementById('selectPromos');
-const selectCursos = document.getElementById('selectCursos');
+const selectSedes = document.getElementById('select-sedes');
+const selectPromos = document.getElementById('select-promos');
+const selectCursos = document.getElementById('select-cursos');
 const empty = document.getElementById('empty');
 const tableData = document.getElementById('tableData');
 const headTable = document.getElementById('headTable');
 const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
-const selectOrderBy = document.getElementById('orderBy');
+const selectOrderBy = document.getElementById('order-by');
 
 const switchSedes = (option) => {
   switch (option) {
@@ -63,6 +63,73 @@ const switchSedes = (option) => {
       selectPromos.disabled = true;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      break;
+  }
+}
+
+const switchOrderBy = (option) => {
+  // console.log(option);
+  switch (option) {
+    case "ascname":
+      options.orderBy = "name";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascperc":
+      options.orderBy = "perc";
+      options.orderDirection = "asc";
+      processCohortData(options);
+
+      break;
+    case "ascexer":
+      options.orderBy = "exer";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascread":
+      options.orderBy = "read";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascquiz":
+      options.orderBy = "quiz";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "ascscor":
+      options.orderBy = "scor";
+      options.orderDirection = "asc";
+      processCohortData(options);
+      break;
+    case "desname":
+      options.orderBy = "name";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desperc":
+      options.orderBy = "perc";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desexer":
+      options.orderBy = "exer";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desread":
+      options.orderBy = "read";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desquiz":
+      options.orderBy = "quiz";
+      options.orderDirection = "des";
+      processCohortData(options);
+      break;
+    case "desscor":
+      options.orderBy = "scor";
+      options.orderDirection = "des";
+      processCohortData(options);
       break;
   }
 }
@@ -185,12 +252,12 @@ const createTableWithData = (todo) => {
   headTable.innerHTML = "";
   resultTable.innerHTML = "";
   inputSearch.style.display = "block";
-  orderBy.style.display= "block";
+  selectOrderBy.style.display = "block";
   const tr1 = document.createElement("tr");
   const tr2 = document.createElement("tr");
   const thAlumnas = document.createElement("th");
   const thCompletitud = document.createElement("th");
-  const thExercises= document.createElement("th");
+  const thExercises = document.createElement("th");
   const thReads = document.createElement("th");
   const thQuizzes = document.createElement("th");
   const tdResExer = document.createElement("td");
@@ -200,10 +267,10 @@ const createTableWithData = (todo) => {
   const tdResQuiz = document.createElement("td");
   const tdPerQuiz = document.createElement("td");
   const tdSumScor = document.createElement("td");
-  const tdAvgScor= document.createElement("td");
+  const tdAvgScor = document.createElement("td");
   const valueAlumnas = document.createTextNode("Alumnas");
   const valueCompletitud = document.createTextNode("%");
-  const valueExercises= document.createTextNode("Ejercicios");
+  const valueExercises = document.createTextNode("Ejercicios");
   const valueReads = document.createTextNode("Lecturas");
   const valueQuizzes = document.createTextNode("Quizzes");
   const valueResExer = document.createTextNode("Resuelto");
@@ -213,7 +280,7 @@ const createTableWithData = (todo) => {
   const valueResQuiz = document.createTextNode("Resuelto");
   const valuePerQuiz = document.createTextNode("Porcentaje");
   const valueSumScor = document.createTextNode("SumScore");
-  const valueAvgScor= document.createTextNode("AvgScore");
+  const valueAvgScor = document.createTextNode("AvgScore");
   thAlumnas.appendChild(valueAlumnas);
   thAlumnas.rowSpan = "2";
   thCompletitud.appendChild(valueCompletitud);
@@ -356,4 +423,4 @@ selectCursos.addEventListener('change', () => getProgressJson((selectPromos.opti
 
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
-// selectOrderBy.addEventListener();
+selectOrderBy.addEventListener("change", () => switchOrderBy(selectOrderBy.options[selectOrderBy.selectedIndex].value));

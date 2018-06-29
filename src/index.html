@@ -36,7 +36,7 @@
       <!-- Select de las sedes de Laboratoria -->
       <div id="sedes">
         <h4 class="h4">Sedes</h4>
-        <select id="selectSedes" class="form-control" name="type">
+        <select id="select-sedes" class="form-control" name="type">
           <option value="" selected></option>
           <option value="lim">Lima</option>
           <option value="scl">Santiago</option>
@@ -49,14 +49,14 @@
       <!-- Promociones por sedes -->
       <div id="promociones">
         <h4 class="h4">Cohort</h4>
-        <select id="selectPromos" class="form-control" disabled name="type" onmousedown="this.value='';">
+        <select id="select-promos" class="form-control" disabled name="type" onmousedown="this.value='';">
         </select>
       </div>
 
       <!-- Selects de cursos -->
       <div id="cursos">
         <h4 class="h4">Cursos</h4>
-        <select id="selectCursos" class="form-control" disabled name="type"></select>
+        <select id="select-cursos" class="form-control" disabled name="type"></select>
       </div>
 
     </div>
@@ -76,21 +76,21 @@
           <input id="input-search" class="form-control" type="text" style="display: none" name="search" placeholder="Search for names..">
         </div>
         <!-- FILTRAR POR -->
-        <select id="orderBy" class="col-4 form-control" style="display: none">
+        <select id="order-by" class="col-4 form-control" style="display: none">
           <optgroup label="Ascendente">
             <option value="ascname">Nombre</option>
             <option value="ascperc">% Completitud</option>
             <option value="ascexer">% Ejercicios</option>
-            <option value="ascquiz">% Quizzes</option>
             <option value="ascread">% Lecturas</option>
+            <option value="ascquiz">% Quizzes</option>
             <option value="ascscor">Score Quizzes</option>
           </optgroup>
           <optgroup label="Descendente">
             <option value="desname">Nombre</option>
             <option value="desperc">% Completitud</option>
             <option value="desexer">% Ejercicios</option>
-            <option value="desquiz">% Quizzes</option>
             <option value="desread">% Lecturas</option>
+            <option value="desquiz">% Quizzes</option>
             <option value="desscor">Score Quizzes</option>
           </optgroup>
         </select>
