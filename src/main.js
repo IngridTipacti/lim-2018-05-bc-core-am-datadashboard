@@ -80,7 +80,6 @@ const switchSedes = (option) => {
 }
 
 const switchOrderBy = (option) => {
-  // console.log(option);
   switch (option) {
     case "ascname":
       options.orderBy = "name";
@@ -298,23 +297,34 @@ const createTableWithData = (todo) => {
   const valueSumScor = document.createTextNode("SumScore");
   const valueAvgScor = document.createTextNode("AvgScore");
   thAlumnas.appendChild(valueAlumnas);
+  thAlumnas.setAttribute("class", "color-gray");
   thAlumnas.rowSpan = "2";
   thCompletitud.appendChild(valueCompletitud);
   thCompletitud.rowSpan = "2";
   thExercises.appendChild(valueExercises);
   thExercises.colSpan = "2";
+  thExercises.setAttribute("class", "color-gray");
   thReads.appendChild(valueReads);
   thReads.colSpan = "2";
+  thReads.setAttribute("class", "color-gray");
   thQuizzes.appendChild(valueQuizzes);
+  thQuizzes.setAttribute("class", "color-gray");
   thQuizzes.colSpan = "4";
   tdResExer.appendChild(valueResExer);
+  tdResExer.setAttribute("class", "color-result");
   tdPerExer.appendChild(valuePerExer);
+  tdPerExer.setAttribute("class", "color-percent");
   tdResRead.appendChild(valueResRead);
+  tdResRead.setAttribute("class", "color-result");
   tdPerRead.appendChild(valuePerRead);
   tdResQuiz.appendChild(valueResQuiz);
+  tdResQuiz.setAttribute("class", "color-result");
   tdPerQuiz.appendChild(valuePerQuiz);
+  tdPerQuiz.setAttribute("class", "color-percent");
   tdSumScor.appendChild(valueSumScor);
+  tdSumScor.setAttribute("class", "color-gray");
   tdAvgScor.appendChild(valueAvgScor);
+  tdAvgScor.setAttribute("class", "color-percent");
   tr1.appendChild(thAlumnas);
   tr1.appendChild(thCompletitud);
   tr1.appendChild(thExercises);
@@ -332,7 +342,6 @@ const createTableWithData = (todo) => {
   headTable.appendChild(tr2);
 
   //generar la tabla general
-  // let todo = processCohortData(options);
   todo.map(d => {
     if (d.stats !== undefined) {
       const tr = document.createElement("tr");
@@ -357,15 +366,23 @@ const createTableWithData = (todo) => {
       const valueScoreSumQuiz = document.createTextNode(d.stats.quizzes.scoreSum);
       const valueScoreAvgQuiz = document.createTextNode(d.stats.quizzes.scoreAvg);
       thName.appendChild(valueName);
+      thName.setAttribute("class", "color-gray");
       tdPercent.appendChild(valuePercent);
       tdResueltoExer.appendChild(valueResueltoExer);
+      tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
+      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
+      tdResueltoRead.setAttribute("class", "color-result");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
+      tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
+      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
+      tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
+      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -390,25 +407,34 @@ const createTableWithData = (todo) => {
       const tdScoreSumQuiz = document.createElement("td");
       const tdScoreAvgQuiz = document.createElement("td");
       const valueName = document.createTextNode(d.name);
-      const valuePercent = document.createTextNode(0);
+      const valuePercent = document.createTextNode(0 + "%");
       const valueResueltoExer = document.createTextNode(0 + " / " + 0);
-      const valuePercentExer = document.createTextNode(0);
+      const valuePercentExer = document.createTextNode(0 + "%");
       const valueResueltoRead = document.createTextNode(0 + " / " + 0);
-      const valuePercentRead = document.createTextNode(0);
+      const valuePercentRead = document.createTextNode(0 + "%");
       const valueResueltoQuiz = document.createTextNode(0 + " / " + 0);
-      const valuePercentQuiz = document.createTextNode(0);
+      const valuePercentQuiz = document.createTextNode(0 + "%");
       const valueScoreSumQuiz = document.createTextNode(0);
       const valueScoreAvgQuiz = document.createTextNode(0);
       thName.appendChild(valueName);
+      thName.setAttribute("class", "color-gray");
       tdPercent.appendChild(valuePercent);
       tdResueltoExer.appendChild(valueResueltoExer);
+      tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
+      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
+      tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
+      tdPercentRead.setAttribute("class", "color-percent");
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
+      tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
+      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
+      tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
+      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
