@@ -244,6 +244,8 @@ const getProgressJson = (idCohort, course) => {
       pasandoDatos(users, progressjson, cohorts);
     } else {
       empty.style.display = "block";
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
       loader.style.display = "none";
