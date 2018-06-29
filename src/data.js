@@ -202,6 +202,7 @@ window.computeUsersStats = (users, progress, courses) => {
 
 window.sortUsers = (users, orderBy, orderDirection) => {
   console.log(users)
+  const nuevosUsuarios = users.filter(user => user.stats !== undefined)
 
   if (orderBy === 'name' & orderDirection === 'asc') {
     const orderByNameAsc = users.sort(function (a, b) {
@@ -211,7 +212,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     if (x > y) { return 1; }
     return 0;
     });
-  console.log(orderByNameAsc);
+  // console.log(orderByNameAsc);
   return orderByNameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
      const orderByNameDes = users.sort(function (a, b) {
@@ -221,9 +222,15 @@ window.sortUsers = (users, orderBy, orderDirection) => {
      if (x > y) { return -1; }
      return 0;
    });
-  console.log(orderByNameDes);
+  // console.log(orderByNameDes);
   return orderByNameDes;
- }
+ } else if (orderBy === 'exercises' & orderDirection === 'asc') {
+  // users.map(user => console.log(user.stats))
+  console.log(nuevosUsuarios)
+  const orderByExercises = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
+  console.log(orderByExercises);
+  return orderByExercises;
+  }
 }
 
 window.filterUsers = (users, search) => {
@@ -236,13 +243,13 @@ window.filterUsers = (users, search) => {
 window.processCohortData = (options) => {
   let arr = Object.keys(options.cohort);
   let courses = Object.keys(options.cohort[arr].coursesIndex);
-  let compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
-  const sort = sortUsers(compute, options.orderBy, options.orderDirection);
+  let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  estudiantes= sortUsers(estudiantes, options.orderBy, options.orderDirection);
   if(options.search !== '') {
-    compute = filterUsers(compute, options.search);
-    return compute;
+    estudiantes = filterUsers(estudiantes, options.search);
+    return estudiantes;
   }
-  return compute;
+  return estudiantes;
 
   // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
