@@ -174,8 +174,8 @@ const pasandoDatos = (users, progress, cohorts) => {
   options.cohort = cohorts;
   options.cohortData.users = users;
   options.cohortData.progress = progress;
-  options.orderBy = "name";
-  options.orderDirection = "des";
+  options.orderBy = "exercises";
+  options.orderDirection = "asc";
   options.search = "";
   processCohortData(options);
   createTableWithData()
@@ -263,6 +263,7 @@ const createTableWithData = () => {
     "<td scope='col'>AvgScore</td> </tr>";
   //generar la tabla general
   let todo = processCohortData(options);
+  console.log(options)
   todo.map(d => {
     if (d.stats !== undefined) {
       const tr = document.createElement("tr");
