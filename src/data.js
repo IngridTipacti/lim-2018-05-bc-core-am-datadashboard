@@ -1,10 +1,14 @@
 window.computeUsersStats = (users, progress, courses) => {
   let usersWithStats = users.map((user) => {
     const prog = progress[user.id];
+    
     // courses.map(course => {
-      nameCourse = courses.toString();
-      // console.log(nameCourse);
-      if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
+     
+    nameCourse = courses.toString();
+    
+    // console.log(nameCourse);
+    
+    if (prog.hasOwnProperty(nameCourse) && prog.intro.hasOwnProperty('units')) {
         const units = prog.intro.units;
         const nameUnits = Object.keys(units);
 
@@ -218,6 +222,10 @@ window.processCohortData = (options) => {
   if(options.search !== '') {
     let filterU = filterUsers(compute, options.search);
   }
+
+
+
+  
 
   // let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   //   estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
