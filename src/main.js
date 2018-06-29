@@ -27,6 +27,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('lim');
       break;
     case 'scl':
@@ -34,6 +36,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('scl');
       break;
     case 'cdm':
@@ -41,6 +45,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('cdm');
       break;
     case 'gdl':
@@ -48,6 +54,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -55,6 +63,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = false;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       getPromo('aqp');
       break;
     default:
@@ -63,6 +73,8 @@ const switchSedes = (option) => {
       selectPromos.disabled = true;
       selectCursos.innerHTML = "";
       selectCursos.disabled = true;
+      inputSearch.style.display = "none";
+      selectOrderBy.style.display = "none";
       break;
   }
 }
@@ -186,6 +198,8 @@ const setCohortsJson = (idCohort) => {
         selectCursos.disabled = true;
         headTable.innerHTML = "";
         resultTable.innerHTML = "";
+        inputSearch.style.display = "none";
+        selectOrderBy.style.display = "none";
         empty.style.display = "block";
       }
     });
@@ -415,6 +429,7 @@ const searchByName = (str) => {
   let todo = processCohortData(options);
   createTableWithData(todo);
 }
+
 selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
 selectPromos.addEventListener('change', () => setCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
