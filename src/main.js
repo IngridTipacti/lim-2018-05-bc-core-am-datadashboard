@@ -84,18 +84,21 @@ const switchOrderBy = (option) => {
     case "ascname":
       options.orderBy = "name";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascname = processCohortData(options);
+      createTableWithData(ascname);
       break;
     case "ascperc":
       options.orderBy = "perc";
       options.orderDirection = "asc";
       processCohortData(options);
-
+      let ascperc = processCohortData(options);
+      createTableWithData(ascperc);
       break;
     case "ascexer":
       options.orderBy = "exer";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascexer = processCohortData(options);
+      createTableWithData(ascexer);
       break;
     case "ascread":
       options.orderBy = "read";
@@ -115,7 +118,8 @@ const switchOrderBy = (option) => {
     case "desname":
       options.orderBy = "name";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desname = processCohortData(options);
+      createTableWithData(desname);
       break;
     case "desperc":
       options.orderBy = "perc";
