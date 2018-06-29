@@ -311,14 +311,14 @@ const createTableWithData = (todo) => {
   thQuizzes.setAttribute("class", "color-gray");
   thQuizzes.colSpan = "4";
   tdResExer.appendChild(valueResExer);
-  tdResExer.setAttribute("class", "color-result");
+  tdResExer.setAttribute("class", "color-gray");
   tdPerExer.appendChild(valuePerExer);
   tdPerExer.setAttribute("class", "color-percent");
   tdResRead.appendChild(valueResRead);
-  tdResRead.setAttribute("class", "color-result");
+  tdResRead.setAttribute("class", "color-gray");
   tdPerRead.appendChild(valuePerRead);
   tdResQuiz.appendChild(valueResQuiz);
-  tdResQuiz.setAttribute("class", "color-result");
+  tdResQuiz.setAttribute("class", "color-gray");
   tdPerQuiz.appendChild(valuePerQuiz);
   tdPerQuiz.setAttribute("class", "color-percent");
   tdSumScor.appendChild(valueSumScor);
@@ -373,7 +373,7 @@ const createTableWithData = (todo) => {
       tdPercentExer.appendChild(valuePercentExer);
       tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
-      tdResueltoRead.setAttribute("class", "color-result");
+      tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
       tdResueltoQuiz.setAttribute("class", "color-gray");
