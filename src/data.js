@@ -202,26 +202,48 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-  users,
-  orderBy,
-  orderDirection
+  console.log(users)
+
+  if (orderBy === 'name' & orderDirection === 'asc') {
+    const orderByNameAsc = users.sort(function (a, b) {
+    var x = a.name.toLowerCase();
+    var y = b.name.toLowerCase();
+    if (x < y) { return -1; }
+    if (x > y) { return 1; }
+    return 0;
+    });
+  console.log(orderByNameAsc);
+  return orderByNameAsc;
+  } else if (orderBy === 'name' & orderDirection === 'des') {
+     const orderByNameDes = users.sort(function (a, b) {
+     var x = a.name.toLowerCase();
+     var y = b.name.toLowerCase();      
+     if (x < y) { return 1; }
+     if (x > y) { return -1; }
+     return 0;
+   });
+  console.log(orderByNameDes);
+  return orderByNameDes;
+ }
 }
 
 window.filterUsers = (users, search) => {
   let filterByUsers = users.filter(user => {
     return user.name.toUpperCase().indexOf(search) > -1;
   });
-  console.log(filterByUsers)
   return filterByUsers;
 }
 
 window.processCohortData = (options) => {
-  const compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  // console.log(compute);
+  let arr = Object.keys(options.cohort);
+  let courses = Object.keys(options.cohort[arr].coursesIndex);
+  let compute = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
   const sort = sortUsers(compute, options.orderBy, options.orderDirection);
   if(options.search !== '') {
-    let filterU = filterUsers(compute, options.search);
+    compute = filterUsers(compute, options.search);
+    return compute;
   }
+  return compute;
 
 
 
@@ -233,4 +255,5 @@ window.processCohortData = (options) => {
   //     estudiantes = filterUsers(users, search);
   //   }
   //   return estudiantes;
+
 }
