@@ -8,7 +8,7 @@ let options = {
   orderDirection: '',
   search: ''
 }
-
+let slideIndex = 1;
 const selectSedes = document.getElementById('select-sedes');
 const selectPromos = document.getElementById('select-promos');
 const selectCursos = document.getElementById('select-cursos');
@@ -19,6 +19,28 @@ const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
 const selectOrderBy = document.getElementById('order-by');
+const slideNext = document.getElementById('next');
+const slidePrevious = document.getElementById('previous');
+const carouselExampleControls = document.getElementById('carouselExampleControls');
+
+const changeSlides = (n) => {
+  showSlides(slideIndex += n);
+}
+
+const showSlides = (n) => {
+  let i;
+  let x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {
+    slideIndex = 1
+  }
+  if (n < 1) {
+    slideIndex = x.length
+  }
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex - 1].style.display = "block";
+}
 
 const switchSedes = (option) => {
   switch (option) {
@@ -29,6 +51,9 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('lim');
       break;
     case 'scl':
@@ -38,6 +63,9 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('scl');
       break;
     case 'cdm':
@@ -47,7 +75,10 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('cdm');
+      carouselExampleControls.style.display = "block";
       break;
     case 'gdl':
       empty.style.display = "none";
@@ -56,6 +87,9 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -65,6 +99,9 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('aqp');
       break;
     default:
@@ -75,6 +112,9 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       break;
   }
 }
@@ -92,7 +132,7 @@ const switchOrderBy = (option) => {
       options.orderDirection = "asc";
       processCohortData(options);
      let ascperc = processCohortData(options);
-      createTableWithData(ascperc); 
+      createTableWithData(ascperc);
       break;
     case "ascexer":
       options.orderBy = "exer";
@@ -187,6 +227,7 @@ const getPromo = (promo) => {
 const setCohortsJson = (idCohort) => {
   selectCursos.disabled = true;
   selectCursos.innerHTML = "";
+  carouselExampleControls.style.display = "none";
   let courses = [];
   getData('../data/cohorts.json', (err, cohortjson) => {
     cohortjson.map((cohort) => {
@@ -251,8 +292,9 @@ const getProgressJson = (idCohort, course) => {
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
+      let courses = ["intro"];
       //nombre de la función que llamará a processCohortData
-      pasandoDatos(users, progressjson, cohorts);
+      pasandoDatos(users, progressjson, courses);
     } else {
       empty.style.display = "block";
       inputSearch.style.display = "none";
@@ -325,18 +367,15 @@ const createTableWithData = (todo) => {
   tdResExer.appendChild(valueResExer);
   tdResExer.setAttribute("class", "color-gray");
   tdPerExer.appendChild(valuePerExer);
-  tdPerExer.setAttribute("class", "color-percent");
   tdResRead.appendChild(valueResRead);
   tdResRead.setAttribute("class", "color-gray");
   tdPerRead.appendChild(valuePerRead);
   tdResQuiz.appendChild(valueResQuiz);
   tdResQuiz.setAttribute("class", "color-gray");
   tdPerQuiz.appendChild(valuePerQuiz);
-  tdPerQuiz.setAttribute("class", "color-percent");
   tdSumScor.appendChild(valueSumScor);
   tdSumScor.setAttribute("class", "color-gray");
   tdAvgScor.appendChild(valueAvgScor);
-  tdAvgScor.setAttribute("class", "color-percent");
   tr1.appendChild(thAlumnas);
   tr1.appendChild(thCompletitud);
   tr1.appendChild(thExercises);
@@ -383,70 +422,15 @@ const createTableWithData = (todo) => {
       tdResueltoExer.appendChild(valueResueltoExer);
       tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
-      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
       tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
       tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
-      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
       tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
-      tdScoreAvgQuiz.setAttribute("class", "color-percent");
-      tr.appendChild(thName);
-      tr.appendChild(tdPercent);
-      tr.appendChild(tdResueltoExer);
-      tr.appendChild(tdPercentExer);
-      tr.appendChild(tdResueltoRead);
-      tr.appendChild(tdPercentRead);
-      tr.appendChild(tdResueltoQuiz);
-      tr.appendChild(tdPercentQuiz);
-      tr.appendChild(tdScoreSumQuiz);
-      tr.appendChild(tdScoreAvgQuiz);
-      resultTable.appendChild(tr);
-    } else {
-      const tr = document.createElement("tr");
-      const thName = document.createElement("th");
-      const tdPercent = document.createElement("td");
-      const tdResueltoExer = document.createElement("td");
-      const tdPercentExer = document.createElement("td");
-      const tdResueltoRead = document.createElement("td");
-      const tdPercentRead = document.createElement("td");
-      const tdResueltoQuiz = document.createElement("td");
-      const tdPercentQuiz = document.createElement("td");
-      const tdScoreSumQuiz = document.createElement("td");
-      const tdScoreAvgQuiz = document.createElement("td");
-      const valueName = document.createTextNode(d.name);
-      const valuePercent = document.createTextNode(0 + "%");
-      const valueResueltoExer = document.createTextNode(0 + " / " + 0);
-      const valuePercentExer = document.createTextNode(0 + "%");
-      const valueResueltoRead = document.createTextNode(0 + " / " + 0);
-      const valuePercentRead = document.createTextNode(0 + "%");
-      const valueResueltoQuiz = document.createTextNode(0 + " / " + 0);
-      const valuePercentQuiz = document.createTextNode(0 + "%");
-      const valueScoreSumQuiz = document.createTextNode(0);
-      const valueScoreAvgQuiz = document.createTextNode(0);
-      thName.appendChild(valueName);
-      thName.setAttribute("class", "color-gray");
-      tdPercent.appendChild(valuePercent);
-      tdResueltoExer.appendChild(valueResueltoExer);
-      tdResueltoExer.setAttribute("class", "color-gray");
-      tdPercentExer.appendChild(valuePercentExer);
-      tdPercentExer.setAttribute("class", "color-percent");
-      tdResueltoRead.appendChild(valueResueltoRead);
-      tdResueltoRead.setAttribute("class", "color-gray");
-      tdPercentRead.appendChild(valuePercentRead);
-      tdPercentRead.setAttribute("class", "color-percent");
-      tdResueltoQuiz.appendChild(valueResueltoQuiz);
-      tdResueltoQuiz.setAttribute("class", "color-gray");
-      tdPercentQuiz.appendChild(valuePercentQuiz);
-      tdPercentQuiz.setAttribute("class", "color-percent");
-      tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
-      tdScoreSumQuiz.setAttribute("class", "color-gray");
-      tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
-      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -479,3 +463,7 @@ selectCursos.addEventListener('change', () => getProgressJson((selectPromos.opti
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
 selectOrderBy.addEventListener("change", () => switchOrderBy(selectOrderBy.options[selectOrderBy.selectedIndex].value));
+
+slideNext.addEventListener("click", () => changeSlides(1));
+
+slidePrevious.addEventListener("click", () => changeSlides(-1));
