@@ -113,7 +113,7 @@ const switchOrderBy = (option) => {
       createTableWithData(ascquiz);
       break;
     case "ascscor":
-      options.orderBy = "scoreAvg";
+      options.orderBy = "scAvg";
       options.orderDirection = "asc";
       let ascscor = processCohortData(options);
       createTableWithData(ascscor);
@@ -149,7 +149,7 @@ const switchOrderBy = (option) => {
       createTableWithData(desquiz);
       break;
     case "desscor":
-      options.orderBy = "scoreAvg";
+      options.orderBy = "scAvg";
       options.orderDirection = "des";
       let desscor = processCohortData(options);
       createTableWithData(desscor);
