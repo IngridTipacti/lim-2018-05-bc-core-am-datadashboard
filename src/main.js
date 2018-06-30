@@ -29,6 +29,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('lim');
       break;
     case 'scl':
@@ -38,6 +40,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('scl');
       break;
     case 'cdm':
@@ -47,6 +51,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('cdm');
       break;
     case 'gdl':
@@ -56,6 +62,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -65,6 +73,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       getPromo('aqp');
       break;
     default:
@@ -75,6 +85,8 @@ const switchSedes = (option) => {
       selectCursos.disabled = true;
       inputSearch.style.display = "none";
       selectOrderBy.style.display = "none";
+      headTable.innerHTML = "";
+      resultTable.innerHTML = "";
       break;
   }
 }
@@ -379,58 +391,6 @@ const createTableWithData = (todo) => {
       tdResueltoRead.appendChild(valueResueltoRead);
       tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
-      tdResueltoQuiz.appendChild(valueResueltoQuiz);
-      tdResueltoQuiz.setAttribute("class", "color-gray");
-      tdPercentQuiz.appendChild(valuePercentQuiz);
-      tdPercentQuiz.setAttribute("class", "color-percent");
-      tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
-      tdScoreSumQuiz.setAttribute("class", "color-gray");
-      tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
-      tdScoreAvgQuiz.setAttribute("class", "color-percent");
-      tr.appendChild(thName);
-      tr.appendChild(tdPercent);
-      tr.appendChild(tdResueltoExer);
-      tr.appendChild(tdPercentExer);
-      tr.appendChild(tdResueltoRead);
-      tr.appendChild(tdPercentRead);
-      tr.appendChild(tdResueltoQuiz);
-      tr.appendChild(tdPercentQuiz);
-      tr.appendChild(tdScoreSumQuiz);
-      tr.appendChild(tdScoreAvgQuiz);
-      resultTable.appendChild(tr);
-    } else {
-      const tr = document.createElement("tr");
-      const thName = document.createElement("th");
-      const tdPercent = document.createElement("td");
-      const tdResueltoExer = document.createElement("td");
-      const tdPercentExer = document.createElement("td");
-      const tdResueltoRead = document.createElement("td");
-      const tdPercentRead = document.createElement("td");
-      const tdResueltoQuiz = document.createElement("td");
-      const tdPercentQuiz = document.createElement("td");
-      const tdScoreSumQuiz = document.createElement("td");
-      const tdScoreAvgQuiz = document.createElement("td");
-      const valueName = document.createTextNode(d.name);
-      const valuePercent = document.createTextNode(0 + "%");
-      const valueResueltoExer = document.createTextNode(0 + " / " + 0);
-      const valuePercentExer = document.createTextNode(0 + "%");
-      const valueResueltoRead = document.createTextNode(0 + " / " + 0);
-      const valuePercentRead = document.createTextNode(0 + "%");
-      const valueResueltoQuiz = document.createTextNode(0 + " / " + 0);
-      const valuePercentQuiz = document.createTextNode(0 + "%");
-      const valueScoreSumQuiz = document.createTextNode(0);
-      const valueScoreAvgQuiz = document.createTextNode(0);
-      thName.appendChild(valueName);
-      thName.setAttribute("class", "color-gray");
-      tdPercent.appendChild(valuePercent);
-      tdResueltoExer.appendChild(valueResueltoExer);
-      tdResueltoExer.setAttribute("class", "color-gray");
-      tdPercentExer.appendChild(valuePercentExer);
-      tdPercentExer.setAttribute("class", "color-percent");
-      tdResueltoRead.appendChild(valueResueltoRead);
-      tdResueltoRead.setAttribute("class", "color-gray");
-      tdPercentRead.appendChild(valuePercentRead);
-      tdPercentRead.setAttribute("class", "color-percent");
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
       tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);

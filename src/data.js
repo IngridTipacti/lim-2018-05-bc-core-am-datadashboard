@@ -16,14 +16,14 @@ window.computeUsersStats = (users, progress, courses) => {
 
       let exerTotal = () => {
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
-            if (prog.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
-              const exercises = prog.intro.units[nameUnit].parts[namePart].exercises;
+            if (parts[namePart].hasOwnProperty('exercises')) {
+              const exercises = parts[namePart].exercises;
               const nameExercises = Object.keys(exercises);
               totalExer = nameExercises.map(nameExercise => {
-                let total = Object.keys(prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise]);
+                let total = Object.keys(parts[namePart].exercises[nameExercise]);
                 return total;
               });
               return totalExer.length;
@@ -36,15 +36,15 @@ window.computeUsersStats = (users, progress, courses) => {
       let exerCompleted = () => {
         let sumCompleted = 0;
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
-            if (prog.intro.units[nameUnit].parts[namePart].hasOwnProperty('exercises')) {
-              const exercises = prog.intro.units[nameUnit].parts[namePart].exercises;
+            if (parts[namePart].hasOwnProperty('exercises')) {
+              const exercises = parts[namePart].exercises;
               const nameExercises = Object.keys(exercises);
               nameExercises.map(nameExercise => {
-                if (prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise].hasOwnProperty('completed')) {
-                  let completed = prog.intro.units[nameUnit].parts[namePart].exercises[nameExercise].completed;
+                if (exercises[nameExercise].hasOwnProperty('completed')) {
+                  let completed = exercises[nameExercise].completed;
                   if (completed > 0) {
                     sumCompleted += completed;
                     return sumCompleted;
@@ -67,7 +67,7 @@ window.computeUsersStats = (users, progress, courses) => {
       let readTotal = () => {
         let reads = [];
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
             if (parts[namePart].type === 'read') {
@@ -82,11 +82,11 @@ window.computeUsersStats = (users, progress, courses) => {
       let readCompleted = () => {
         let sumCompleted = 0;
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
             if (parts[namePart].type === 'read') {
-              let completed = prog.intro.units[nameUnit].parts[namePart].completed;
+              let completed = parts[namePart].completed;
               if (completed > 0) {
                 sumCompleted += completed;
                 return sumCompleted;
@@ -107,7 +107,7 @@ window.computeUsersStats = (users, progress, courses) => {
       let quizTotal = () => {
         let quiz = [];
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
             if (parts[namePart].type === 'quiz') {
@@ -122,11 +122,11 @@ window.computeUsersStats = (users, progress, courses) => {
       let quizCompleted = () => {
         let sumCompleted = 0;
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
             if (parts[namePart].type === 'quiz') {
-              let completed = prog.intro.units[nameUnit].parts[namePart].completed;
+              let completed = parts[namePart].completed;
               if (completed > 0) {
                 sumCompleted += completed;
                 return sumCompleted;
@@ -147,11 +147,11 @@ window.computeUsersStats = (users, progress, courses) => {
       let quizScoreSum = () => {
         let sumScore = 0;
         nameUnits.map(nameUnit => {
-          const parts = prog.intro.units[nameUnit].parts;
+          const parts = units[nameUnit].parts;
           const nameParts = Object.keys(parts);
           nameParts.map(namePart => {
             if (parts[namePart].type === 'quiz' && parts[namePart].hasOwnProperty('score')) {
-              let score = prog.intro.units[nameUnit].parts[namePart].score;
+              let score = parts[namePart].score;
               sumScore += score;
               return sumScore;
             }
@@ -185,6 +185,27 @@ window.computeUsersStats = (users, progress, courses) => {
           percent: quizPercent(quizCompleted(), quizTotal()),
           scoreSum: quizScoreSum(),
           scoreAvg: quizScoreAvg(quizScoreSum(), quizCompleted())
+        }
+      }
+    } else {
+      user.stats = {
+        percent: 0,
+        exercises: {
+          total: 0,
+          completed: 0,
+          percent: 0,
+        },
+        reads: {
+          total: 0,
+          completed: 0,
+          percent: 0
+        },
+        quizzes: {
+          total: 0,
+          completed: 0,
+          percent: 0,
+          scoreSum: 0,
+          scoreAvg: 0
         }
       }
     }
