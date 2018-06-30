@@ -132,7 +132,7 @@ const switchOrderBy = (option) => {
       options.orderDirection = "asc";
       processCohortData(options);
      let ascperc = processCohortData(options);
-      createTableWithData(ascperc); 
+      createTableWithData(ascperc);
       break;
     case "ascexer":
       options.orderBy = "exer";
