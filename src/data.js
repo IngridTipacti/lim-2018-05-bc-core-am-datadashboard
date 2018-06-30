@@ -194,20 +194,7 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-  // console.log(users)
-  const nuevosUsuarios = users.filter(user => user.stats !== undefined);
-
-  // if (orderDirection === "asc") {
-  //   if(orderBy === "name") {}
-  //   else if(orderBy === "perc") {}
-  //   else if(orderBy === "scor") {}
-  // }add
-  // else if(orderDirection === "des") {
-  //   if(orderBy === "name") {}
-  //   else if(orderBy === "perc") {}
-  //   else if(orderBy === "scor") {}
-  // }
-
+    const nuevosUsuarios = users.filter(user => user.stats !== undefined);
   if (orderBy === 'name' & orderDirection === 'asc') {
     const nameAsc = nuevosUsuarios.sort(function (a, b) {
       var x = a.name.toLowerCase();
@@ -216,29 +203,21 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       if (x > y) { return 1; }
       return 0;
     });
-    // console.log(nameAsc);
     return nameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
     const nameDes = nuevosUsuarios.sort(function (a, b) {
-      var x = a.name.toLowerCase();
-      var y = b.name.toLowerCase();
+      const x = a.name.toLowerCase();
+      const y = b.name.toLowerCase();
       if (x < y) { return 1; }
       if (x > y) { return -1; }
       return 0;
     });
-    // console.log(nameDes);
     return nameDes;
   } else if (orderBy === 'exer' && orderDirection === 'asc') {
-    // users.map(user => console.log(user.stats))
-    // console.log(nuevosUsuarios)
     const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
-    // console.log(orderByExercises);
     return exerAsc;
   } else if (orderBy === 'exer' && orderDirection === 'des') {
-    // users.map(user => console.log(user.stats))
-    // console.log(nuevosUsuarios)
     const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
-    // console.log(orderByExercises);
     return exerDes;
   } else if (orderBy === 'perc' && orderDirection === 'asc') {
     const percAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
