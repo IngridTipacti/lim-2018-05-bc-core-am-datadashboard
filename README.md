@@ -176,9 +176,11 @@ Mayor organización, orden y utilidad.
 
 #### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
 
-Diseño tu Interfaz de Usuario [Prototipo](https://www.figma.com/proto/R7gXaYlwQh2ksdcpvKkSTXVD/Dashboard?scaling=scale-down&node-id=103%3A24&redirected=1) 
+Diseño tu Interfaz de Usuario [Ver Prototipo](https://www.figma.com/proto/R7gXaYlwQh2ksdcpvKkSTXVD/Dashboard?scaling=scale-down&node-id=103%3A24&redirected=1) 
 
 El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear.
+
+![Print Prototipo](http://subirimagen.me/uploads/20180630163413.JPG) 
 
 ### Implementación de la Interfaz de Usuario (HTML/CSS/JS)
 
