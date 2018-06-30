@@ -8,7 +8,7 @@ let options = {
   orderDirection: '',
   search: ''
 }
-
+let slideIndex = 1;
 const selectSedes = document.getElementById('select-sedes');
 const selectPromos = document.getElementById('select-promos');
 const selectCursos = document.getElementById('select-cursos');
@@ -19,6 +19,28 @@ const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
 const selectOrderBy = document.getElementById('order-by');
+const slideNext = document.getElementById('next');
+const slidePrevious = document.getElementById('previous');
+const carouselExampleControls = document.getElementById('carouselExampleControls');
+
+const changeSlides = (n) => {
+  showSlides(slideIndex += n);
+}
+
+const showSlides = (n) => {
+  let i;
+  let x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {
+    slideIndex = 1
+  }
+  if (n < 1) {
+    slideIndex = x.length
+  }
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex - 1].style.display = "block";
+}
 
 const switchSedes = (option) => {
   switch (option) {
@@ -87,6 +109,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       break;
   }
 }
@@ -191,6 +214,7 @@ const getPromo = (promo) => {
 const setCohortsJson = (idCohort) => {
   selectCursos.disabled = true;
   selectCursos.innerHTML = "";
+  carouselExampleControls.style.display = "none";
   let courses = [];
   getData('../data/cohorts.json', (err, cohortjson) => {
     cohortjson.map((cohort) => {
@@ -330,18 +354,15 @@ const createTableWithData = (todo) => {
   tdResExer.appendChild(valueResExer);
   tdResExer.setAttribute("class", "color-gray");
   tdPerExer.appendChild(valuePerExer);
-  tdPerExer.setAttribute("class", "color-percent");
   tdResRead.appendChild(valueResRead);
   tdResRead.setAttribute("class", "color-gray");
   tdPerRead.appendChild(valuePerRead);
   tdResQuiz.appendChild(valueResQuiz);
   tdResQuiz.setAttribute("class", "color-gray");
   tdPerQuiz.appendChild(valuePerQuiz);
-  tdPerQuiz.setAttribute("class", "color-percent");
   tdSumScor.appendChild(valueSumScor);
   tdSumScor.setAttribute("class", "color-gray");
   tdAvgScor.appendChild(valueAvgScor);
-  tdAvgScor.setAttribute("class", "color-percent");
   tr1.appendChild(thAlumnas);
   tr1.appendChild(thCompletitud);
   tr1.appendChild(thExercises);
@@ -388,18 +409,15 @@ const createTableWithData = (todo) => {
       tdResueltoExer.appendChild(valueResueltoExer);
       tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
-      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
       tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
       tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
-      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
       tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
-      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -432,3 +450,7 @@ selectCursos.addEventListener('change', () => getProgressJson((selectPromos.opti
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
 selectOrderBy.addEventListener("change", () => switchOrderBy(selectOrderBy.options[selectOrderBy.selectedIndex].value));
+
+slideNext.addEventListener("click", () => changeSlides(1));
+
+slidePrevious.addEventListener("click", () => changeSlides(-1));
