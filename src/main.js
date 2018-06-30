@@ -255,8 +255,9 @@ const getProgressJson = (idCohort, course) => {
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
+      let courses = ["intro"];
       //nombre de la función que llamará a processCohortData
-      pasandoDatos(users, progressjson, cohorts);
+      pasandoDatos(users, progressjson, courses);
     } else {
       empty.style.display = "block";
       inputSearch.style.display = "none";

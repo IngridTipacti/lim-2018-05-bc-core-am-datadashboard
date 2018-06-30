@@ -275,15 +275,15 @@ window.filterUsers = (users, search) => {
   return filterByUsers;
 }
 
-//Se cambio elnombre de la variable compute por estudiantes"
+//Se cambio elnombre de la variable compute por students"
 window.processCohortData = (options) => {
-  let arr = Object.keys(options.cohort);
-  let courses = Object.keys(options.cohort[arr].coursesIndex);
-  let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
-  estudiantes = sortUsers(estudiantes, options.orderBy, options.orderDirection);
+  // let arr = Object.keys(options.cohort);
+  // let courses = Object.keys(options.cohort[arr].coursesIndex);
+  let students = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+  students = sortUsers(students, options.orderBy, options.orderDirection);
   if (options.search !== '') {
-    estudiantes = filterUsers(estudiantes, options.search);
-    return estudiantes;
+    students = filterUsers(students, options.search);
+    return students;
   }
-  return estudiantes;
+  return students;
 }
