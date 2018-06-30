@@ -71,10 +71,10 @@ header {
 .color-gray {
   background-color: #e0e0e0;
 }
-.color-percent {
-  background-color: white;
-}
 
 .container-fluid {
   padding-top: 15px;
+}
+#previous:hover , #next:hover {
+  background-color: rgb(112, 112, 112)
 }

@@ -8,7 +8,7 @@ let options = {
   orderDirection: '',
   search: ''
 }
-
+let slideIndex = 1;
 const selectSedes = document.getElementById('select-sedes');
 const selectPromos = document.getElementById('select-promos');
 const selectCursos = document.getElementById('select-cursos');
@@ -19,6 +19,28 @@ const resultTable = document.getElementById('resultTable');
 const loader = document.getElementById('loader');
 const inputSearch = document.getElementById('input-search');
 const selectOrderBy = document.getElementById('order-by');
+const slideNext = document.getElementById('next');
+const slidePrevious = document.getElementById('previous');
+const carouselExampleControls = document.getElementById('carouselExampleControls');
+
+const changeSlides = (n) => {
+  showSlides(slideIndex += n);
+}
+
+const showSlides = (n) => {
+  let i;
+  let x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {
+    slideIndex = 1
+  }
+  if (n < 1) {
+    slideIndex = x.length
+  }
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex - 1].style.display = "block";
+}
 
 const switchSedes = (option) => {
   switch (option) {
@@ -31,6 +53,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('lim');
       break;
     case 'scl':
@@ -42,6 +65,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('scl');
       break;
     case 'cdm':
@@ -54,6 +78,7 @@ const switchSedes = (option) => {
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
       getPromo('cdm');
+      carouselExampleControls.style.display = "block";
       break;
     case 'gdl':
       empty.style.display = "none";
@@ -64,6 +89,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -75,6 +101,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('aqp');
       break;
     default:
@@ -87,6 +114,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       break;
   }
 }
@@ -103,7 +131,7 @@ const switchOrderBy = (option) => {
       options.orderBy = "perc";
       options.orderDirection = "asc";
       processCohortData(options);
-      let ascperc = processCohortData(options);
+     let ascperc = processCohortData(options);
       createTableWithData(ascperc);
       break;
     case "ascexer":
@@ -115,17 +143,20 @@ const switchOrderBy = (option) => {
     case "ascread":
       options.orderBy = "read";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascread = processCohortData(options);
+      createTableWithData(ascread);
       break;
     case "ascquiz":
       options.orderBy = "quiz";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascquiz = processCohortData(options);
+      createTableWithData(ascquiz);
       break;
     case "ascscor":
-      options.orderBy = "scor";
+      options.orderBy = "scAvg";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascscor = processCohortData(options);
+      createTableWithData(ascscor);
       break;
     case "desname":
       options.orderBy = "name";
@@ -136,27 +167,32 @@ const switchOrderBy = (option) => {
     case "desperc":
       options.orderBy = "perc";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desperc = processCohortData(options);
+      createTableWithData(desperc);
       break;
     case "desexer":
       options.orderBy = "exer";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desexer = processCohortData(options);
+      createTableWithData(desexer);
       break;
     case "desread":
       options.orderBy = "read";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desread = processCohortData(options);
+      createTableWithData(desread);
       break;
     case "desquiz":
       options.orderBy = "quiz";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desquiz = processCohortData(options);
+      createTableWithData(desquiz);
       break;
     case "desscor":
-      options.orderBy = "scor";
+      options.orderBy = "scAvg";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desscor = processCohortData(options);
+      createTableWithData(desscor);
       break;
   }
 }
@@ -191,6 +227,7 @@ const getPromo = (promo) => {
 const setCohortsJson = (idCohort) => {
   selectCursos.disabled = true;
   selectCursos.innerHTML = "";
+  carouselExampleControls.style.display = "none";
   let courses = [];
   getData('../data/cohorts.json', (err, cohortjson) => {
     cohortjson.map((cohort) => {
@@ -255,8 +292,9 @@ const getProgressJson = (idCohort, course) => {
   getData('../data/cohorts/lim-2018-03-pre-core-pw/progress.json', (err, progressjson) => {
     if (users.length > 0 && course === "intro") {
       empty.style.display = "none";
+      let courses = ["intro"];
       //nombre de la función que llamará a processCohortData
-      pasandoDatos(users, progressjson, cohorts);
+      pasandoDatos(users, progressjson, courses);
     } else {
       empty.style.display = "block";
       inputSearch.style.display = "none";
@@ -329,18 +367,15 @@ const createTableWithData = (todo) => {
   tdResExer.appendChild(valueResExer);
   tdResExer.setAttribute("class", "color-gray");
   tdPerExer.appendChild(valuePerExer);
-  tdPerExer.setAttribute("class", "color-percent");
   tdResRead.appendChild(valueResRead);
   tdResRead.setAttribute("class", "color-gray");
   tdPerRead.appendChild(valuePerRead);
   tdResQuiz.appendChild(valueResQuiz);
   tdResQuiz.setAttribute("class", "color-gray");
   tdPerQuiz.appendChild(valuePerQuiz);
-  tdPerQuiz.setAttribute("class", "color-percent");
   tdSumScor.appendChild(valueSumScor);
   tdSumScor.setAttribute("class", "color-gray");
   tdAvgScor.appendChild(valueAvgScor);
-  tdAvgScor.setAttribute("class", "color-percent");
   tr1.appendChild(thAlumnas);
   tr1.appendChild(thCompletitud);
   tr1.appendChild(thExercises);
@@ -387,18 +422,15 @@ const createTableWithData = (todo) => {
       tdResueltoExer.appendChild(valueResueltoExer);
       tdResueltoExer.setAttribute("class", "color-gray");
       tdPercentExer.appendChild(valuePercentExer);
-      tdPercentExer.setAttribute("class", "color-percent");
       tdResueltoRead.appendChild(valueResueltoRead);
       tdResueltoRead.setAttribute("class", "color-gray");
       tdPercentRead.appendChild(valuePercentRead);
       tdResueltoQuiz.appendChild(valueResueltoQuiz);
       tdResueltoQuiz.setAttribute("class", "color-gray");
       tdPercentQuiz.appendChild(valuePercentQuiz);
-      tdPercentQuiz.setAttribute("class", "color-percent");
       tdScoreSumQuiz.appendChild(valueScoreSumQuiz);
       tdScoreSumQuiz.setAttribute("class", "color-gray");
       tdScoreAvgQuiz.appendChild(valueScoreAvgQuiz);
-      tdScoreAvgQuiz.setAttribute("class", "color-percent");
       tr.appendChild(thName);
       tr.appendChild(tdPercent);
       tr.appendChild(tdResueltoExer);
@@ -431,3 +463,7 @@ selectCursos.addEventListener('change', () => getProgressJson((selectPromos.opti
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
 selectOrderBy.addEventListener("change", () => switchOrderBy(selectOrderBy.options[selectOrderBy.selectedIndex].value));
+
+slideNext.addEventListener("click", () => changeSlides(1));
+
+slidePrevious.addEventListener("click", () => changeSlides(-1));
