@@ -75,3 +75,6 @@ header {
 .container-fluid {
   padding-top: 15px;
 }
+#previous:hover , #next:hover {
+  background-color: rgb(112, 112, 112)
+}
