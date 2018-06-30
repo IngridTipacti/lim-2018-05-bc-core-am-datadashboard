@@ -247,22 +247,22 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     const percDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
     return percDes;
   } else if (orderBy === 'read' && orderDirection === 'asc') {
-    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
     return readAsc;
   } else if (orderBy === 'read' && orderDirection === 'des') {
-    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.reads.percent - a.stats.reads.percent });
     return readDes;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
-    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
     return quizAsc;
   } else if (orderBy === 'quiz' && orderDirection === 'des') {
-    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.percent - a.stats.quizzes.percent });
     return quizDes;
   } else if (orderBy === 'scAvg' && orderDirection === 'asc') {
-    const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
     return scoreAvgAsc;
   } else if (orderBy === 'scAvg' && orderDirection === 'des') {
-    const scoreAvgDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    const scoreAvgDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg });
     return scoreAvgDes;
   }
 }
