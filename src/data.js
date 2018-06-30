@@ -201,7 +201,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   //   if(orderBy === "name") {}
   //   else if(orderBy === "perc") {}
   //   else if(orderBy === "scor") {}
-  // }
+  // }add
   // else if(orderDirection === "des") {
   //   if(orderBy === "name") {}
   //   else if(orderBy === "perc") {}
@@ -209,41 +209,61 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   // }
 
   if (orderBy === 'name' & orderDirection === 'asc') {
-    const orderByNameAsc = nuevosUsuarios.sort(function (a, b) {
+    const nameAsc = nuevosUsuarios.sort(function (a, b) {
       var x = a.name.toLowerCase();
       var y = b.name.toLowerCase();
-      if (x < y) {
-        return -1;
-      }
-      if (x > y) {
-        return 1;
-      }
+      if (x < y) { return -1; }
+      if (x > y) { return 1; }
       return 0;
     });
-    // console.log(orderByNameAsc);
-    return orderByNameAsc;
+    // console.log(nameAsc);
+    return nameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
-    const orderByNameDes = nuevosUsuarios.sort(function (a, b) {
+    const nameDes = nuevosUsuarios.sort(function (a, b) {
       var x = a.name.toLowerCase();
       var y = b.name.toLowerCase();
-      if (x < y) {
-        return 1;
-      }
-      if (x > y) {
-        return -1;
-      }
+      if (x < y) { return 1; }
+      if (x > y) { return -1; }
       return 0;
     });
-    // console.log(orderByNameDes);
-    return orderByNameDes;
-  } else if (orderBy === 'exer' & orderDirection === 'asc') {
+    // console.log(nameDes);
+    return nameDes;
+  } else if (orderBy === 'exer' && orderDirection === 'asc') {
     // users.map(user => console.log(user.stats))
     // console.log(nuevosUsuarios)
-    const orderByExercises = nuevosUsuarios.sort(function (a, b) {
-      return a.stats.exercises.percent - b.stats.exercises.percent
-    });
+    const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
     // console.log(orderByExercises);
-    return orderByExercises;
+    return exerAsc;
+  } else if (orderBy === 'exer' && orderDirection === 'des') {
+    // users.map(user => console.log(user.stats))
+    // console.log(nuevosUsuarios)
+    const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
+    // console.log(orderByExercises);
+    return exerDes;
+  } else if (orderBy === 'perc' && orderDirection === 'asc') {
+    const percAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    return percAsc;
+  } else if (orderBy === 'perc' && orderDirection === 'des') {
+    const percDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    return percDes;
+  } else if (orderBy === 'read' && orderDirection === 'asc') {
+    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    return readAsc;
+  } else if (orderBy === 'read' && orderDirection === 'des') {
+    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    return readDes;
+  } else if (orderBy === 'quiz' && orderDirection === 'asc') {
+    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    return quizAsc;
+  } else if (orderBy === 'quiz' && orderDirection === 'des') {
+    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    return quizDes;
+  } else if (orderBy === 'scAvg' && orderDirection === 'asc') {
+    const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+    return scoreAvgAsc;
+  } else if (orderBy === 'scAvg' && orderDirection === 'des') {
+    const scoreAvgDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+    return scoreAvgDes;
   }
 }
 

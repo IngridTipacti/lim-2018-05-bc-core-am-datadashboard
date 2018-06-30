@@ -172,23 +172,13 @@ Mayor organización, orden y utilidad.
 
 #### 2) Sketch de la solución (prototipo de baja fidelidad)
 
-![Sin titulo](http://subirimagen.me/uploads/20180614171643.14) 
+![Sin titulo](http://subirimagen.me/uploads/20180630155934.JPG) 
 
 #### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
 
-Lo siguiente es diseñar tu Interfaz de Usuario (UI por sus siglas en inglés).
-Para eso debes aprender a utilizar alguna herramienta de diseño visual.
-Nosotros te recomendamos [Figma](https://www.figma.com/) que  es una herramienta
-que funciona en el navegador y, además, puedes crear una cuenta gratis. Sin
-embargo, eres libre de utilizar otros editores gráficos como
-Illustrator, Photoshop, PowerPoint, Keynote, etc.
+Diseño tu Interfaz de Usuario [Prototipo](https://www.figma.com/proto/R7gXaYlwQh2ksdcpvKkSTXVD/Dashboard?scaling=scale-down&node-id=103%3A24&redirected=1) 
 
-El diseño debe representar tu _ideal_ de solución. Digamos que es lo que
-desearías implementar si tuvieras tiempo ilimitado para hackear.
-
-Tu diseño debe seguir los fundamentos de _visual design_, como:
-contraste, alineación, jerarquía, entre otros. Tip: revisa el contenido de UX
-de la unidad de visual design.
+El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear.
 
 ### Implementación de la Interfaz de Usuario (HTML/CSS/JS)
 
