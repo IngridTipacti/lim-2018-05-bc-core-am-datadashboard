@@ -53,6 +53,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('lim');
       break;
     case 'scl':
@@ -64,6 +65,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('scl');
       break;
     case 'cdm':
@@ -76,6 +78,7 @@ const switchSedes = (option) => {
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
       getPromo('cdm');
+      carouselExampleControls.style.display = "block";
       break;
     case 'gdl':
       empty.style.display = "none";
@@ -86,6 +89,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('gdl');
       break;
     case 'aqp':
@@ -97,6 +101,7 @@ const switchSedes = (option) => {
       selectOrderBy.style.display = "none";
       headTable.innerHTML = "";
       resultTable.innerHTML = "";
+      carouselExampleControls.style.display = "block";
       getPromo('aqp');
       break;
     default:
