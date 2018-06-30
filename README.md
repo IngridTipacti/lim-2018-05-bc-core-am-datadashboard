@@ -172,6 +172,7 @@ Mayor organización, orden y utilidad.
 
 #### 2) Sketch de la solución (prototipo de baja fidelidad)
 
+Mostramos el modelo de baja fidelidad aprobado por cliente: 
 ![Sin titulo](http://subirimagen.me/uploads/20180630155934.JPG) 
 
 #### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
