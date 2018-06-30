@@ -131,8 +131,8 @@ const switchOrderBy = (option) => {
       options.orderBy = "perc";
       options.orderDirection = "asc";
       processCohortData(options);
-      let ascperc = processCohortData(options);
-      createTableWithData(ascperc);
+     let ascperc = processCohortData(options);
+      createTableWithData(ascperc); 
       break;
     case "ascexer":
       options.orderBy = "exer";
@@ -143,17 +143,20 @@ const switchOrderBy = (option) => {
     case "ascread":
       options.orderBy = "read";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascread = processCohortData(options);
+      createTableWithData(ascread);
       break;
     case "ascquiz":
       options.orderBy = "quiz";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascquiz = processCohortData(options);
+      createTableWithData(ascquiz);
       break;
     case "ascscor":
-      options.orderBy = "scor";
+      options.orderBy = "scAvg";
       options.orderDirection = "asc";
-      processCohortData(options);
+      let ascscor = processCohortData(options);
+      createTableWithData(ascscor);
       break;
     case "desname":
       options.orderBy = "name";
@@ -164,27 +167,32 @@ const switchOrderBy = (option) => {
     case "desperc":
       options.orderBy = "perc";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desperc = processCohortData(options);
+      createTableWithData(desperc);
       break;
     case "desexer":
       options.orderBy = "exer";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desexer = processCohortData(options);
+      createTableWithData(desexer);
       break;
     case "desread":
       options.orderBy = "read";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desread = processCohortData(options);
+      createTableWithData(desread);
       break;
     case "desquiz":
       options.orderBy = "quiz";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desquiz = processCohortData(options);
+      createTableWithData(desquiz);
       break;
     case "desscor":
-      options.orderBy = "scor";
+      options.orderBy = "scAvg";
       options.orderDirection = "des";
-      processCohortData(options);
+      let desscor = processCohortData(options);
+      createTableWithData(desscor);
       break;
   }
 }
