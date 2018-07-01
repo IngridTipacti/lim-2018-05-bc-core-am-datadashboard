@@ -276,7 +276,7 @@ window.filterUsers = (users, search) => {
 
 window.processCohortData = (options) => {
   let computed = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  let sorted = sortUsers(computed, options.orderBy, options.orderDirection);
-  let filtered = filterUsers(sorted, options.search);
-  return filtered;
+  computed = sortUsers(computed, options.orderBy, options.orderDirection);
+  computed = filterUsers(computed, options.search);
+  return computed;
 }
