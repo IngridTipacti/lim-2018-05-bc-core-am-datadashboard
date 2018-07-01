@@ -20,10 +20,7 @@ describe("data", () => {
 
     const cohort = fixtures.cohorts.find(item => item.id === "lim-2018-03-pre-core-pw");
     const courses = Object.keys(cohort.coursesIndex);
-    const {
-      users,
-      progress
-    } = fixtures;
+    const { users, progress } = fixtures;
 
     it("debería retornar arreglo de usuarios con propiedad stats", () => {
       const processed = computeUsersStats(users, progress, courses);
@@ -176,26 +173,21 @@ describe("data", () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const {users, progress } = fixtures;
-    const students = computeUsersStats(users, progress, courses);
+    const options = {
+      cohort: courses,
+      cohortData: {
+        users: users,
+        progress: progress
+      },
+      orderBy: 'asc',
+      orderDirection: 'name',
+      search: 'Ana'
+    }
     it("debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter", () => {
-      const options = {
-        cohort: courses,
-        cohortData: {
-          users: students,
-          progress: progress
-        },
-        orderBy: 'asc',
-        orderDirection: 'name',
-        search: 'Ana'
-      }
       const processed = processCohortData(options);
-      assert.isTrue(processed[0].hasOwnProperty("stats"), 0);
-      processed.sort(function (a, b) {
-        assert.isAtMost((a.name.toLowerCase() > b.name.toLowerCase()) - (a.name.toLowerCase() < b.name.toLowerCase()), 1)
+      processed.forEach(user => {
+        assert.ok(user.hasOwnProperty('stats'));
       });
-      for (let i = 0; i < processed.length; i++) {
-        assert.isTrue(processed[i].name.toUpperCase().indexOf(search.toUpperCase()) > -1, 0);
-      }
     });
   });
 

@@ -215,7 +215,7 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-    const nuevosUsuarios = users.filter(user => user.stats !== undefined);
+  const nuevosUsuarios = users.filter(user => user.stats !== undefined);
   if (orderBy === 'name' & orderDirection === 'asc') {
     const nameAsc = nuevosUsuarios.sort(function (a, b) {
       var x = a.name.toLowerCase();
@@ -274,15 +274,9 @@ window.filterUsers = (users, search) => {
   return filterByUsers;
 }
 
-//Se cambio elnombre de la variable compute por students"
 window.processCohortData = (options) => {
-  // let arr = Object.keys(options.cohort);
-  // let courses = Object.keys(options.cohort[arr].coursesIndex);
-  let students = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  students = sortUsers(students, options.orderBy, options.orderDirection);
-  if (options.search !== '') {
-    students = filterUsers(students, options.search);
-    return students;
-  }
-  return students;
+  let computed = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+  let sorted = sortUsers(computed, options.orderBy, options.orderDirection);
+  let filtered = filterUsers(sorted, options.search);
+  return filtered;
 }
