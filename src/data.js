@@ -215,9 +215,9 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-    const nuevosUsuarios = users.filter(user => user.stats !== undefined);
+    const newUsers = users.filter(user => user.stats !== undefined);
   if (orderBy === 'name' & orderDirection === 'asc') {
-    const nameAsc = nuevosUsuarios.sort(function (a, b) {
+    const nameAsc = newUsers.sort(function (a, b) {
       var x = a.name.toLowerCase();
       var y = b.name.toLowerCase();
       if (x < y) { return -1; }
@@ -226,7 +226,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     return nameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
-    const nameDes = nuevosUsuarios.sort(function (a, b) {
+    const nameDes = newUsers.sort(function (a, b) {
       const x = a.name.toLowerCase();
       const y = b.name.toLowerCase();
       if (x < y) { return 1; }
@@ -235,34 +235,34 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     return nameDes;
   } else if (orderBy === 'exer' && orderDirection === 'asc') {
-    const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
+    const exerAsc = newUsers.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
     return exerAsc;
   } else if (orderBy === 'exer' && orderDirection === 'des') {
-    const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
+    const exerDes = newUsers.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
     return exerDes;
-  } else if (orderBy === 'perc' && orderDirection === 'asc') {
-    const percAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+  } else if (orderBy === 'percTotal' && orderDirection === 'asc') {
+    const percAsc = newUsers.sort(function (a, b) { return a.stats.percent - b.stats.percent });
     return percAsc;
-  } else if (orderBy === 'perc' && orderDirection === 'des') {
-    const percDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+  } else if (orderBy === 'percTotal' && orderDirection === 'des') {
+    const percDes = newUsers.sort(function (a, b) { return b.stats.percent - a.stats.percent });
     return percDes;
   } else if (orderBy === 'read' && orderDirection === 'asc') {
-    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
+    const readAsc = newUsers.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
     return readAsc;
   } else if (orderBy === 'read' && orderDirection === 'des') {
-    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.reads.percent - a.stats.reads.percent });
+    const readDes = newUsers.sort(function (a, b) { return b.stats.reads.percent - a.stats.reads.percent });
     return readDes;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
-    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
+    const quizAsc = newUsers.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
     return quizAsc;
   } else if (orderBy === 'quiz' && orderDirection === 'des') {
-    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.percent - a.stats.quizzes.percent });
+    const quizDes = newUsers.sort(function (a, b) { return b.stats.quizzes.percent - a.stats.quizzes.percent });
     return quizDes;
   } else if (orderBy === 'scAvg' && orderDirection === 'asc') {
-    const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
+    const scoreAvgAsc = newUsers.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
     return scoreAvgAsc;
   } else if (orderBy === 'scAvg' && orderDirection === 'des') {
-    const scoreAvgDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg });
+    const scoreAvgDes = newUsers.sort(function (a, b) { return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg });
     return scoreAvgDes;
   }
 }
