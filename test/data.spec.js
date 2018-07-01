@@ -20,7 +20,10 @@ describe("data", () => {
 
     const cohort = fixtures.cohorts.find(item => item.id === "lim-2018-03-pre-core-pw");
     const courses = Object.keys(cohort.coursesIndex);
-    const { users, progress } = fixtures;
+    const {
+      users,
+      progress
+    } = fixtures;
 
     it("debería retornar arreglo de usuarios con propiedad stats", () => {
       const processed = computeUsersStats(users, progress, courses);
@@ -76,32 +79,124 @@ describe("data", () => {
   });
 
   describe("sortUsers(users, orderBy, orderDirection)", () => {
-
-    it("debería retornar arreglo de usuarios ordenado por nombre ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por nombre DESC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por porcentaje general ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por porcentaje general DESC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por ejercicios completados ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por ejercicios completados DESC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por quizzes completados ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por quizzes completados DESC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC", () => {});
-    it("debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC", () => {});
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    const processed = computeUsersStats(users, progress, courses);
+    it("debería retornar arreglo de usuarios ordenado por nombre ASC", () => {
+      const newSortUsers = sortUsers(processed, 'name', 'asc');
+      newSortUsers.sort(function (a, b) {
+        assert.isAtMost((a.name.toLowerCase() > b.name.toLowerCase()) - (a.name.toLowerCase() < b.name.toLowerCase()), 1)
+      });
+    });
+    it("debería retornar arreglo de usuarios ordenado por nombre DESC", () => {
+      const newSortUsers = sortUsers(processed, 'name', 'des');
+      newSortUsers.sort(function (a, b) {
+        assert.isAtLeast((a.name.toLowerCase() > b.name.toLowerCase()) - (a.name.toLowerCase() < b.name.toLowerCase()), -1)
+      });
+    });
+    it("debería retornar arreglo de usuarios ordenado por porcentaje general ASC", () => {
+      const newSortUsers = sortUsers(processed, 'perc', 'asc');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtMost((newSortUsers[0].stats.percent) - (newSortUsers[1].stats.percent), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por porcentaje general DESC", () => {
+      const newSortUsers = sortUsers(processed, 'perc', 'des');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtLeast((newSortUsers[0].stats.percent) - (newSortUsers[1].stats.percent), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por ejercicios completados ASC", () => {
+      const newSortUsers = sortUsers(processed, 'exer', 'asc');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtMost((newSortUsers[0].stats.exercises.completed) - (newSortUsers[1].stats.exercises.completed), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por ejercicios completados DESC", () => {
+      const newSortUsers = sortUsers(processed, 'exer', 'des');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtLeast((newSortUsers[0].stats.exercises.completed) - (newSortUsers[1].stats.exercises.completed), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por quizzes completados ASC", () => {
+      const newSortUsers = sortUsers(processed, 'quiz', 'asc');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtMost((newSortUsers[0].stats.quizzes.completed) - (newSortUsers[1].stats.quizzes.completed), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por quizzes completados DESC", () => {
+      const newSortUsers = sortUsers(processed, 'quiz', 'des');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtLeast((newSortUsers[0].stats.quizzes.completed) - (newSortUsers[1].stats.quizzes.completed), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC", () => {
+      const newSortUsers = sortUsers(processed, 'scAvg', 'asc');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtMost((newSortUsers[0].stats.quizzes.scoreAvg) - (newSortUsers[1].stats.quizzes.scoreAvg), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC", () => {
+      const newSortUsers = sortUsers(processed, 'scAvg', 'des');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtLeast((newSortUsers[0].stats.quizzes.scoreAvg) - (newSortUsers[1].stats.quizzes.scoreAvg), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC", () => {
+      const newSortUsers = sortUsers(processed, 'read', 'asc');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtMost((newSortUsers[0].stats.reads.completed) - (newSortUsers[1].stats.reads.completed), 0);
+      }
+    });
+    it("debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC", () => {
+      const newSortUsers = sortUsers(processed, 'read', 'des');
+      for (let i = 0; i < newSortUsers.length; i++) {
+        assert.isAtLeast((newSortUsers[0].stats.reads.completed) - (newSortUsers[1].stats.reads.completed), 0);
+      }
+    });
 
   });
 
   describe("filterUsers(users, filterBy)", () => {
-
-    it("debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)", () => {});
-
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    it("debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)", () => {
+      const processed = computeUsersStats(users, progress, courses);
+      const search = 'Ana';
+      const newFilterUsers = filterUsers(processed, search);
+      for (let i = 0; i < newFilterUsers.length; i++) {
+        assert.isTrue(newFilterUsers[i].name.toUpperCase().indexOf(search.toUpperCase()) > -1, 0);
+      }
+    });
   });
 
   describe("processCohortData({ cohortData, orderBy, orderDirection, filterBy })", () => {
-
-    it("debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter", () => {});
-
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const {users, progress } = fixtures;
+    const students = computeUsersStats(users, progress, courses);
+    it("debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter", () => {
+      const options = {
+        cohort: courses,
+        cohortData: {
+          users: students,
+          progress: progress
+        },
+        orderBy: 'asc',
+        orderDirection: 'name',
+        search: 'Ana'
+      }
+      const processed = processCohortData(options);
+      assert.isTrue(processed[0].hasOwnProperty("stats"), 0);
+      processed.sort(function (a, b) {
+        assert.isAtMost((a.name.toLowerCase() > b.name.toLowerCase()) - (a.name.toLowerCase() < b.name.toLowerCase()), 1)
+      });
+      for (let i = 0; i < processed.length; i++) {
+        assert.isTrue(processed[i].name.toUpperCase().indexOf(search.toUpperCase()) > -1, 0);
+      }
+    });
   });
 
 });

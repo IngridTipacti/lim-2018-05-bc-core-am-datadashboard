@@ -235,10 +235,10 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     return nameDes;
   } else if (orderBy === 'exer' && orderDirection === 'asc') {
-    const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
+    const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.completed - b.stats.exercises.completed });
     return exerAsc;
   } else if (orderBy === 'exer' && orderDirection === 'des') {
-    const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
+    const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.completed - a.stats.exercises.completed });
     return exerDes;
   } else if (orderBy === 'perc' && orderDirection === 'asc') {
     const percAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
@@ -247,16 +247,16 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     const percDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
     return percDes;
   } else if (orderBy === 'read' && orderDirection === 'asc') {
-    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
+    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.reads.completed - b.stats.reads.completed });
     return readAsc;
   } else if (orderBy === 'read' && orderDirection === 'des') {
-    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.reads.percent - a.stats.reads.percent });
+    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.reads.completed - a.stats.reads.completed });
     return readDes;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
-    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
+    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.completed - b.stats.quizzes.completed });
     return quizAsc;
   } else if (orderBy === 'quiz' && orderDirection === 'des') {
-    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.percent - a.stats.quizzes.percent });
+    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.completed - a.stats.quizzes.completed });
     return quizDes;
   } else if (orderBy === 'scAvg' && orderDirection === 'asc') {
     const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
@@ -269,7 +269,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 
 window.filterUsers = (users, search) => {
   let filterByUsers = users.filter(user => {
-    return user.name.toUpperCase().indexOf(search) > -1;
+    return user.name.toUpperCase().indexOf(search.toUpperCase()) > -1;
   });
   return filterByUsers;
 }

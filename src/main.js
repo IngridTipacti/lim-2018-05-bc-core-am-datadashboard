@@ -449,7 +449,7 @@ const createTableWithData = (todo) => {
 }
 
 const searchByName = (str) => {
-  options.search = str.toUpperCase();
+  options.search = str;
   let todo = processCohortData(options);
   createTableWithData(todo);
 }
