@@ -128,7 +128,7 @@ const switchOrderBy = (option) => {
       createTableWithData(ascname);
       break;
     case "ascperc":
-      options.orderBy = "percTotal";
+      options.orderBy = "perc";
       options.orderDirection = "asc";
       processCohortData(options);
      let ascperc = processCohortData(options);
@@ -165,7 +165,7 @@ const switchOrderBy = (option) => {
       createTableWithData(desname);
       break;
     case "desperc":
-      options.orderBy = "percTotal";
+      options.orderBy = "perc";
       options.orderDirection = "des";
       let desperc = processCohortData(options);
       createTableWithData(desperc);
@@ -449,7 +449,7 @@ const createTableWithData = (todo) => {
 }
 
 const searchByName = (str) => {
-  options.search = str.toUpperCase();
+  options.search = str;
   let todo = processCohortData(options);
   createTableWithData(todo);
 }

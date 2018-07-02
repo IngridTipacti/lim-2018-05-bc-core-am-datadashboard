@@ -215,9 +215,9 @@ window.computeUsersStats = (users, progress, courses) => {
 }
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-    const newUsers = users.filter(user => user.stats !== undefined);
+  const nuevosUsuarios = users.filter(user => user.stats !== undefined);
   if (orderBy === 'name' & orderDirection === 'asc') {
-    const nameAsc = newUsers.sort(function (a, b) {
+    const nameAsc = nuevosUsuarios.sort(function (a, b) {
       var x = a.name.toLowerCase();
       var y = b.name.toLowerCase();
       if (x < y) { return -1; }
@@ -226,7 +226,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     return nameAsc;
   } else if (orderBy === 'name' & orderDirection === 'des') {
-    const nameDes = newUsers.sort(function (a, b) {
+    const nameDes = nuevosUsuarios.sort(function (a, b) {
       const x = a.name.toLowerCase();
       const y = b.name.toLowerCase();
       if (x < y) { return 1; }
@@ -235,54 +235,48 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     });
     return nameDes;
   } else if (orderBy === 'exer' && orderDirection === 'asc') {
-    const exerAsc = newUsers.sort(function (a, b) { return a.stats.exercises.percent - b.stats.exercises.percent });
+    const exerAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.exercises.completed - b.stats.exercises.completed });
     return exerAsc;
   } else if (orderBy === 'exer' && orderDirection === 'des') {
-    const exerDes = newUsers.sort(function (a, b) { return b.stats.exercises.percent - a.stats.exercises.percent });
+    const exerDes = nuevosUsuarios.sort(function (a, b) { return b.stats.exercises.completed - a.stats.exercises.completed });
     return exerDes;
-  } else if (orderBy === 'percTotal' && orderDirection === 'asc') {
-    const percAsc = newUsers.sort(function (a, b) { return a.stats.percent - b.stats.percent });
+  } else if (orderBy === 'perc' && orderDirection === 'asc') {
+    const percAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.percent - b.stats.percent });
     return percAsc;
-  } else if (orderBy === 'percTotal' && orderDirection === 'des') {
-    const percDes = newUsers.sort(function (a, b) { return b.stats.percent - a.stats.percent });
+  } else if (orderBy === 'perc' && orderDirection === 'des') {
+    const percDes = nuevosUsuarios.sort(function (a, b) { return b.stats.percent - a.stats.percent });
     return percDes;
   } else if (orderBy === 'read' && orderDirection === 'asc') {
-    const readAsc = newUsers.sort(function (a, b) { return a.stats.reads.percent - b.stats.reads.percent });
+    const readAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.reads.completed - b.stats.reads.completed });
     return readAsc;
   } else if (orderBy === 'read' && orderDirection === 'des') {
-    const readDes = newUsers.sort(function (a, b) { return b.stats.reads.percent - a.stats.reads.percent });
+    const readDes = nuevosUsuarios.sort(function (a, b) { return b.stats.reads.completed - a.stats.reads.completed });
     return readDes;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
-    const quizAsc = newUsers.sort(function (a, b) { return a.stats.quizzes.percent - b.stats.quizzes.percent });
+    const quizAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.completed - b.stats.quizzes.completed });
     return quizAsc;
   } else if (orderBy === 'quiz' && orderDirection === 'des') {
-    const quizDes = newUsers.sort(function (a, b) { return b.stats.quizzes.percent - a.stats.quizzes.percent });
+    const quizDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.completed - a.stats.quizzes.completed });
     return quizDes;
   } else if (orderBy === 'scAvg' && orderDirection === 'asc') {
-    const scoreAvgAsc = newUsers.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
+    const scoreAvgAsc = nuevosUsuarios.sort(function (a, b) { return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg });
     return scoreAvgAsc;
   } else if (orderBy === 'scAvg' && orderDirection === 'des') {
-    const scoreAvgDes = newUsers.sort(function (a, b) { return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg });
+    const scoreAvgDes = nuevosUsuarios.sort(function (a, b) { return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg });
     return scoreAvgDes;
   }
 }
 
 window.filterUsers = (users, search) => {
   let filterByUsers = users.filter(user => {
-    return user.name.toUpperCase().indexOf(search) > -1;
+    return user.name.toUpperCase().indexOf(search.toUpperCase()) > -1;
   });
   return filterByUsers;
 }
 
-//Se cambio elnombre de la variable compute por students"
 window.processCohortData = (options) => {
-  // let arr = Object.keys(options.cohort);
-  // let courses = Object.keys(options.cohort[arr].coursesIndex);
-  let students = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
-  students = sortUsers(students, options.orderBy, options.orderDirection);
-  if (options.search !== '') {
-    students = filterUsers(students, options.search);
-    return students;
-  }
-  return students;
+  let computed = computeUsersStats(options.cohortData.users, options.cohortData.progress, options.cohort);
+  computed = sortUsers(computed, options.orderBy, options.orderDirection);
+  computed = filterUsers(computed, options.search);
+  return computed;
 }
