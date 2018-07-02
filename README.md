@@ -79,6 +79,11 @@ podemos usar tanto en los tests como en la interfaz en sí.
 Para la organización y seguimiento de actividades compartidas utilizamos el tablero de trello: 
 [Ver Tablero](https://trello.com/b/47LS49ui/data-dashboard) 
 
+
+![Product Backlog](http://subirimagen.me/uploads/20180702084628.jpeg) 
+
+
+
 Los criterios mínimos de aceptación para considerar del proyecto son:
 
 ### User Experience Design
@@ -118,7 +123,7 @@ Mostramos el modelo de baja fidelidad aprobado por cliente:
 
 Diseño tu Interfaz de Usuario [Ver Prototipo](https://www.figma.com/proto/R7gXaYlwQh2ksdcpvKkSTXVD/Dashboard?scaling=scale-down&node-id=103%3A24&redirected=1) 
 
-El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear.
+El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear. Está validado por nuestro cliente.
 
 ![Print Prototipo](http://subirimagen.me/uploads/20180630163413.JPG) 
 
@@ -148,6 +153,12 @@ Como mínimo, tu implementación debe:
 Es importante que tu interfaz, a pesar de ser una versión mínima de tu ideal,
 igual debe seguir los fundamentos de visual design, como: contraste,
 alineación, jerarquía, entre otros.
+
+## Producto Final 
+
+Presentamos el print de la página inicial del producto requerido por el cliente: 
+
+![Print Producto Final](http://subirimagen.me/uploads/20180702084706.jpg)
 
 ## Detalles de Implementación
 
