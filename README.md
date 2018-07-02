@@ -139,8 +139,10 @@ podemos usar tanto en los tests como en la interfaz en sí.
 
 ## Entregables
 
-Los criterios mínimos de aceptación para considerar que has completado este
-proyecto son:
+Para la organización y seguimiento de actividades compartidas utilizamos el tablero de trello: 
+[Ver Tablero](https://trello.com/b/47LS49ui/data-dashboard) 
+
+Los criterios mínimos de aceptación para considerar del proyecto son:
 
 ### User Experience Design
 
