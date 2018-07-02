@@ -160,6 +160,8 @@ Presentamos el print de la página inicial del producto requerido por el cliente
 
 ![Print Producto Final](http://subirimagen.me/uploads/20180702084706.jpg)
 
+![Print Producto Final2](http://subirimagen.me/uploads/20180702085658.png)
+
 ## Detalles de Implementación
 
 ### data.js
