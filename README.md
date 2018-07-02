@@ -26,69 +26,6 @@ _ver_ y _usar_ la data de progreso del LMS. Para ello, proponemos crear un
 
 ## Introducción
 
-Según un [estudio de IBM](https://www-01.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=WRL12345USEN),
-el 90% de la data que existe hoy ha sido creada en los últimos dos años.
-Cada día generamos 2.5 trillones de bytes de datos, una cifra sin precedentes.
-
-Sin embargo, los datos por sí solos son de poca utilidad. Para transformar datos
-en **información** necesitamos procesarlos y entenderlos. Una manera muy
-sencilla de hacerlo es creando _visualizaciones_. Las
-empresas líderes de hoy generan visualizaciones dinámicas de su data
-que les permiten entender mejor su negocio y tomar decisiones apropiadas.
-
-En este proyecto tendrás tu primer acercamiento a transformar data en
-información creando tu primer **data dashboard**.
-
-Si pensamos en un _dashboard_ podemos pensar en el tablero de control de un auto
-o el de un avión. Un espacio desde el cual un usuario puede tener acceso a la
-información y controles más relevantes, en este caso, del vehículo que está
-utilizando. El _dashboard_ de un auto le permite a quien conduce saber a qué
-velocidad está yendo, qué cambio/velocidad está utilizando, cuánto combustible
-tiene disponible, cuál es la temperatura del motor, cuántas revoluciones por
-minuto dan las ruedas, cuánta distancia ha recorrido, etc.
-
-![car dashboard](https://img.buzzfeed.com/buzzfeed-static/static/2017-02/7/12/enhanced/buzzfeed-prod-fastlane-03/original-17515-1486490056-3.jpg?crop=2041:1068;80,248)
-
-## Aplicaciones en el mundo real
-
-En el mundo de la web es muy común el uso de _dashboards_. De hecho, [wikipedia](https://goo.gl/P7PF4y)
-nos dice que un _dashboard_ puede ser un resumen gráfico de varias piezas de
-información importante, generalmente utilizadas para dar una visión general de
-una empresa o de un servicio. Así, tenemos dashboards como los de:
-
-* [Google Analytics](https://assets.econsultancy.com/images/resized/0003/3813/mobile_commerce_dashboard-blog-full.png)
-  para visualizar la data de tráfico de sitios web.
-
-* [Mailchimp](https://blog.mailchimp.com/wp-content/uploads/2016/11/Dashboard-view-3-Copy-1008x768.jpg)
-  para visualizar el desempeño de campañas de mercadeo digital por correo
-  electrónico.
-
-* [Quickbooks](https://quickbooks.intuit.com/content/dam/intuit/quickbooks/branding/make-organization-easy-visual.png)
-  para visualizar la información financiera de una empresa.
-
-Seguramente, a lo largo de tu carrera como diseñadora o desarrolladora, te
-tocará crear un _data dashboard_. Quizás sea para visualizar la data de un
-negocio de delivery de comida, o las rutas históricas de un negocio de
-transporte, o simplemente los indicadores clave de tu propio emprendimiento ;)
-
-## Objetivos de aprendizaje
-
-El objetivo principal de este proyecto es que aprendas a diseñar y construir una
-_interfaz web_ donde podamos visualizar y manipular data.
-
-Esperamos que puedas pensar en el usuario, entender cuál es la mejor manera de visualizar la data según sus necesidades, y plasmar todo eso en tu diseño
-en la web.
-
-Además, este proyecto se debe "resolver" en parejas, por lo que un objetivo
-importante es ganar experiencia en trabajos colaborativos con entrega grupal.
-
-## Tópicos a cubrir
-
-Tendrás que familiarizarte con conceptos como:
-_arrays_,_objects_, _dom_, _xhr_ y _visual design_.
-
-Además, reforzarás lo aprendido en el proyecto anterior: _valores, tipos,
-variables_, _control de flujo_ y _tests unitarios_.
 
 ## Consideraciones generales
 
@@ -139,8 +76,15 @@ podemos usar tanto en los tests como en la interfaz en sí.
 
 ## Entregables
 
-Los criterios mínimos de aceptación para considerar que has completado este
-proyecto son:
+Para la organización y seguimiento de actividades compartidas utilizamos el tablero de trello: 
+[Ver Tablero](https://trello.com/b/47LS49ui/data-dashboard) 
+
+
+![Product Backlog](http://subirimagen.me/uploads/20180702084628.jpeg) 
+
+
+
+Los criterios mínimos de aceptación para considerar del proyecto son:
 
 ### User Experience Design
 
@@ -179,7 +123,7 @@ Mostramos el modelo de baja fidelidad aprobado por cliente:
 
 Diseño tu Interfaz de Usuario [Ver Prototipo](https://www.figma.com/proto/R7gXaYlwQh2ksdcpvKkSTXVD/Dashboard?scaling=scale-down&node-id=103%3A24&redirected=1) 
 
-El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear.
+El diseño representa tu _ideal_ de solución, es lo que deseariamos implementar si tuvieras tiempo ilimitado para hackear. Está validado por nuestro cliente.
 
 ![Print Prototipo](http://subirimagen.me/uploads/20180630163413.JPG) 
 
@@ -209,6 +153,14 @@ Como mínimo, tu implementación debe:
 Es importante que tu interfaz, a pesar de ser una versión mínima de tu ideal,
 igual debe seguir los fundamentos de visual design, como: contraste,
 alineación, jerarquía, entre otros.
+
+## Producto Final 
+
+Presentamos el print de la página inicial del producto requerido por el cliente: 
+
+![Print Producto Final](http://subirimagen.me/uploads/20180702084706.jpg)
+
+![Print Producto Final2](http://subirimagen.me/uploads/20180702085658.png)
 
 ## Detalles de Implementación
 
@@ -411,7 +363,7 @@ puedas realizar una presentación que permita a todos comprender lo realizado.
 Sabemos que puede ser una instancia difícil, esperamos que logres mostrar su
 trabajo y los demás lo comprendan. -->
 
-## Hacker edition
+<!-- ## Hacker edition
 
 Features/características extra sugeridas:
 
@@ -420,7 +372,7 @@ Features/características extra sugeridas:
   Lee la [documentación aquí](https://laboratoria.github.io/api.laboratoria.la/).
 * Agregarle a tu interfaz de usuario implementada visualizaciones gráficas.
 * Brindar el detalle de progreso de cada estudiante _por curso_
-* Proveer estadísticas de progreso de todo el cohort
+* Proveer estadísticas de progreso de todo el cohort -->
 
 ## Entrega
 
