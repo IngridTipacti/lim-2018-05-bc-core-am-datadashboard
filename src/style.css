@@ -84,14 +84,18 @@ header {
 
 /* reemplazo de la tabla */
 #container-list {
-  background-color: rgb(255, 251, 0);
   font-weight: bold;
-  width: 45%;
+  width: 100%;
   display: block;
-  /* margin-bottom: 20px; */
 }
 .container-total {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: rgb(255, 251, 0);
+  float: left;
+  width: 48%;
+  height: 270px;
 }
 .percent-total {
   text-align: center;
@@ -99,7 +103,7 @@ header {
 }
 .user-name {
   text-align: center;
-  font-size: 30px;
+  font-size: 3.5vh;
 }
 .assessment {
   margin-bottom: 100px;
@@ -124,6 +128,17 @@ header {
   display: flex;
   text-align: center;
 }
+@media screen and (max-width: 1130px) {
+  .container-total {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(255, 251, 0);
+    float: left;
+    width: 46%;
+    height: 270px;
+  }
+}
 
 @media screen and (max-width: 700px) {
   .loggin {
@@ -136,6 +151,9 @@ header {
     width: 60%;
   }
   #container-list {
+    width: 100%;
+  }
+  .container-total {
     width: 100%;
   }
 }
