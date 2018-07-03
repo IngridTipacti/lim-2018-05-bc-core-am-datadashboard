@@ -82,6 +82,49 @@ header {
   background-color: rgb(112, 112, 112)
 }
 
+/* reemplazo de la tabla */
+#container-list {
+  background-color: rgb(255, 251, 0);
+  font-weight: bold;
+  width: 45%;
+  display: block;
+  /* margin-bottom: 20px; */
+}
+.container-total {
+  margin-bottom: 40px;
+}
+.percent-total {
+  text-align: center;
+  font-size: 50px;
+}
+.user-name {
+  text-align: center;
+  font-size: 30px;
+}
+.assessment {
+  margin-bottom: 100px;
+}
+.exercises {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.reads {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.quizzes {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.quizzes-score {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
 @media screen and (max-width: 700px) {
   .loggin {
     display: none;
@@ -91,5 +134,8 @@ header {
   }
   .laboratoria {
     width: 60%;
+  }
+  #container-list {
+    width: 100%;
   }
 }

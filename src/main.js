@@ -9,19 +9,20 @@ let options = {
   search: ''
 }
 let slideIndex = 1;
-const selectSedes = document.getElementById('select-sedes');
-const selectPromos = document.getElementById('select-promos');
-const selectCursos = document.getElementById('select-cursos');
-const empty = document.getElementById('empty');
-const tableData = document.getElementById('tableData');
-const headTable = document.getElementById('headTable');
-const resultTable = document.getElementById('resultTable');
-const loader = document.getElementById('loader');
-const inputSearch = document.getElementById('input-search');
-const selectOrderBy = document.getElementById('order-by');
-const slideNext = document.getElementById('next');
-const slidePrevious = document.getElementById('previous');
-const carouselExampleControls = document.getElementById('carouselExampleControls');
+const selectSedes = document.getElementById("select-sedes");
+const selectPromos = document.getElementById("select-promos");
+const selectCursos = document.getElementById("select-cursos");
+const empty = document.getElementById("empty");
+const tableData = document.getElementById("tableData");
+const headTable = document.getElementById("headTable");
+const resultTable = document.getElementById("resultTable");
+const loader = document.getElementById("loader");
+const inputSearch = document.getElementById("input-search");
+const selectOrderBy = document.getElementById("order-by");
+const slideNext = document.getElementById("next");
+const slidePrevious = document.getElementById("previous");
+const carouselExampleControls = document.getElementById("carouselExampleControls");
+const listUsers = document.getElementById("container-list");
 
 const changeSlides = (n) => {
   showSlides(slideIndex += n);
@@ -125,74 +126,86 @@ const switchOrderBy = (option) => {
       options.orderBy = "name";
       options.orderDirection = "asc";
       let ascname = processCohortData(options);
-      createTableWithData(ascname);
+      // createTableWithData(ascname);
+      createListWithData(ascname)
       break;
     case "ascperc":
       options.orderBy = "perc";
       options.orderDirection = "asc";
       processCohortData(options);
-     let ascperc = processCohortData(options);
-      createTableWithData(ascperc);
+      let ascperc = processCohortData(options);
+      // createTableWithData(ascperc);
+      createListWithData(ascperc)
       break;
     case "ascexer":
       options.orderBy = "exer";
       options.orderDirection = "asc";
       let ascexer = processCohortData(options);
-      createTableWithData(ascexer);
+      // createTableWithData(ascexer);
+      createListWithData(ascexer)
       break;
     case "ascread":
       options.orderBy = "read";
       options.orderDirection = "asc";
       let ascread = processCohortData(options);
-      createTableWithData(ascread);
+      // createTableWithData(ascread);
+      createListWithData(ascread)
       break;
     case "ascquiz":
       options.orderBy = "quiz";
       options.orderDirection = "asc";
       let ascquiz = processCohortData(options);
-      createTableWithData(ascquiz);
+      // createTableWithData(ascquiz);
+      createListWithData(ascquiz)
       break;
     case "ascscor":
       options.orderBy = "scAvg";
       options.orderDirection = "asc";
       let ascscor = processCohortData(options);
-      createTableWithData(ascscor);
+      // createTableWithData(ascscor);
+      createListWithData(ascscor)
       break;
     case "desname":
       options.orderBy = "name";
       options.orderDirection = "des";
       let desname = processCohortData(options);
-      createTableWithData(desname);
+      // createTableWithData(desname);
+      createListWithData(desname)
       break;
     case "desperc":
       options.orderBy = "perc";
       options.orderDirection = "des";
       let desperc = processCohortData(options);
-      createTableWithData(desperc);
+      // createTableWithData(desperc);
+      createListWithData(desperc)
       break;
     case "desexer":
       options.orderBy = "exer";
       options.orderDirection = "des";
       let desexer = processCohortData(options);
-      createTableWithData(desexer);
+      // createTableWithData(desexer);
+      createListWithData(desexer)
       break;
     case "desread":
       options.orderBy = "read";
       options.orderDirection = "des";
       let desread = processCohortData(options);
-      createTableWithData(desread);
+      // createTableWithData(desread);
+      createListWithData(desread)
       break;
     case "desquiz":
       options.orderBy = "quiz";
       options.orderDirection = "des";
       let desquiz = processCohortData(options);
-      createTableWithData(desquiz);
+      // createTableWithData(desquiz);
+      createListWithData(desquiz)
       break;
     case "desscor":
       options.orderBy = "scAvg";
       options.orderDirection = "des";
       let desscor = processCohortData(options);
-      createTableWithData(desscor);
+      // createTableWithData(desscor);
+      createListWithData(desscor)
       break;
   }
 }
@@ -314,7 +327,8 @@ const pasandoDatos = (users, progress, cohorts) => {
   options.orderDirection = "asc";
   options.search = "";
   let todo = processCohortData(options);
-  createTableWithData(todo);
+  // createTableWithData(todo);
+  createListWithData(todo);
 }
 
 const createTableWithData = (todo) => {
@@ -448,17 +462,125 @@ const createTableWithData = (todo) => {
   inputSearch.style.display = "block";
 }
 
+const createListWithData = (todo) => {
+  listUsers.innerHTML = "";
+  inputSearch.style.display = "block";
+  selectOrderBy.style.display = "block";
+  todo.map(d => {
+    const divPercentTotal = document.createElement("div");
+    const divUserName = document.createElement("div");
+    const divAssessment = document.createElement("div");
+    const divExercises = document.createElement("div");
+    const divExerTitle = document.createElement("div");
+    const divExerPerc = document.createElement("div");
+    const divExerComp = document.createElement("div");
+    const divReads = document.createElement("div");
+    const divReadTitle = document.createElement("div");
+    const divReadPerc = document.createElement("div");
+    const divReadComp = document.createElement("div");
+    const divQuizzes = document.createElement("div");
+    const divQuizTitle = document.createElement("div");
+    const divQuizPerc = document.createElement("div");
+    const divQuizComp = document.createElement("div");
+    const divQuizzesScore = document.createElement("div");
+    const divSumScoreTitle = document.createElement("div");
+    const divSumScoreResult = document.createElement("div");
+    const divAvgScoreTitle = document.createElement("div");
+    const divAvgScoreResult = document.createElement("div");
+    const containerTotal = document.createElement("div");
+
+    const valuePercentTotal = document.createTextNode(d.stats.percent + "%");
+    const valueUserName = document.createTextNode(d.name);
+    const valueExerTitle = document.createTextNode("Ejercicios");
+    const valueExerPerc = document.createTextNode(d.stats.exercises.percent + "%");
+    const valueExerComp = document.createTextNode(d.stats.exercises.completed + " / " + d.stats.exercises.total);
+    const valueReadTitle = document.createTextNode("Lecturas");
+    const valueReadPerc = document.createTextNode(d.stats.reads.percent + "%");
+    const valueReadComp = document.createTextNode(d.stats.reads.completed + " / " + d.stats.reads.total);
+    const valueQuizTitle = document.createTextNode("Quizzes");
+    const valueQuizPerc = document.createTextNode(d.stats.quizzes.percent + "%");
+    const valueQuizComp = document.createTextNode(d.stats.quizzes.completed + " / " + d.stats.quizzes.total);
+    const valueSumScoreTitle = document.createTextNode("SumScore");
+    const valueSumScoreResult = document.createTextNode(d.stats.quizzes.scoreSum);
+    const valueAvgScoreTitle = document.createTextNode("AvgScore");
+    const valueAvgScoreResult = document.createTextNode(d.stats.quizzes.scoreAvg);
+
+    divPercentTotal.appendChild(valuePercentTotal);
+    divPercentTotal.setAttribute("class", "percent-total");
+    divUserName.appendChild(valueUserName);
+    divUserName.setAttribute("class", "user-name");
+    divExerTitle.appendChild(valueExerTitle);
+    divExerTitle.setAttribute("class", "col-5");
+    divExerPerc.appendChild(valueExerPerc);
+    divExerPerc.setAttribute("class", "col-3");
+    divExerComp.appendChild(valueExerComp);
+    divExerComp.setAttribute("class", "col-4");
+    divReadTitle.appendChild(valueReadTitle);
+    divReadTitle.setAttribute("class", "col-5");
+    divReadPerc.appendChild(valueReadPerc);
+    divReadPerc.setAttribute("class", "col-3");
+    divReadComp.appendChild(valueReadComp);
+    divReadComp.setAttribute("class", "col-4");
+    divQuizTitle.appendChild(valueQuizTitle);
+    divQuizTitle.setAttribute("class", "col-5");
+    divQuizPerc.appendChild(valueQuizPerc);
+    divQuizPerc.setAttribute("class", "col-3");
+    divQuizComp.appendChild(valueQuizComp);
+    divQuizComp.setAttribute("class", "col-4");
+    divSumScoreTitle.appendChild(valueSumScoreTitle);
+    divSumScoreTitle.setAttribute("class", "col-4");
+    divSumScoreResult.appendChild(valueSumScoreResult);
+    divSumScoreResult.setAttribute("class", "col-2");
+    divAvgScoreTitle.appendChild(valueAvgScoreTitle);
+    divAvgScoreTitle.setAttribute("class", "col-4");
+    divAvgScoreResult.appendChild(valueAvgScoreResult);
+    divAvgScoreResult.setAttribute("class", "col-2");
+
+    divExercises.appendChild(divExerTitle);
+    divExercises.appendChild(divExerPerc);
+    divExercises.appendChild(divExerComp);
+    divExercises.setAttribute("class", "exercises");
+    divReads.appendChild(divReadTitle);
+    divReads.appendChild(divReadPerc);
+    divReads.appendChild(divReadComp);
+    divReads.setAttribute("class", "reads");
+    divQuizzes.appendChild(divQuizTitle);
+    divQuizzes.appendChild(divQuizPerc);
+    divQuizzes.appendChild(divQuizComp);
+    divQuizzes.setAttribute("class", "quizzes");
+    divQuizzesScore.appendChild(divSumScoreTitle);
+    divQuizzesScore.appendChild(divSumScoreResult);
+    divQuizzesScore.appendChild(divAvgScoreTitle);
+    divQuizzesScore.appendChild(divAvgScoreResult);
+    divQuizzesScore.setAttribute("class", "quizzes-score");
+
+    divAssessment.appendChild(divExercises);
+    divAssessment.appendChild(divReads);
+    divAssessment.appendChild(divQuizzes);
+    divAssessment.appendChild(divQuizzesScore);
+
+    containerTotal.appendChild(divPercentTotal);
+    containerTotal.appendChild(divUserName);
+    containerTotal.appendChild(divAssessment);
+    containerTotal.setAttribute("class", "container-total");
+    listUsers.appendChild(containerTotal);
+  });
+  loader.style.display = "none";
+  inputSearch.style.display = "block";
+}
+
 const searchByName = (str) => {
   options.search = str;
   let todo = processCohortData(options);
-  createTableWithData(todo);
+  // createTableWithData(todo);
+  createListWithData(todo);
 }
 
-selectSedes.addEventListener('change', () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
+selectSedes.addEventListener("change", () => switchSedes(selectSedes.options[selectSedes.selectedIndex].value));
 
-selectPromos.addEventListener('change', () => setCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
+selectPromos.addEventListener("change", () => setCohortsJson(selectPromos.options[selectPromos.selectedIndex].value));
 
-selectCursos.addEventListener('change', () => getProgressJson((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
+selectCursos.addEventListener("change", () => getProgressJson((selectPromos.options[selectPromos.selectedIndex].value), selectCursos.options[selectCursos.selectedIndex].value));
 
 inputSearch.addEventListener("input", (e) => searchByName(e.target.value));
 
