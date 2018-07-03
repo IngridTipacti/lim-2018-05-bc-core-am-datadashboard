@@ -10,7 +10,7 @@ header {
 
 /* img del logo */
 .laboratoria {
-  width: 23%;
+  width: 40%;
   float: left;
 }
 .initial {
@@ -75,6 +75,85 @@ header {
 .container-fluid {
   padding-top: 15px;
 }
+#carouselExampleControls {
+  height: auto;
+}
 #previous:hover , #next:hover {
   background-color: rgb(112, 112, 112)
+}
+
+/* reemplazo de la tabla */
+#container-list {
+  font-weight: bold;
+  width: 100%;
+  display: block;
+}
+.container-total {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: rgb(255, 251, 0);
+  float: left;
+  width: 48%;
+  height: 270px;
+}
+.percent-total {
+  text-align: center;
+  font-size: 50px;
+}
+.user-name {
+  text-align: center;
+  font-size: 3.5vh;
+}
+.assessment {
+  margin-bottom: 100px;
+}
+.exercises {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.reads {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.quizzes {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+.quizzes-score {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+@media screen and (max-width: 1130px) {
+  .container-total {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(255, 251, 0);
+    float: left;
+    width: 46%;
+    height: 270px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .loggin {
+    display: none;
+  }
+  .h4 {
+    font-size: 100%
+  }
+  .laboratoria {
+    width: 60%;
+  }
+  #container-list {
+    width: 100%;
+  }
+  .container-total {
+    width: 100%;
+  }
 }
